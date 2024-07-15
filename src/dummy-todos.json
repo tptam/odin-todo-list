@@ -1,0 +1,142 @@
+[
+   {
+      "title":"Complete project proposal",
+      "description":"Draft and finalize the proposal for the new client project",
+      "dueDate":"2024-07-30T17:00:00Z",
+      "priority":3,
+      "done":false
+   },
+   {
+      "title":"Buy groceries",
+      "description":"Pick up milk, eggs, bread, and vegetables from the supermarket",
+      "dueDate":"2024-07-18T20:00:00Z",
+      "priority":2,
+      "done":false
+   },
+   {
+      "title":"Schedule dentist appointment",
+      "description":"Call Dr. Smith's office to book a check-up",
+      "dueDate":"2024-08-15T12:00:00Z",
+      "priority":1,
+      "done":true
+   },
+   {
+      "title":"Prepare presentation slides",
+      "description":"Create slides for the team meeting on project progress",
+      "dueDate":"2024-07-25T09:00:00Z",
+      "priority":3,
+      "done":false
+   },
+   {
+      "title":"Pay electricity bill",
+      "description":"Log in to the utility company website and pay the monthly bill",
+      "dueDate":"2024-07-20T23:59:59Z",
+      "priority":2,
+      "done":true
+   },
+   {
+      "title":"Clean garage",
+      "description":"Organize tools, dispose of old items, and sweep the floor",
+      "dueDate":"2024-08-06T15:00:00Z",
+      "priority":0,
+      "done":false
+   },
+   {
+      "title":"Submit expense report",
+      "description":"Compile receipts and fill out the expense form for the business trip",
+      "dueDate":"2024-07-22T17:00:00Z",
+      "priority":2,
+      "done":false
+   },
+   {
+      "title":"Plan team building event",
+      "description":"Research and propose ideas for the quarterly team outing",
+      "dueDate":"2024-08-10T12:00:00Z",
+      "priority":1,
+      "done":false
+   },
+   {
+      "title":"Update resume",
+      "description":"Add recent projects and skills to CV",
+      "dueDate":"2024-09-01T20:00:00Z",
+      "priority":0,
+      "done":false
+   },
+   {
+      "title":"Fix leaky faucet",
+      "description":"Replace washer in bathroom sink faucet",
+      "dueDate":"2024-07-23T21:00:00Z",
+      "priority":1,
+      "done":true
+   },
+   {
+      "title":"Prepare for job interview",
+      "description":"Research company, practice common questions, choose outfit",
+      "dueDate":"2024-08-02T09:00:00Z",
+      "priority":3,
+      "done":false
+   },
+   {
+      "title":"Renew gym membership",
+      "description":"Visit the gym or renew online before membership expires",
+      "dueDate":"2024-07-31T23:59:59Z",
+      "priority":2,
+      "done":false
+   },
+   {
+      "title":"Back up computer files",
+      "description":"Perform monthly backup of important documents and photos",
+      "dueDate":"2024-07-28T22:00:00Z",
+      "priority":1,
+      "done":false
+   },
+   {
+      "title":"Learn new programming language",
+      "description":"Complete online course on Python basics",
+      "dueDate":"2024-09-30T23:59:59Z",
+      "priority":0,
+      "done":false
+   },
+   {
+      "title":"Write blog post",
+      "description":"Draft and publish article on recent industry trends",
+      "dueDate":"2024-08-05T18:00:00Z",
+      "priority":2,
+      "done":true
+   },
+   {
+      "title":"File tax returns",
+      "description":"Gather documents and submit last year's tax returns",
+      "dueDate":"2024-04-15T23:59:59Z",
+      "priority":3,
+      "done":true
+   },
+   {
+      "title":"Renew driver's license",
+      "description":"Visit DMV to renew expired driver's license",
+      "dueDate":"2024-05-31T17:00:00Z",
+      "priority":2,
+      "done":true
+   },
+   {
+      "title":"Return library books",
+      "description":"Return overdue books to the city library",
+      "dueDate":"2024-06-30T19:00:00Z",
+      "priority":1,
+      "done":false
+   },
+   {
+      "title":"Schedule annual health checkup",
+      "description":"Book appointment for yearly physical examination",
+      "dueDate":"2024-03-15T12:00:00Z",
+      "priority":2,
+      "done":false
+   },
+   {
+      "title":"Plan retirement savings strategy",
+      "description":"Research and outline long-term financial goals and investment plans",
+      "dueDate":"2030-12-31T23:59:59Z",
+      "priority":1,
+      "done":false
+   }
+]
