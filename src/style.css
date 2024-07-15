@@ -1,0 +1,34 @@
+:root {
+    /* From Tailwind color pallete*/
+    --primary-color: #14b8a6; /*Teal500*/
+    --secondary-color: #f97316; /*Orange500*/
+    --neutral-color: #0a0a0a;  /*Neutral950*/
+    --neutral-color-700: #404040;
+    --neutral-color-200: #e5e5e5;
+    --neutral-color-50: #fafafa; 
+
+    --text-color: var(--neutral-color);
+    --background-color: var(--neutral-color-200);
+    --surface-color: var(--neutral-color-50);
+}
+
+/* Reset CSS */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+ul {
+    list-style: none;
+}
+
+button {
+    border: none;
+    color: var(--text-color);
+}
+
+a {
+    text-decoration: none;
+    color: var(--text-color);
+}
