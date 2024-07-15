@@ -14,6 +14,10 @@ class Project {
     set name(newName){
         this.#name = newName;
     }
+
+    addTodo(todo){
+        this.#todos.push(todo);   
+    }
 }
 
 export default Project;
