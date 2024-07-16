@@ -12,6 +12,10 @@ class Service {
         // Data retrieval from repository will be added 
     }
 
+    get defaultProject(){
+        return this.#defaultProject;
+    }
+
     createTodo(title, description, dueDate, priority, done){
         const dataRuleSet = Todo.dataRuleSet;
         const id = getId();
@@ -71,6 +75,10 @@ class Service {
     }
 
     deleteTodoFromProject(todoId, projectId) {
+        // if (this.isDefaultProject(projectId)) {
+        //     deleteTodo(todoId);
+        //     return;
+        // }
         const project = this.getProjectById(projectId);
         const todo = this.getTodoById(todoId);
         if (project === undefined || todo === undefined) {
@@ -78,6 +86,8 @@ class Service {
         }
         project.deleteTodo(todo);
     }
+
+    
 
 }
 
