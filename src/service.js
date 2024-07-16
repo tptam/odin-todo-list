@@ -53,6 +53,10 @@ class Service {
         }
     }
 
+    getProjectById(id) {
+        return this.#projects[id];
+    }
+
 }
 
 function getId() {
