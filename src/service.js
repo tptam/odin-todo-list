@@ -17,16 +17,19 @@ class Service {
     }
 
     createTodo(title, description, dueDate, priority, done){
-        const dataRuleSet = Todo.dataRuleSet;
         const id = getId();
         const input = { id, title, description, dueDate, priority, done };
-        if (dataRuleSet.validate(input)) {
+        const validated = validate(input, Todo.schema);
+        const invalidKeys = Object.entries(validated)
+            .filter(([key, val]) => !val)
+            .map(([key, val]) => key);
+        if (invalidKeys.length > 0) {
+            throw new ValidationError(invalidKeys);
+        } else {
             const todo = new Todo(id, title, description, dueDate, priority, done);
             this.#todos[id] = todo;
             this.#defaultProject.addTodo(todo);
             return todo;
-        } else {
-            throw new Error("Invalid Input");
         }
     }
     
@@ -37,24 +40,30 @@ class Service {
     updateTodoByID(id, title, description, dueDate, priority, done){
         const todo = this.getTodoById(id);
         const input = { id, title, description, dueDate, priority, done };
-        const dataRuleSet = Todo.dataRuleSet;
-        if (dataRuleSet.validate(input)) {
-            todo.setAll(title, description, dueDate, priority, done);
+        const validated = validate(input, Todo.schema);
+        const invalidKeys = Object.entries(validated)
+            .filter(([key, val]) => !val)
+            .map(([key, val]) => key)
+        if (invalidKeys.length > 0) {
+            throw new ValidationError(invalidKeys);
         } else {
-            throw new Error("Invalid Input");        
+            todo.setAll(title, description, dueDate, priority, done);
         }
     }
 
     createProject(name) {
-        const dataRuleSet = Project.dataRuleSet;
         const id = getId();
         const input = { id, name };
-        if (dataRuleSet.validate(input)) {
+        const validated = validate(input, Project.schema);
+        const invalidKeys = Object.entries(validated)
+            .filter(([key, val]) => !val)
+            .map(([key, val]) => key)
+        if (invalidKeys.length > 0) {
+            throw new ValidationError(invalidKeys);
+        } else {
             const project = new Project(id, name);
             this.#projects[id] = project;
             return project;
-        } else {
-            throw new Error("Invalid Input");
         }
     }
 
@@ -91,15 +100,16 @@ class Service {
     updateProjectById(id, name) {
         const project = this.getProjectById(id);
         const input = { id, name };
-        const dataRuleSet = Project.dataRuleSet;
-        if (dataRuleSet.validate(input)) {
-            project.name = name;
+        const validated = validate(input, Project.schema);
+        const invalidKeys = Object.entries(validated)
+            .filter(([key, val]) => !val)
+            .map(([key, val]) => key);
+        if (invalidKeys.length > 0) {
+            throw new ValidationError(invalidKeys);
         } else {
-            throw new Error("Invalid Input");
+            project.name = name;
         }
     }
-
-
 
     deleteTodo(todoId) {
         const todo = this.getTodoById(todoId);
@@ -114,7 +124,18 @@ function getId() {
     return ulid();
 }
 
+function validate(obj, schema){
+    const validated = {};
+    for (const [key, value] of Object.entries(obj)) {
+        validated[key] = schema[key](value);
+    }
+    return validated;
+}
 
-
+class ValidationError extends Error {
+    constructor(keys) {
+        super(`Invalid key(s): ${JSON.stringify(keys)}`);
+    }
+}
 
 export default Service;

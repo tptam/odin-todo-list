@@ -1,5 +1,3 @@
-import DataRuleSet from "./data-rule-set";
-
 class Project {
     #id;
     #todos;
@@ -35,23 +33,20 @@ class Project {
         }
     }
 
-    static #dataRuleSet = new DataRuleSet({
-        id: [
-            val => val !== null,
-            val => val !== undefined,
-            val => typeof (val) === 'string',
-        ],
-        name: [
-            val => val !== null,
-            val => val !== undefined,
-            val => typeof (val) === 'string',
-            val => val.length < 40,
-        ],
-    });
+    static #schema = {
+        id: val => val !== undefined
+            && val !== null
+            && typeof (val) === 'string',
+        name: val => val !== undefined
+            && val !== null
+            && typeof (val) === 'string'
+            && val.length > 0,
+    };
 
-    static get dataRuleSet() {
-        return Project.#dataRuleSet;
+    static get schema(){
+        return this.#schema;
     }
+
 }
 
 export default Project;

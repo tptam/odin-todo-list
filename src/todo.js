@@ -1,5 +1,4 @@
 import { isAfter, isToday } from "date-fns";
-import DataRuleSet from "./data-rule-set.js";
 
 class Todo {
     #id;
@@ -60,47 +59,31 @@ class Todo {
         this.#done = done;
     }
 
-    static #dataRuleSet = new DataRuleSet({
-        id: [
-            val => val !== null,
-            val => val !== undefined,
-            val => typeof (val) === 'string',
-        ],
-        title: [
-            val => val !== null,
-            val => val !== undefined,
-            val => typeof (val) === 'string',
-            val => val.length < 200
-        ],
-        description: [
-            val => val !== null,
-            val => val !== undefined,
-            val => typeof (val) === 'string',
-        ],
-        dueDate: [
-            val => val !== null,
-            val => val !== undefined,
-            val => Date.prototype.isPrototypeOf(val),
-            val => {
-                const today = new Date();
-                return isAfter(val, today) || isToday(val);
-            },
-        ],
-        priority: [
-            val => val !== null,
-            val => val !== undefined,
-            val => typeof(val) === "number",
-            val => [3,2,1,0].includes(val),
-        ],
-        done: [
-            val => val !== null,
-            val => val !== undefined,
-            val => typeof (val) === "boolean",
-        ],
-    });
+    static #schema = {
+        id: val => val !== null 
+            && val !== undefined 
+            && typeof (val) === 'string',
+        title: val => val !== null 
+            && val !== undefined 
+            && typeof (val) === 'string'
+            && val.length > 0,
+        description: val => val !== null 
+            && val !== undefined
+            && typeof (val) === 'string',
+        dueDate: val => val !== undefined
+            && Date.prototype.isPrototypeOf(val)
+            && (isAfter(val, new Date()) || isToday(val)),
+        priority: val => val !== null
+            && val !== undefined
+            && typeof(val) === "number"
+            && [3, 2, 1, 0].includes(val),
+        done: val => val !== null
+            && val !== undefined
+            && typeof(val) === "boolean",
+    }
 
-    static get dataRuleSet(){
-        return Todo.#dataRuleSet;
+    static get schema(){
+        return Todo.#schema;
     }
 }
 
