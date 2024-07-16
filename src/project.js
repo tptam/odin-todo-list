@@ -50,7 +50,7 @@ class Project {
     });
 
     static get dataRuleSet() {
-        return Todo.#dataRuleSet;
+        return Project.#dataRuleSet;
     }
 }
 
