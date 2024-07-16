@@ -18,7 +18,7 @@ class Service {
         const input = { id, title, description, dueDate, priority, done };
         if (dataRuleSet.validate(input)) {
             const todo = new Todo(id, title, description, dueDate, priority, done);
-            this.#projects[id] = todo;
+            this.#todos[id] = todo;
             return todo;
         } else {
             throw new Error("Invalid Input");
@@ -40,6 +40,18 @@ class Service {
         }
     }
 
+    createProject(name) {
+        const dataRuleSet = Project.dataRuleSet;
+        const id = getId();
+        const input = { id, name };
+        if (dataRuleSet.validate(input)) {
+            const project = new Project(id, name);
+            this.#projects[id] = project;
+            return project;
+        } else {
+            throw new Error("Invalid Input");
+        }
+    }
 
 }
 
