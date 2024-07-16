@@ -57,6 +57,15 @@ class Service {
         return this.#projects[id];
     }
 
+    addTodoToProject(projectId, todoId) {
+        const project = this.getProjectById(projectId);
+        const todo = this.getTodoById(todoId);
+        if (project === undefined || todo === undefined) {
+            throw new Error("Object not found.");
+        }
+        project.addTodo(todo);
+    }
+
 }
 
 function getId() {
