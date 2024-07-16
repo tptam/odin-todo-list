@@ -24,6 +24,9 @@ class Service {
             return null;
         }
     }
+    getTodoById(id){
+        return this.#todos[id];
+    }
 
 }
 
