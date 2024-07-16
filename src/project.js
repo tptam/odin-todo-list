@@ -16,7 +16,16 @@ class Project {
     }
 
     addTodo(todo){
-        this.#todos.push(todo);   
+        if (!this.#todos.includes(todo)) {
+            this.#todos.push(todo);   
+        }
+    }
+
+    deleteTodo(todo) {
+        const index = this.#todos.indexOf(todo);
+        if (index !== -1) {
+            this.#todos.splice(index, 0);
+        }
     }
 }
 
