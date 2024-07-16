@@ -1,3 +1,5 @@
+import DataRuleSet from "./data-rule-set";
+
 class Project {
     #todos;
     #name;
@@ -28,16 +30,17 @@ class Project {
         }
     }
 
-    static #rules = {
+    static #dataRuleSet = new DataRuleSet({
         name: [
             val => val !== null,
             val => val !== undefined,
             val => typeof (val) === 'string',
             val => val.length < 40,
         ],
-    }
-    static get rules() {
-        return Todo.#rules;
+    });
+
+    static get dataRuleSet() {
+        return Todo.#dataRuleSet;
     }
 }
 

@@ -1,4 +1,5 @@
 import { isAfter, isToday } from "date-fns";
+import DataRuleSet from "./data-rule-set.js";
 
 class Todo {
     #title;
@@ -44,7 +45,7 @@ class Todo {
         this.#done = newDone;
     }
 
-    static #rules = {
+    static #dataRuleSet = new DataRuleSet({
         title: [
             val => val !== null,
             val => val !== undefined,
@@ -76,9 +77,10 @@ class Todo {
             val => val !== undefined,
             val => typeof (val) === "boolean",
         ],
-    }
-    static get rules(){
-        return Todo.#rules;
+    });
+
+    static get dataRuleSet(){
+        return Todo.#dataRuleSet;
     }
 }
 
