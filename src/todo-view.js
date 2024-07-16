@@ -1,6 +1,6 @@
 import Todo from "./todo.js";
 
-class TodoViewModel {
+class TodoView {
     constructor(todo) {
         this.todo = todo;
      }
@@ -17,4 +17,4 @@ Done: ${this.todo.done}
     }
 }
 
-export default TodoViewModel;
+export default TodoView;
