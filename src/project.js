@@ -1,11 +1,16 @@
 import DataRuleSet from "./data-rule-set";
 
 class Project {
+    #id;
     #todos;
     #name;
-    constructor(name) {
+    constructor(id, name) {
+        this.#id = id;
         this.#name = name;
         this.#todos = [];
+    }
+    get id(){
+        return this.#id;
     }
     get todos(){
         return this.#todos;
@@ -31,6 +36,11 @@ class Project {
     }
 
     static #dataRuleSet = new DataRuleSet({
+        id: [
+            val => val !== null,
+            val => val !== undefined,
+            val => typeof (val) === 'string',
+        ],
         name: [
             val => val !== null,
             val => val !== undefined,
