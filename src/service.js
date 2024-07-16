@@ -88,6 +88,19 @@ class Service {
         project.deleteTodo(todo);
     }
 
+    updateProjectById(id, name) {
+        const project = this.getProjectById(id);
+        const input = { id, name };
+        const dataRuleSet = Project.dataRuleSet;
+        if (dataRuleSet.validate(input)) {
+            project.name = name;
+        } else {
+            throw new Error("Invalid Input");
+        }
+    }
+
+
+
     deleteTodo(todoId) {
         const todo = this.getTodoById(todoId);
         Object.values(this.#projects).forEach(project => {
