@@ -111,11 +111,30 @@ class Service {
         }
     }
 
+    deleteProjectById(projectID) {
+        delete(this.#projects[projectID]);
+    }
+
     deleteTodo(todoId) {
         const todo = this.getTodoById(todoId);
         Object.values(this.#projects).forEach(project => {
             project.deleteTodo(todo);
         });
+    }
+
+    getAllTodos(){
+        return this.#defaultProject.todos;
+    }
+
+    getAllProjects(excludeDefault = true) {
+        if (excludeDefault) {
+            return Object.values(this.#projects)
+                .filter(
+                    project => project !== this.#defaultProject
+                );
+        } else {
+            return Object.values(this.#projects);
+        }
     }
 
 }
