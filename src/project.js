@@ -1,7 +1,6 @@
 class Project {
     #todos;
     #name;
-    #rules;
     constructor(name) {
         this.#name = name;
         this.#todos = [];

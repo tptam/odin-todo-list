@@ -44,7 +44,7 @@ class Todo {
         this.#done = newDone;
     }
 
-    static rules = {
+    static #rules = {
         title: [
             val => val !== null,
             val => val !== undefined,
@@ -76,6 +76,9 @@ class Todo {
             val => val !== undefined,
             val => typeof (val) === "boolean",
         ],
+    }
+    static get rules(){
+        return Todo.#rules;
     }
 }
 
