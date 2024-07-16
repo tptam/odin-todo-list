@@ -1,6 +1,7 @@
 class Project {
     #todos;
     #name;
+    #rules;
     constructor(name) {
         this.#name = name;
         this.#todos = [];
@@ -26,6 +27,18 @@ class Project {
         if (index !== -1) {
             this.#todos.splice(index, 0);
         }
+    }
+
+    static #rules = {
+        name: [
+            val => val !== null,
+            val => val !== undefined,
+            val => typeof (val) === 'string',
+            val => val.length < 40,
+        ],
+    }
+    static get rules() {
+        return Todo.#rules;
     }
 }
 
