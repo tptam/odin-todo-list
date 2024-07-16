@@ -5,11 +5,11 @@ import Project from "./project.js";
 class Service {
     #todos = {};
     #projects = {};
+    #defaultProject;
 
     constructor(){
-        const defaultProject = new Project("default");
-        const id = getId();
-        this.#projects[id] = defaultProject;
+        this.#defaultProject = this.createProject("default");
+        // Data retrieval from repository will be added 
     }
 
     createTodo(title, description, dueDate, priority, done){
@@ -66,7 +66,18 @@ class Service {
         project.addTodo(todo);
     }
 
-    
+    isDefaultProject(projectId) {
+        return this.getProjectById(projectId) === this.#defaultProject;
+    }
+
+    deleteTodoFromProject(todoId, projectId) {
+        const project = this.getProjectById(projectId);
+        const todo = this.getTodoById(todoId);
+        if (project === undefined || todo === undefined) {
+            throw new Error("Object not found.");
+        }
+        project.deleteTodo(todo);
+    }
 
 }
 
