@@ -23,6 +23,7 @@ class Service {
         if (dataRuleSet.validate(input)) {
             const todo = new Todo(id, title, description, dueDate, priority, done);
             this.#todos[id] = todo;
+            this.#defaultProject.addTodo(todo);
             return todo;
         } else {
             throw new Error("Invalid Input");
@@ -75,10 +76,10 @@ class Service {
     }
 
     deleteTodoFromProject(todoId, projectId) {
-        // if (this.isDefaultProject(projectId)) {
-        //     deleteTodo(todoId);
-        //     return;
-        // }
+        if (this.isDefaultProject(projectId)) {
+            this.deleteTodo(todoId);
+            return;
+        }
         const project = this.getProjectById(projectId);
         const todo = this.getTodoById(todoId);
         if (project === undefined || todo === undefined) {
@@ -87,7 +88,12 @@ class Service {
         project.deleteTodo(todo);
     }
 
-    
+    deleteTodo(todoId) {
+        const todo = this.getTodoById(todoId);
+        Object.values(this.#projects).forEach(project => {
+            project.deleteTodo(todo);
+        });
+    }
 
 }
 
