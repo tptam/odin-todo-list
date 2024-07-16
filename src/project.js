@@ -31,7 +31,7 @@ class Project {
     deleteTodo(todo) {
         const index = this.#todos.indexOf(todo);
         if (index !== -1) {
-            this.#todos.splice(index, 0);
+            this.#todos.splice(index, 1);
         }
     }
 
