@@ -2,17 +2,23 @@ import { isAfter, isToday } from "date-fns";
 import DataRuleSet from "./data-rule-set.js";
 
 class Todo {
+    #id;
     #title;
     #description;
     #dueDate;
     #priority;
     #done;
-    constructor(title, description, dueDate, priority, done) {
+    constructor(id, title, description, dueDate, priority, done) {
+        this.#id = id;
         this.#title = title;
         this.#description = description;
         this.#dueDate = dueDate;
         this.#priority = priority;
         this.#done = done;
+    }
+    get id() {
+        // id is immutable and has no setter
+        return this.#id;
     }
     get title(){
         return this.#title;
@@ -45,7 +51,21 @@ class Todo {
         this.#done = newDone;
     }
 
+    setAll(title, description, dueDate, priority, done){
+        // id is immutable and has no setter
+        this.#title = title;
+        this.#description = description;
+        this.#dueDate = dueDate;
+        this.#priority = priority;
+        this.#done = done;
+    }
+
     static #dataRuleSet = new DataRuleSet({
+        id: [
+            val => val !== null,
+            val => val !== undefined,
+            val => typeof (val) === 'string',
+        ],
         title: [
             val => val !== null,
             val => val !== undefined,
