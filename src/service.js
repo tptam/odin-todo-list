@@ -14,19 +14,32 @@ class Service {
 
     createTodo(title, description, dueDate, priority, done){
         const dataRuleSet = Todo.dataRuleSet;
-        const input = { title, description, dueDate, priority, done };
+        const id = getId();
+        const input = { id, title, description, dueDate, priority, done };
         if (dataRuleSet.validate(input)) {
-            const todo = new Todo(title, description, dueDate, priority, done);
-            const id = getId();
+            const todo = new Todo(id, title, description, dueDate, priority, done);
             this.#projects[id] = todo;
             return todo;
         } else {
-            return null;
+            throw new Error("Invalid Input");
         }
     }
+    
     getTodoById(id){
         return this.#todos[id];
     }
+
+    updateTodoByID(id, title, description, dueDate, priority, done){
+        const todo = this.getTodoById(id);
+        const input = { id, title, description, dueDate, priority, done };
+        const dataRuleSet = Todo.dataRuleSet;
+        if (dataRuleSet.validate(input)) {
+            todo.setAll(title, description, dueDate, priority, done);
+        } else {
+            throw new Error("Invalid Input");        
+        }
+    }
+
 
 }
 
