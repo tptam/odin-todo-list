@@ -1,13 +1,49 @@
 :root {
+    --gutter: 16px;
+
+    /* Section size */
+    --header-height: 5.5rem;
+    --brand-height: 3.5rem;
+    --nav-height: calc(var(--header-height) - var(--brand-height));
+    --footer-height: 2rem;
+
+    /* Font size */
+    --logo-font-size: calc(var(--brand-height) - var(--gutter));
+    --nav-font-size: calc(var(--nav-height) - var(--gutter));
+    --content-h1-font-size: 1.8rem;
+    --content-h2-font-size: 1.5rem;
+    --content-h3-font-size: 1.2rem;
+    --table-font-size: 1.1rem;
+
+    /* Other size*/
+    --table-width: min(900px, 100%);
+    --table-line-height: 3.5rem;
+    --add-button-size: 4rem;
+
     /* From Tailwind color pallete*/
     --primary-color: #14b8a6; /*Teal500*/
+    --primary-color-400: #2dd4bf;
+    --primary-color-200: #99f6e4;
+    --primary-color-100: #ccfbf1;
     --secondary-color: #f97316; /*Orange500*/
+    --secondary-color-400: #fb923c;
+    --secondary-color-300: #fdba74;
+    --secondary-color-200: #fed7aa;
+    --secondary-color-100: #ffedd5; 
     --neutral-color: #0a0a0a;  /*Neutral950*/
     --neutral-color-700: #404040;
+    --neutral-color-400: #a8a29e;
     --neutral-color-200: #e5e5e5;
+    --neutral-color-300: #d6d3d1;
     --neutral-color-50: #fafafa; 
 
+    --do-color: #d0021b;
+    --schedule-color: #F5A623;
+    --delegate-color: #4A90E2;
+    --eliminate-color:#737373;
+
     --text-color: var(--neutral-color);
+    --text-color-white: var(var(--neutral-color-50));
     --background-color: var(--neutral-color-200);
     --surface-color: var(--neutral-color-50);
 }
@@ -17,6 +53,7 @@
     margin: 0;
     padding: 0;
     box-sizing: border-box;
+    /* border: 1px solid pink; */
 }
 
 ul {
@@ -26,9 +63,254 @@ ul {
 button {
     border: none;
     color: var(--text-color);
+    cursor: pointer;
 }
 
 a {
     text-decoration: none;
     color: var(--text-color);
+    cursor: pointer;
+}
+
+table {
+    border-collapse: collapse;
+    font-size: var(--table-font-size);
+}
+
+
+/* Parts */
+input[type=checkbox] {
+  transform: scale(1.5, 1.5);
+}
+
+
+button.add {
+    width: var(--add-button-size);
+    height: var(--add-button-size);
+    border-radius: 50%;
+    font-weight: 700;
+    font-size: calc(var(--add-button-size) - var(--gutter));
+    background-color: var(--primary-color);
+    opacity: 0.8;
+    position: fixed;
+    bottom: calc(var(--footer-height) + var(--gutter));
+    right: calc(50vw - (var(--table-width) / 2) + var(--gutter));
+}
+
+button.toggle {
+    width: 11ch;
+    height: 2rem;
+    padding: 0 0.4rem 0 1rem;
+    border-style: none;
+    border-radius: 1rem;
+    display: grid;
+    align-items: center;
+    font-size: 1.2rem;
+    background-color: var(--neutral-color-200);
+    grid-template-columns: 1fr 1.5rem;
+    grid-template-rows: 100%;
+    grid-template-areas: "label knob"; 
+}
+
+button.toggle span {
+  grid-area: label;
+  justify-self: start;
+}
+
+button.toggle svg {
+    grid-area: knob;
+}
+
+button.toggle[value="on"] svg {
+    fill: var(--primary-color);
+}
+
+
+/* Common sections*/
+body {
+    min-height: 100vh;
+    display: grid;
+    grid-template-rows: var(--header-height) 1fr var(--footer-height);
+    font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+}
+
+header {
+    background-color: var(--primary-color);
+    display: grid;
+    grid-template-rows: var(--brand-height) var(--nav-height);
+    align-items: center;
+}
+
+header h1 {
+    font-size: var(--logo-font-size);
+    margin-left: var(--gutter);
+}
+
+nav {
+    height: var(--nav-height);
+    font-size: var(--nav-font-size);
+    background-color: var(--neutral-color-200);
+    display: flex;
+    justify-content: flex-start;
+    align-items: stretch;
+}
+
+nav button {
+    background-color: var(--neutral-color-200);
+    font-size: var(--nav-font-size);
+    font-weight: 700;
+    padding-right: var(--gutter);
+    padding-left: var(--gutter);
+}
+
+nav button:hover{
+    background-color: var(--neutral-color-400);
+}
+
+nav button.selected{
+    background-color: var(--secondary-color-400);
+    color: var(--neutral-color-50);
+}
+
+button.dropbtn {
+    width: 100%;
+    height: 100%;
+}
+
+.dropdown {
+  position: relative;
+  display: inline-block;
+}
+
+.dropdown-content {
+  display: none;
+  position: absolute;
+  background-color: var(--surface-color);
+  min-width: 160px;
+  box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+  z-index: 1;
+}
+
+/* Links inside the dropdown */
+.dropdown-content a {
+  color: black;
+  padding: calc(var(--gutter) / 2) var(--gutter);
+  text-decoration: none;
+  display: block;
+}
+
+/* Insert separation line before */
+.dropdown-content a.separate{
+    border-top: 1px solid var(--neutral-color-300);
+}
+
+/* Change color of dropdown links on hover */
+.dropdown-content a:hover {background-color: var(--neutral-color-300);}
+
+/* Show the dropdown menu on hover */
+.dropdown:hover .dropdown-content {display: block;}
+
+
+
+#content {
+    background-color: var(--background-color);
+    padding: var(--gutter);
+}
+
+
+footer {
+    width: 100%;
+    font-size: 1rem;
+    display: flex;
+    gap: var(--gutter);
+    justify-content: center;
+    align-items: center;
+    background-color: var(--primary-color);
+}
+
+
+
+/* Todo table */
+#content a:hover {
+    font-weight:700;
+}
+
+caption {
+    font-weight: 700;
+    font-size: var(--content-h1-font-size);
+    text-align: left;
+    margin-bottom: calc(var(--gutter) * 2);
+}
+
+table {
+    width: var(--table-width);
+    margin: var(--gutter) auto;
+}
+
+thead, tbody {
+    display: grid;
+    grid-auto-rows: var(--table-line-height);
+    gap: var(--gutter);
+}
+
+tr {
+    padding-right: var(--gutter);
+    padding-left: var(--gutter);
+    display: grid;
+    grid-auto-flow: column;
+    grid-template-columns: 2ch 1fr 10ch 12ch 12ch 10ch;
+    gap: calc(var(--gutter)*2);
+    align-items: center;
+    justify-items: center;
+    border-radius: 5px;
+}
+
+tbody tr {
+    background-color: var(--surface-color);
+}
+
+th, td {
+    display: block;
+    width: 100%;
+    text-align: center;
+}
+
+th.title, 
+th.priority,
+td.priority {
+    text-align: left;
+}
+
+th.title[scope="row"] {
+    font-weight: normal;
+}
+
+td.priority {
+    padding-left: 1ch;
+}
+
+tr.do td.priority {
+    border-left: 6px solid var(--do-color);
+}
+
+tr.schedule td.priority  {
+    border-left: 6px solid var(--schedule-color);
+}
+
+tr.delegate td.priority  {
+    border-left: 6px solid var(--delegate-color);
+}
+
+tr.eliminate td.priority  {
+    border-left: 6px solid var(--eliminate-color);
+}
+
+button.multiple-delete {
+    background-color: transparent;
+    width: 100%;
+    height: var(--table-line-height);
+}
+
+button.multiple-delete img{
+    width: calc(var(--table-font-size) * 1.3);
 }
