@@ -3,9 +3,57 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Todo List</title>
+    <title>Todo App</title>
 </head>
 <body>
-    Hello
+    <header>
+        <h1>ToDo App</h1>
+        <nav>
+            <button>All</button>
+            <button>Today</button>
+            <div class="dropdown">
+                <button class="dropbtn">Project</button>
+                <div class="dropdown-content">
+                    <a href="#">Work</a>
+                    <a href="#">Home</a>
+                    <a class="separate" href="#">Add...</a>
+                </div>
+            </div>
+        </nav>
+    </header>
+    <div class="content">
+        <div id="today">
+            <h1>Today</h1>
+            <table>
+                <thead>
+                    <tr>
+                        <th scope="col" class="title">Title</th>
+                        <th scope="col" class="dueDate">Due</th>
+                        <th scope="col" class="priority">Priority</th>
+                        <th scope="col" class="done">Status</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <th scope="row">Visit Burt</th>
+                        <td>2025-07-17</td>
+                        <td class="urgent">Urgent</td>
+                        <td>
+                            <button class="toggle false">Done</button>
+                        </td>
+                    </tr>
+                    <tr>
+                        <th scope="row">Find out more</th>
+                        <td>2025-07-17</td>
+                        <td class="schedule">Schedule</td>
+                        <td>
+                            <button class="toggle false">Done</button>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+            <button>Add</button>
+        </div>
+    </div>
 </body>
 </html>
