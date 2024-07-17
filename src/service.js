@@ -137,6 +137,17 @@ class Service {
         }
     }
 
+    searchTodos(filterFunc){
+        return this.getAllTodos().filter(
+            todo => filterFunc(todo)
+        );
+    }
+
+    searchProjects(filterFunc, excludeDefault=true) {
+        this.getAllProjects(excludeDefault).filter(
+            project => filterFunc(project)
+        )
+    }
 }
 
 function getId() {
