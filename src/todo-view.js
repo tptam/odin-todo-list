@@ -15,6 +15,12 @@ Priority: ${this.todo.priority}
 Done: ${this.todo.done}
 `.trim();
     }
+
+    toSummaryString(){
+        return `${this.todo.title} (${this.todo.dueDate.toDateString()}) ${this.todo.done ? "✓" : "-"}\n`;
+    }
 }
+
+
 
 export default TodoView;
