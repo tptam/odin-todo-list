@@ -44,7 +44,7 @@ function render(tr, rowJson, rowHandlers){
     cell = document.createElement("td");
     cell.classList.add("project");
     cell.appendChild(parseHtml(`
-        <a>${row.project}</a>
+        <a data-id="${row.projectId}">${row.project}</a>
         `));
     tr.appendChild(cell);
 
