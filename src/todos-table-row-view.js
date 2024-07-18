@@ -62,8 +62,22 @@ function render(tr, rowJson, handlers){
     )
 }
 
-function update(){
+function update(tr, rowJson){
+    const rowData = JSON.parse(rowJson);
+    setRowPriority(tr, rowData.priority);
+    tr.querySelector(".title a").textContent = rowJson.title;
+    tr.querySelector(".due-date").textContent = rowJson.dueDate;
+    tr.querySelector(".priority").textContent = rowJson.priority;
+    tr.querySelector(".status span").textContent = rowJson.done ? "Done" : "Not Yet";
+    tr.querySelector(".project a").textContent = rowJson.project;
+}
 
+function setRowPriority(tr, priority){
+    tr.classList.remove("do");
+    tr.classList.remove("schedule");
+    tr.classList.remove("delegate");
+    tr.classList.remove("eliminate");
+    tr.classList.add(priority);
 }
 
 export {render, update};
