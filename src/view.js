@@ -1,7 +1,8 @@
 import * as todos from "./todos-view";
 import * as todosTable from "./todos-table-view";
 import * as todosTableRow from "./todos-table-row-view";
+import * as statusButton from "./todo-status-button-view";
 import * as menu from "./menu-view";
 
 
-export { todos, todosTable, todosTableRow, menu };
+export { todos, todosTable, todosTableRow, statusButton, menu };
