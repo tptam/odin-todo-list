@@ -118,7 +118,7 @@ class Service {
         delete(this.#projects[projectID]);
     }
 
-    deleteTodo(todoId) {
+    deleteTodoById(todoId) {
         const todo = this.getTodoById(todoId);
         Object.values(this.#projects).forEach(project => {
             project.deleteTodo(todo);
