@@ -152,6 +152,19 @@ class Service {
         )
     }
 
+    getProjectByTodoId(id, ignoreDefault=true){
+        const todo = this.getTodoById(id);
+        for (let project of Object.values(this.#projects)){
+            if (
+                project.todos.includes(todo) 
+                && (!ignoreDefault || project !== this.#defaultProject)
+            ){
+                return project;
+            }
+        }
+        return null;
+    }
+
     toggleTodoDoneByID(id) {
         const todo = this.getTodoById(id);
         todo.done = !todo.done;
