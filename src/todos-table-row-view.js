@@ -1,6 +1,10 @@
 import parseHtml from "./parse-html.js";
 
-function render(tr, rowJson, handlers){
+let handlers;
+
+function render(tr, rowJson, rowHandlers){
+    handlers = rowHandlers;
+
     const row = JSON.parse(rowJson);
     tr.classList.add(row.priority);
 
