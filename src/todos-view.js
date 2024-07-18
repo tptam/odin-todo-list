@@ -1,7 +1,11 @@
 import parseHtml from "./parse-html.js";
 import * as todosTableView from "./todos-table-view.js";
 
-function render(content, todosData, handlers) {
+let handlers;
+
+function render(content, todosData, todosHandlers) {
+    handlers = todosHandlers;
+
     content.innerHTML = "";
     const table = document.createElement("table");
     content.appendChild(table);
@@ -18,9 +22,10 @@ function render(content, todosData, handlers) {
     )
 }
 
-function update(content, todosData) {
+function update(content, todosJson, handlers) {
     const table = content.querySelector("table.todos");
-    todosTableView.update(table, todosData);  
+    todosTableView.update(table, todosJson);  
 }
+
 
 export {render, update};
