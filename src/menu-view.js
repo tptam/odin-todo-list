@@ -23,4 +23,16 @@ function update(menu, projectsData) {
     projectMenuView.update(projectMenu, projectsData);
 }
 
-export { render, update };
+function updateHighlight(menu, menuClass){
+    menu.querySelectorAll("button").forEach(
+        button => {
+            if (button.classList.contains(menuClass)) {
+                button.classList.add("selected");
+            } else {
+                button.classList.remove("selected");
+            }
+        }
+    );
+}
+
+export { render, update, updateHighlight };

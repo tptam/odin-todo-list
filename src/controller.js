@@ -43,6 +43,7 @@ class Controller{
             todo => isToday(todo.dueDate)
         );
         this.displayTodos("Today's ToDo", todos);
+        
     }
 
     displayTodos(caption, todos){
