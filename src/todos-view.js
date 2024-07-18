@@ -9,12 +9,21 @@ function render(content, tableJson, todosHandlers) {
 
     content.innerHTML = "";
 
-    // if (todo)
-
-    const table = document.createElement("table");
-    table.classList.add("todos");
-    content.appendChild(table);
-    todosTableView.render(table, JSON.stringify(tableData), handlers);
+    if (tableData.rows.length === 0) {
+        content.appendChild(parseHtml(`
+            <div class="empty">
+                <h1>${tableData.caption}</h1>
+                <p>
+                    No todo task found. Create one (or just relax).
+                </p>
+            </div>
+        `));
+    } else {
+        const table = document.createElement("table");
+        table.classList.add("todos");
+        content.appendChild(table);
+        todosTableView.render(table, JSON.stringify(tableData), handlers);
+    }
 
     const addButton = parseHtml(
         '<button class="add">+</button>'
