@@ -18,7 +18,7 @@ class Controller{
         const menuHandlers = {
             clickAllTodosLink: this.displayAllTodos.bind(this),
             clickTodayTodosLink: this.displayTodayTodos.bind(this),
-            clickProjectLink: () => { },
+            clickProjectLink: this.displayTodosinProject.bind(this),
             clickAllProjectsLink: () => { },
             addProject: () => { },
         }
@@ -38,12 +38,21 @@ class Controller{
         this.displayAllTodos();
     }
 
+    displayTodosinProject(event){
+        const link = event.currentTarget;
+        const id = link.getAttribute("data-projectId");
+        const project = this.#model.getProjectById(id);
+        this.displayTodos(`Project: ${project.name}`, project.todos)
+    }
+
     displayTodayTodos(){
         const todos = this.#model.searchTodos(
             todo => isToday(todo.dueDate)
         );
         this.displayTodos("Today's ToDo", todos);
-        
+
+        const menu = document.querySelector("nav");
+        this.#view.menu.updateHighlight(menu, "today");
     }
 
     displayTodos(caption, todos){
@@ -76,7 +85,7 @@ class Controller{
             clickMultiDeleteButton: this.deleteSelectedTodos.bind(this),
             clickAddButton: () => { },
             clickTitleLink: () => { },
-            clickProjectLink: () => { },
+            clickProjectLink: this.displayTodosinProject.bind(this),
             clickStatusButton: this.toggleTodoStatus.bind(this),
 
         }
@@ -113,11 +122,14 @@ class Controller{
             clickMultiDeleteButton: this.deleteSelectedTodos.bind(this),
             clickAddButton: () => { },
             clickTitleLink: () => { },
-            clickProjectLink: () => { },
+            clickProjectLink: this.displayTodosinProject.bind(this),
             clickStatusButton: this.toggleTodoStatus.bind(this),
         
         }
         this.#view.todos.render(content, JSON.stringify(tableData), todosHandlers);
+
+        const menu = document.querySelector("nav");
+        this.#view.menu.updateHighlight(menu, "all");
     }
 
     deleteSelectedTodos(){

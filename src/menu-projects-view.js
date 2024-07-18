@@ -1,6 +1,7 @@
 import parseHtml from "./parse-html.js";
 
 function render(menu, projectsData, handlers) {
+    console.log(handlers);
     const projects = JSON.parse(projectsData);
     projects.forEach(
         project => menu.appendChild(parseHtml(`
@@ -15,11 +16,11 @@ function render(menu, projectsData, handlers) {
     menu.appendChild(parseHtml(`
         <a id="add-project" class="separate" href="#">Add...</a>
     `));
-
+    
     menu.querySelectorAll("a.link-project").forEach(
         link => link.addEventListener(
             "click",
-            e => handlers.clickProjectLink(link.getAttribute("data-projectId"))
+            handlers.clickProjectLink
         )
     );
     

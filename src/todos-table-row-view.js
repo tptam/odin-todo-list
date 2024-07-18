@@ -44,7 +44,7 @@ function render(tr, rowJson, rowHandlers){
     cell = document.createElement("td");
     cell.classList.add("project");
     cell.appendChild(parseHtml(`
-        <a data-id="${row.projectId}">${row.project}</a>
+        <a data-projectId="${row.projectId}">${row.project}</a>
         `));
     tr.appendChild(cell);
 
@@ -52,14 +52,11 @@ function render(tr, rowJson, rowHandlers){
         "click",
         handlers.clickTitleLink
     );
+
     tr.querySelector(".project a").addEventListener(
         "click",
         handlers.clickProjectLink
     );
-    // tr.querySelector(".status button").addEventListener(
-    //     "click",
-    //     handlers.clickStatusButton
-    // )
 }
 
 function update(tr, rowJson){
