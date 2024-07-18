@@ -58,7 +58,7 @@ class Controller{
             clickAddButton: () => {},
             clickTitleLink: () => {},
             clickProjectLink: () => {},
-            clickStatusButton: () => {},
+            clickStatusButton: this.toggleTodoStatus.bind(this),
         }
         this.#view.todos.render(content, JSON.stringify(tableObj), todoHandlers);
     }
@@ -72,11 +72,17 @@ class Controller{
         const ids = [];
         checkedBoxes.forEach( box => ids.push(box.value));
 
-        console.log(table);
         for (let id of ids) {
             this.#model.deleteTodoById(id);
             this.#view.todosTable.deleteRowById(table, id);
         }
+    }
+
+    toggleTodoStatus(event){
+        const button = event.currentTarget;
+        const id = button.closest("tr").getAttribute("data-id");
+        this.#model.toggleTodoDoneByID(id);
+        this.#view.statusButton.toggle(button);
     }
 }
 
