@@ -2,6 +2,9 @@ import { ulid } from "ulid";
 import Todo from "./todo.js";
 import Project from "./project.js";
 
+
+import dummyTodos from "./dummy-todos.json";
+
 class Service {
     #todos = {};
     #projects = {};
@@ -147,6 +150,34 @@ class Service {
         this.getAllProjects(excludeDefault).filter(
             project => filterFunc(project)
         )
+    }
+
+    populateDummy(){
+        const todos = dummyTodos.map(
+            todo => {
+                const newTodo = this.createTodo(
+                    todo.title,
+                    todo.description,
+                    (new Date(todo.dueDate)),
+                    todo.priority,
+                    todo.done
+                );
+                return newTodo;
+            }
+        );
+        const project1 = this.createProject("Alice");
+        const project2 = this.createProject("Bob");
+        const project3 = this.createProject("Charlie");
+
+        todos.map((todo, index) => {
+            if (index < 8) {
+                this.addTodoToProject(todo.id, project1.id);
+            } else if (index < 15) {
+                this.addTodoToProject(todo.id, project2.id);
+            } else {
+                this.addTodoToProject(todo.id, project3.id);
+            }
+        });
     }
 }
 
