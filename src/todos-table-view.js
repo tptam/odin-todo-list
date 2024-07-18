@@ -2,9 +2,12 @@ import * as todosTableRowView from "./todos-table-row-view.js";
 import parseHtml from "./parse-html.js";
 import trashIcon from "./images/trash-can.svg"
 
-function render(table, tableJson, handlers){
+let handlers;
+
+function render(table, tableJson, tableHandlers){
+    handlers = tableHandlers;
     const tableData = JSON.parse(tableJson);
-    
+
     const caption = document.createElement("caption");
     caption.textContent = tableData.caption;
     table.appendChild(caption);
@@ -59,6 +62,7 @@ function render(table, tableJson, handlers){
     table.appendChild(tbody);
     for (let row of tableData.rows) {
         const tr = document.createElement("tr");
+        tr.id = row.id;
         tbody.appendChild(tr);
         todosTableRowView.render(tr, JSON.stringify(row), handlers);
     }
@@ -70,8 +74,20 @@ function render(table, tableJson, handlers){
     );
 }
 
-function update(table, todosData){
+function update(table, tableJson){
+    const tableData = JSON.parse(tableJson);
+    const caption = table.querySelector("caption");
+    caption.textContent = tableData.caption;
 
+    const tbody = table.querySelector("tbody");
+    tbody.textContent = "";
+
+    for (let row of tableData.rows) {
+        const tr = document.createElement("tr");
+        tr.id = row.id;
+        tbody.appendChild(tr);
+        todosTableRowView.render(tr, JSON.stringify(row), handlers);
+    }
 }
 
 export {render, update};
