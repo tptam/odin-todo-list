@@ -8,6 +8,7 @@ function render(content, todosData, todosHandlers) {
 
     content.innerHTML = "";
     const table = document.createElement("table");
+    table.classList.add("todos");
     content.appendChild(table);
     todosTableView.render(table, todosData, handlers);
 

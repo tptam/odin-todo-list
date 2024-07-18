@@ -84,4 +84,5 @@ function setRowPriority(tr, priority){
     tr.classList.add(priority);
 }
 
+
 export {render, update};

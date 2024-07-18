@@ -4,6 +4,7 @@ class Controller{
     #view;
     #model;
     static #priorityLabel = ["eliminate", "delegate", "schedule", "do"];
+
     constructor(view, model) {
         this.#view = view;
         this.#model = model;
@@ -53,7 +54,7 @@ class Controller{
         );
 
         const todoHandlers = {
-            clickMultiDeleteButton: this.multipleDelete,
+            clickMultiDeleteButton: this.deleteSelectedTodos.bind(this),
             clickAddButton: () => {},
             clickTitleLink: () => {},
             clickProjectLink: () => {},
@@ -62,11 +63,20 @@ class Controller{
         this.#view.todos.render(content, JSON.stringify(tableObj), todoHandlers);
     }
 
-    multipleDelete(){
-        const checkedBoxes = document.querySelector("input:checked");
-        checkedBoxes.forEach(
-            box => model.deleteProjectById(box.value)
-        );
+    deleteSelectedTodos(){
+        const checkedBoxes = document.querySelectorAll("input:checked");
+        const table = document.querySelector("table.todos");
+        if (checkedBoxes.length === 0) {
+            return;
+        }
+        const ids = [];
+        checkedBoxes.forEach( box => ids.push(box.value));
+
+        console.log(table);
+        for (let id of ids) {
+            this.#model.deleteTodoById(id);
+            this.#view.todosTable.deleteRowById(table, id);
+        }
     }
 }
 

@@ -6,6 +6,7 @@ let handlers;
 
 function render(table, tableJson, tableHandlers){
     handlers = tableHandlers;
+
     const tableData = JSON.parse(tableJson);
 
     const caption = document.createElement("caption");
@@ -62,7 +63,7 @@ function render(table, tableJson, tableHandlers){
     table.appendChild(tbody);
     for (let row of tableData.rows) {
         const tr = document.createElement("tr");
-        tr.id = row.id;
+        tr.setAttribute("data-id", row.id);
         tbody.appendChild(tr);
         todosTableRowView.render(tr, JSON.stringify(row), handlers);
     }
@@ -84,10 +85,18 @@ function update(table, tableJson){
 
     for (let row of tableData.rows) {
         const tr = document.createElement("tr");
-        tr.id = row.id;
+        tr.setAttribute("data-id", row.id);
         tbody.appendChild(tr);
         todosTableRowView.render(tr, JSON.stringify(row), handlers);
     }
 }
 
-export {render, update};
+function deleteRowById(table, rowId) {
+    const tr = table.querySelector(`tr[data-id="${rowId}"]`);
+    console.log(rowId);
+    if (tr) {
+        tr.remove();
+    }    
+}
+
+export { render, update, deleteRowById };
