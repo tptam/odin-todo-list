@@ -1,4 +1,5 @@
 import parseHtml from "./parse-html.js";
+import * as statusButton from "./todo-status-button-view.js";
 
 let handlers;
 
@@ -34,15 +35,10 @@ function render(tr, rowJson, rowHandlers){
     tr.appendChild(cell);
 
     cell = document.createElement("td");
-    cell.classList.add("status");
-    cell.appendChild(parseHtml(`
-            <button class="toggle" value="${row.done ? "on" : "off"}">
-                <span>${row.done ? "Done" : "Not Yet"}</span>
-                <svg viewBox="0, 0, 10, 10" xmlns="http://www.w3.org/2000/svg" fill="#fafafa">
-                    <circle cx="5" cy="5" r="4"/>
-                </svg>
-            </button>
-        `));
+    cell.classList.add("status");    
+    const button = document.createElement("button");
+    cell.appendChild(button);
+    statusButton.render(button, row.done, handlers.clickStatusButton);
     tr.appendChild(cell);
 
     cell = document.createElement("td");
@@ -60,20 +56,23 @@ function render(tr, rowJson, rowHandlers){
         "click",
         handlers.clickProjectLink
     );
-    tr.querySelector(".status button").addEventListener(
-        "click",
-        handlers.clickStatusButton
-    )
+    // tr.querySelector(".status button").addEventListener(
+    //     "click",
+    //     handlers.clickStatusButton
+    // )
 }
 
 function update(tr, rowJson){
     const rowData = JSON.parse(rowJson);
     setRowPriority(tr, rowData.priority);
-    tr.querySelector(".title a").textContent = rowJson.title;
-    tr.querySelector(".due-date").textContent = rowJson.dueDate;
-    tr.querySelector(".priority").textContent = rowJson.priority;
-    tr.querySelector(".status span").textContent = rowJson.done ? "Done" : "Not Yet";
-    tr.querySelector(".project a").textContent = rowJson.project;
+    tr.querySelector(".title a").textContent = rowData.title;
+    tr.querySelector(".due-date").textContent = rowData.dueDate;
+    tr.querySelector(".priority").textContent = rowData.priority;
+
+    const button = tr.querySelector(".status button");
+    statusButton.toggle(button);
+
+    tr.querySelector(".project a").textContent = rowData.project;
 }
 
 function setRowPriority(tr, priority){
