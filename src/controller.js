@@ -97,36 +97,8 @@ class Controller{
         const content = document.querySelector("#content");
         content.textContent = "";
 
-        const tableData = {
-            caption: "All ToDo Tasks",
-            rows: []
-        };
-        this.#model.getAllTodos().map(
-            todo => {
-                const proj = this.#model.getProjectByTodoId(todo.id);
-                tableData.rows.push(
-                    {
-                        id: todo.id,
-                        title: todo.title,
-                        dueDate: format(new Date(todo.dueDate), "yyyy-MM-dd"),
-                        priority: Controller.#priorityLabel[todo.priority],
-                        done: todo.done,
-                        project: proj === null ? "" : proj.name,
-                        projectId: proj === null ? "" : proj.id,
-                    }
-                );
-            }
-        );
-
-        const todosHandlers = {
-            clickMultiDeleteButton: this.deleteSelectedTodos.bind(this),
-            clickAddButton: () => { },
-            clickTitleLink: () => { },
-            clickProjectLink: this.displayTodosinProject.bind(this),
-            clickStatusButton: this.toggleTodoStatus.bind(this),
-        
-        }
-        this.#view.todos.render(content, JSON.stringify(tableData), todosHandlers);
+        const todos = this.#model.getAllTodos();
+        this.displayTodos("All ToDo Tasks", todos);
 
         const menu = document.querySelector("nav");
         this.#view.menu.updateHighlight(menu, "all");
