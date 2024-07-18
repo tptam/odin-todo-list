@@ -11,6 +11,7 @@ class Controller{
     }
 
     init(){
+        // For testing
         this.#model.populateDummy();
      
         const menu = document.querySelector("nav");
@@ -41,16 +42,22 @@ class Controller{
             rows: []
         };
         this.#model.getAllTodos().map(
-            todo => tableObj.rows.push(
-                {
-                    id: todo.id,
-                    title: todo.title,
-                    dueDate: format(new Date(todo.dueDate), "yyyy-MM-dd"),
-                    priority: Controller.#priorityLabel[todo.priority],
-                    done: todo.done,
-                    project: "Alice"
-                }
-            )
+            todo => {
+                const proj = this.#model.getProjectByTodoId(todo.id);
+                console.log(proj);
+                tableObj.rows.push(
+                    {
+                        id: todo.id,
+                        title: todo.title,
+                        dueDate: format(new Date(todo.dueDate), "yyyy-MM-dd"),
+                        priority: Controller.#priorityLabel[todo.priority],
+                        done: todo.done,
+                        project: proj === null ? "" : proj.name,
+                        projectId: proj === null ? "" : proj.id,
+                    }
+                );
+
+            }
         );
 
         const todoHandlers = {
