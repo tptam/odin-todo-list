@@ -9,7 +9,7 @@
    {
       "title":"Buy groceries",
       "description":"Pick up milk, eggs, bread, and vegetables from the supermarket",
-      "dueDate":"2024-07-18T20:00:00Z",
+      "dueDate":"2024-07-18",
       "priority":2,
       "done":false
    },
