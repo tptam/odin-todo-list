@@ -16,7 +16,7 @@ class Controller{
      
         const menu = document.querySelector("nav");
         const menuHandlers = {
-            clickAllTodosLink: () => { },
+            clickAllTodosLink: this.displayAllTodos.bind(this),
             clickTodayTodosLink: () => { },
             clickProjectLink: () => { },
             clickAllProjectsLink: () => { },
@@ -35,17 +35,22 @@ class Controller{
 
         this.#view.menu.render(menu, JSON.stringify(projectsData), menuHandlers);
 
-        const content = document.querySelector("#content"); 
+        this.displayAllTodos();
+    }
 
-        const tableObj = {
-            caption: "All ToDo's", 
+    displayAllTodos(){
+        const content = document.querySelector("#content");
+        content.textContent = "";
+
+        const tableData = {
+            caption: "All ToDo Tasks",
             rows: []
         };
         this.#model.getAllTodos().map(
             todo => {
                 const proj = this.#model.getProjectByTodoId(todo.id);
                 console.log(proj);
-                tableObj.rows.push(
+                tableData.rows.push(
                     {
                         id: todo.id,
                         title: todo.title,
@@ -56,18 +61,18 @@ class Controller{
                         projectId: proj === null ? "" : proj.id,
                     }
                 );
-
             }
         );
 
-        const todoHandlers = {
+        const todosHandlers = {
             clickMultiDeleteButton: this.deleteSelectedTodos.bind(this),
-            clickAddButton: () => {},
-            clickTitleLink: () => {},
-            clickProjectLink: () => {},
+            clickAddButton: () => { },
+            clickTitleLink: () => { },
+            clickProjectLink: () => { },
             clickStatusButton: this.toggleTodoStatus.bind(this),
+        
         }
-        this.#view.todos.render(content, JSON.stringify(tableObj), todoHandlers);
+        this.#view.todos.render(content, JSON.stringify(tableData), todosHandlers);
     }
 
     deleteSelectedTodos(){
