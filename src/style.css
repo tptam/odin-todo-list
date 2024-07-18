@@ -128,6 +128,7 @@ button.toggle[value="on"] svg {
 
 
 /* Common sections*/
+
 body {
     /* required to make the footer stick to the bottom*/
     min-height: 100vh;
@@ -337,4 +338,48 @@ button.multi-delete img{
 .empty p {
     font-size: var(--content-h2-font-size);
     font-weight: normal;
+}
+
+
+/* Overridiing rules for projects table */
+table.projects thead{
+    gap: 0;
+    grid-auto-rows: calc(var(--table-line-height)) ;
+}
+table.projects tr {
+    grid-template-columns: 2ch 1fr repeat(4, 8ch) 15ch;
+}
+tr.summary {
+    grid-template-columns: 2ch 1fr calc((var(--gutter) * 8) + 47ch);
+}
+tr.summary th {
+    grid-column: 3 / 6;
+    text-align: left;
+    border-bottom: 3px solid var(--neutral-color-400);
+    align-self: end;
+    text-align: right;
+}
+
+table.projects th.todos,
+table.projects td.todos,
+table.projects th.done,
+table.projects td.done,
+table.projects th.overdue,
+table.projects td.overdue,
+table.projects th.progress,
+table.projects td.progress {
+    text-align: right;
+    font-family: monospace;
+}
+
+table.projects td.todos,
+table.projects td.done,
+table.projects td.overdue,
+table.projects td.progress {
+    text-align: right;
+    font-family: monospace;
+}
+
+table.projects svg {
+    fill: var(--neutral-color-300);
 }

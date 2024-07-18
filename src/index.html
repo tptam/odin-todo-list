@@ -9,103 +9,59 @@
     <header>
         <h1>ToDo List</h1>
         <nav>
-            <button id="link-todos-all" class="selected">All</button>
-            <button id="link-todos-today">Today</button>
+            <button id="link-todos-all" class="selected all">All</button>
+            <button id="link-todos-today" class="today">Today</button>
             <div class="dropdown">
-                <button class="dropbtn">Project</button>
+                <button class="dropbtn project">Project</button>
                 <div id="project-menu" class="dropdown-content" hidden>
-                    <!-- <a class="link-project" data-projectId="001">Work</a>
-                    <a class="link-project" data-projectId="002">Secret Mission</a>
-                    <a id="link-projects-all" class="separate" href="#">View all</a>
-                    <a id="add-project" class="separate" href="#">Add...</a> -->
                 </div>
             </div>
         </nav>
     </header>
     <div id="content">
-        <!-- 
-        <table class="todos">
-            <caption>All Todo's</caption>
+        <table class="projects">
+            <caption>All Projects</caption>
             <thead>
+                <!-- <tr class="summary">
+                    <td colspan="2"></td>
+                    <th scope="col" colspan="4">ToDo</th>
+                </tr> -->
                 <tr>
                     <th class="select">
                         <button class="multi-delete">
-                            <img src="<%= require('./images/trash-can.svg') %>" alt="Delete icon">
+                            <img src="http://127.0.0.1:5500/dist/b4a7b26be64c05d0f239.svg" alt="Delete icon">
                         </button>
                     </th>
-                    <th scope="col" class="title">Title</th>
-                    <th scope="col" class="due-date">Due Date</th>
-                    <th scope="col" class="priority">Priority</th>
-                    <th scope="col" class="done">Status</th>
-                    <th scope="col" class="project">Project</th>
+                    <th class="name title" scope="col">Name</th>
+                    <th class="todos" scope="col">Todos</th>
+                    <th class="done" scope="col">Done</th>
+                    <th class="overdue" scope="col">Overdue</th>
+                    <th class="progress" scope="col" colspan="2">Progress</th>
                 </tr>
             </thead>
             <tbody>
-                <tr class="do">
-                    <td class="select"><input type="checkbox" name="select" value="0000"></td>
-                    <th class="title" scope="row"><a href="">Visit Burt</a></th>
-                    <td class="due-date">2025-07-17</td>
-                    <td class="priority">Do</td>
-                    <td>
-                        <button class="toggle" value="on">     
-                            <span>Done</span>
-                            <svg viewBox="0, 0, 10, 10" xmlns="http://www.w3.org/2000/svg" fill="#fafafa">
-                            <circle cx="5" cy="5" r="4"/>
-                            </svg>
-                        </button>
+                <tr data-projectid="01J32W2P7KT0ZC452ZYDQ4CJ4J">
+                    <td class="select">
+                        <input type="checkbox" name="select" value="01J32W2P7KT0ZC452ZYDQ4CJ4J">
                     </td>
-                    <td class="project"><a href="#">Work</a></td>
-                </tr>
-                <tr class="schedule">
-                    <td class="select"><input type="checkbox" name="select" value="0001"></td>
-                    <th class="title" scope="row"><a href="">Appreciate art</a></th>
-                    <td class="due-date">2025-07-17</td>
-                    <td class="priority">Schedule</td>
-                    <td>
-                        <button class="toggle" value="off">     
-                            <span>Not Yet</span>
-                            <svg viewBox="0, 0, 10, 10" xmlns="http://www.w3.org/2000/svg" fill="#fafafa">
-                            <circle cx="5" cy="5" r="4"/>
-                            </svg>
-                        </button>
+                    <th class="name title" scope="row"><a>Alice</a></th>
+                    <td class="todos"><a>8</a></td>
+                    <td class="done"><a>2</a></td>
+                    <td class="overdue"><a>2</a></td>
+                    <td class="progress">25%</td>
+                    <td class="progress-bar">
+                        <svg viewBox="0, 0, 100, 25" xmlns="http://www.w3.org/2000/svg" fill="#d2d2d2">
+                            <rect width="3" height="25" x="0" y="0" />
+                            <rect width="3" height="25" x="5" y="0"  />
+                            <rect width="3" height="25" x="10" y="0"  />
+                            <rect width="3" height="25" x="15" y="0"  />
+                            <rect width="3" height="25" x="20" y="0"  />
+                        </svg>
                     </td>
-                    <td class="project"><a href="#">Secret Mission</a></td>
-                </tr>
-                <tr class="delegate">
-                    <td class="select"><input type="checkbox" name="select" value="0002"></td>
-                    <th class="title" scope="row"><a href="">Ask about the new tote bag</a></th>
-                    <td class="due-date">2025-07-17</td>
-                    <td class="priority">Delegate</td>
-                    <td>
-                        <button class="toggle" value="on">     
-                            <span>Done</span>
-                            <svg viewBox="0, 0, 10, 10" xmlns="http://www.w3.org/2000/svg" fill="#fafafa">
-                            <circle cx="5" cy="5" r="4"/>
-                            </svg>
-                        </button>
-                    </td>
-                    <td class="project"><a href="#">Work</a></td>
-                </tr>
-                <tr class="eliminate">
-                    <td class="select"><input type="checkbox" name="select" value="0003"></td>
-                    <th class="title" scope="row"><a href="">Refine macro data</a></th>
-                    <td class="due-date">2025-07-17</td>
-                    <td class="priority">Eliminate</td>
-                    <td>
-                        <button class="toggle" value="off">     
-                            <span>Not Yet</span>
-                            <svg viewBox="0, 0, 10, 10" xmlns="http://www.w3.org/2000/svg" fill="#fafafa">
-                            <circle cx="5" cy="5" r="4"/>
-                            </svg>
-                        </button>
-                    </td>
-                    <td class="project"><a href="#">Work</a></td>
                 </tr>
             </tbody>
         </table>
-        <button class="add">+</button>
-         -->
-    </div>
+        <button class="add">+</button></div>
     <footer>Copyright © tptam 2024</footer>
 </body>
 </html>
