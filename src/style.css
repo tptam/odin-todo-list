@@ -244,7 +244,7 @@ caption {
 
 table {
     width: var(--table-width);
-    margin: var(--gutter) auto;
+    margin: var(--gutter) auto calc(var(--add-button-size) * 2);
 }
 
 thead, tbody {
@@ -305,12 +305,12 @@ tr.eliminate td.priority  {
     border-left: 6px solid var(--eliminate-color);
 }
 
-button.multiple-delete {
+button.multi-delete {
     background-color: transparent;
     width: 100%;
     height: var(--table-line-height);
 }
 
-button.multiple-delete img{
+button.multi-delete img{
     width: calc(var(--table-font-size) * 1.3);
 }

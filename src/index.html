@@ -9,26 +9,27 @@
     <header>
         <h1>ToDo List</h1>
         <nav>
-            <button class="selected">All</button>
-            <button>Today</button>
+            <button id="link-todos-all" class="selected">All</button>
+            <button id="link-todos-today">Today</button>
             <div class="dropdown">
                 <button class="dropbtn">Project</button>
-                <div class="dropdown-content" hidden>
-                    <a href="#">Work</a>
-                    <a href="#">Secret Mission</a>
-                    <a class="separate" href="#">View all</a>
-                    <a class="separate" href="#">Add...</a>
+                <div id="project-menu" class="dropdown-content" hidden>
+                    <!-- <a class="link-project" data-projectId="001">Work</a>
+                    <a class="link-project" data-projectId="002">Secret Mission</a>
+                    <a id="link-projects-all" class="separate" href="#">View all</a>
+                    <a id="add-project" class="separate" href="#">Add...</a> -->
                 </div>
             </div>
         </nav>
     </header>
     <div id="content">
-        <table class="todo">
+        <!-- 
+        <table class="todos">
             <caption>All Todo's</caption>
             <thead>
                 <tr>
                     <th class="select">
-                        <button class="multiple-delete">
+                        <button class="multi-delete">
                             <img src="<%= require('./images/trash-can.svg') %>" alt="Delete icon">
                         </button>
                     </th>
@@ -41,7 +42,7 @@
             </thead>
             <tbody>
                 <tr class="do">
-                    <td class="select"><input type="checkbox" name="select" id="0123"></td>
+                    <td class="select"><input type="checkbox" name="select" value="0000"></td>
                     <th class="title" scope="row"><a href="">Visit Burt</a></th>
                     <td class="due-date">2025-07-17</td>
                     <td class="priority">Do</td>
@@ -56,7 +57,7 @@
                     <td class="project"><a href="#">Work</a></td>
                 </tr>
                 <tr class="schedule">
-                    <td class="select"><input type="checkbox" name="select" id="0123"></td>
+                    <td class="select"><input type="checkbox" name="select" value="0001"></td>
                     <th class="title" scope="row"><a href="">Appreciate art</a></th>
                     <td class="due-date">2025-07-17</td>
                     <td class="priority">Schedule</td>
@@ -71,7 +72,7 @@
                     <td class="project"><a href="#">Secret Mission</a></td>
                 </tr>
                 <tr class="delegate">
-                    <td class="select"><input type="checkbox" name="select" id="0123"></td>
+                    <td class="select"><input type="checkbox" name="select" value="0002"></td>
                     <th class="title" scope="row"><a href="">Ask about the new tote bag</a></th>
                     <td class="due-date">2025-07-17</td>
                     <td class="priority">Delegate</td>
@@ -86,7 +87,7 @@
                     <td class="project"><a href="#">Work</a></td>
                 </tr>
                 <tr class="eliminate">
-                    <td class="select"><input type="checkbox" name="select" id="0123"></td>
+                    <td class="select"><input type="checkbox" name="select" value="0003"></td>
                     <th class="title" scope="row"><a href="">Refine macro data</a></th>
                     <td class="due-date">2025-07-17</td>
                     <td class="priority">Eliminate</td>
@@ -103,6 +104,7 @@
             </tbody>
         </table>
         <button class="add">+</button>
+         -->
     </div>
     <footer>Copyright © tptam 2024</footer>
 </body>
