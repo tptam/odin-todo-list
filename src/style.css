@@ -314,3 +314,21 @@ button.multi-delete {
 button.multi-delete img{
     width: calc(var(--table-font-size) * 1.3);
 }
+
+/* No task found message */
+.empty {
+    width: var(--table-width);
+    margin: var(--gutter) auto calc(var(--add-button-size) * 2);
+}
+
+.empty h1{
+    font-weight: 700;
+    font-size: var(--content-h1-font-size);
+    text-align: left;
+    margin-bottom: calc(var(--gutter) * 2);
+}
+
+.empty p {
+    font-size: var(--content-h2-font-size);
+    font-weight: normal;
+}
