@@ -369,7 +369,6 @@ table.projects td.overdue,
 table.projects th.progress,
 table.projects td.progress {
     text-align: right;
-    font-family: monospace;
 }
 
 table.projects td.todos,
@@ -381,5 +380,17 @@ table.projects td.progress {
 }
 
 table.projects svg {
+    fill: var(--neutral-color-200);
+}
+
+table.projects .over50 svg {
     fill: var(--neutral-color-300);
+}
+
+table.projects .over75 svg {
+    fill: var(--neutral-color-400);
+}
+
+table.projects .complete svg {
+    fill: var(--primary-color);
 }
