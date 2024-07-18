@@ -152,6 +152,11 @@ class Service {
         )
     }
 
+    toggleTodoDoneByID(id) {
+        const todo = this.getTodoById(id);
+        todo.done = !todo.done;
+    }
+
     populateDummy(){
         const todos = dummyTodos.map(
             todo => {
