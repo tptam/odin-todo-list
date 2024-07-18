@@ -1,4 +1,4 @@
-import { format } from "date-fns";
+import { format, isToday } from "date-fns";
 
 class Controller{
     #view;
@@ -17,7 +17,7 @@ class Controller{
         const menu = document.querySelector("nav");
         const menuHandlers = {
             clickAllTodosLink: this.displayAllTodos.bind(this),
-            clickTodayTodosLink: () => { },
+            clickTodayTodosLink: this.displayTodayTodos.bind(this),
             clickProjectLink: () => { },
             clickAllProjectsLink: () => { },
             addProject: () => { },
@@ -38,6 +38,51 @@ class Controller{
         this.displayAllTodos();
     }
 
+    displayTodayTodos(){
+        const todos = this.#model.searchTodos(
+            todo => isToday(todo.dueDate)
+        );
+        this.displayTodos("Today's ToDo", todos);
+    }
+
+    displayTodos(caption, todos){
+        const content = document.querySelector("#content");
+        content.textContent = "";
+
+        const tableData = {
+            caption: caption,
+            rows: []
+        };
+
+        todos.map(
+            todo => {
+                const proj = this.#model.getProjectByTodoId(todo.id);
+                tableData.rows.push(
+                    {
+                        id: todo.id,
+                        title: todo.title,
+                        dueDate: format(new Date(todo.dueDate), "yyyy-MM-dd"),
+                        priority: Controller.#priorityLabel[todo.priority],
+                        done: todo.done,
+                        project: proj === null ? "" : proj.name,
+                        projectId: proj === null ? "" : proj.id,
+                    }
+                );
+            }
+        );
+
+        const todosHandlers = {
+            clickMultiDeleteButton: this.deleteSelectedTodos.bind(this),
+            clickAddButton: () => { },
+            clickTitleLink: () => { },
+            clickProjectLink: () => { },
+            clickStatusButton: this.toggleTodoStatus.bind(this),
+
+        }
+
+        this.#view.todos.render(content, JSON.stringify(tableData), todosHandlers);
+    }
+
     displayAllTodos(){
         const content = document.querySelector("#content");
         content.textContent = "";
@@ -49,7 +94,6 @@ class Controller{
         this.#model.getAllTodos().map(
             todo => {
                 const proj = this.#model.getProjectByTodoId(todo.id);
-                console.log(proj);
                 tableData.rows.push(
                     {
                         id: todo.id,
