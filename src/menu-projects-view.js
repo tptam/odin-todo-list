@@ -1,7 +1,6 @@
 import parseHtml from "./parse-html.js";
 
 function render(menu, projectsData, handlers) {
-    console.log(handlers);
     const projects = JSON.parse(projectsData);
     projects.forEach(
         project => menu.appendChild(parseHtml(`
