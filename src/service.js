@@ -176,6 +176,9 @@ class Service {
     getProjectProgressRate(id){
         const project = this.getProjectById(id);
         const total = project.todos.length;
+        if (total === 0) {
+            return 0;
+        }
         const done = project.todos.filter(todo => todo.done).length;
         return done / total;
     }
