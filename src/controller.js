@@ -65,7 +65,7 @@ class Controller{
 
         const tableHandlers = {
             clickNameLink: ()=>{console.log("name")},
-            clickTodosLink: () => { console.log("todos") },
+            clickTodosLink: this.displayTodosinProject.bind(this),
             clickDoneLink: () => { console.log("done") },
             clickOverdueLink: () => { console.log("overdue") },
             clickAddButton: () => { console.log("add project") },
