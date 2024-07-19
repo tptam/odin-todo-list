@@ -173,6 +173,13 @@ class Service {
         );
     }
 
+    getProjectProgressRate(id){
+        const project = this.getProjectById(id);
+        const total = project.todos.length;
+        const done = project.todos.filter(todo => todo.done).length;
+        return done / total;
+    }
+
     toggleTodoDoneByID(id) {
         const todo = this.getTodoById(id);
         todo.done = !todo.done;
