@@ -41,7 +41,7 @@
     --do-color: #d0021b;
     --schedule-color: #F5A623;
     --delegate-color: #4A90E2;
-    --eliminate-color:#a8a29e;
+    --eliminate-color:#bbbbbb;
 
     --text-color: var(--neutral-color);
     --text-color-white: var(var(--neutral-color-50));
@@ -283,6 +283,7 @@ th, td {
 }
 
 th.title, 
+td.title, 
 th.priority,
 td.priority {
     text-align: left;
