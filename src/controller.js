@@ -64,11 +64,11 @@ class Controller{
         )
 
         const tableHandlers = {
-            clickNameLink: ()=>{},
-            clickTodoLink: ()=>{},
-            clickDoneLink: ()=>{},
-            clickOverdueLink: ()=>{},
-            clickAddButton: () => {},
+            clickNameLink: ()=>{console.log("name")},
+            clickTodosLink: () => { console.log("todos") },
+            clickDoneLink: () => { console.log("done") },
+            clickOverdueLink: () => { console.log("overdue") },
+            clickAddButton: () => { console.log("add project") },
         }
 
         const content = document.querySelector("#content");
