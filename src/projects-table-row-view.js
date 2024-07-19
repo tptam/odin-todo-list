@@ -17,7 +17,7 @@ function render(tr, rowJson, rowHandlers) {
             classes: ["name", "title"],
             attribute: { scope: "row" },
             text: null,
-            contentHtml: `<a>${row.name}</a>`
+            contentHtml: `<a data-projectId="${row.id}">${row.name}</a>`
         },
         {
             tag: "td",
@@ -31,14 +31,14 @@ function render(tr, rowJson, rowHandlers) {
             classes: ["done",],
             attribute: {},
             text: null,
-            contentHtml: `<a>${row.done}</a>`
+            contentHtml: `<a data-projectId="${row.id}">${row.done}</a>`
         },
         {
             tag: "td",
             classes: ["overdue",],
             attribute: {},
             text: null,
-            contentHtml: `<a>${row.overdue}</a>`
+            contentHtml: `<a data-projectId="${row.id}">${row.overdue}</a>`
         },
         {
             tag: "td",
