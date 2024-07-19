@@ -9,5 +9,5 @@ const service = new Service();
 const controller = new Controller(view, service);
 
 
-// controller.init();
+controller.init();
 
