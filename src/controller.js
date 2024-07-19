@@ -57,6 +57,7 @@ class Controller{
                         done: project.todos.filter(todo => todo.done).length,
                         overdue: overdueTodos.length,
                         progress: `${Math.round(progressRate * 100) }%`,
+                        progressRate: progressRate,
                     }
                 )
             }
