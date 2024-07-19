@@ -107,7 +107,7 @@ button.toggle {
     display: grid;
     align-items: center;
     font-size: 1.2rem;
-    background-color: var(--neutral-color-200);
+    background-color: #ebebeb;
     grid-template-columns: 1fr 1.5rem;
     grid-template-rows: 100%;
     grid-template-areas: "label knob"; 
