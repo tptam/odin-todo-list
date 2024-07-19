@@ -34,8 +34,10 @@
     --neutral-color-700: #404040;
     --neutral-color-600: #525252;
     --neutral-color-400: #a8a29e;
-    --neutral-color-200: #e5e5e5;
     --neutral-color-300: #d6d3d1;
+    --neutral-color-200: #e5e5e5;
+    --neutral-color-150: #ededed;
+    --neutral-color-100: #f5f5f5;
     --neutral-color-50: #fafafa; 
 
     --do-color: #d0021b;
@@ -406,6 +408,10 @@ table.projects td>a:hover {
 
 
 table.projects svg {
+    fill: var(--neutral-color-150);
+}
+
+table.projects .over25 svg {
     fill: var(--neutral-color-200);
 }
 
