@@ -19,7 +19,7 @@ class Controller{
             clickAllTodosLink: this.displayAllTodos.bind(this),
             clickTodayTodosLink: this.displayTodayTodos.bind(this),
             clickProjectLink: this.displayTodosinProject.bind(this),
-            clickAllProjectsLink: () => { },
+            clickAllProjectsLink: this.dislayAllProjects.bind(this),
             addProject: () => { },
         }
 
@@ -37,6 +37,44 @@ class Controller{
 
         this.displayAllTodos();
     }
+
+
+    dislayAllProjects() {
+        const tableData = {
+            caption: "All Projects",
+            rows: []
+        }
+
+        this.#model.getAllProjects().forEach(
+            project => tableData.rows.push(
+                {
+                    id: project.id,
+                    name: project.name,
+                    todos: project.todos.length,
+                    done: project.todos.filter(todo => todo.done).length,
+                    overdue: 0,
+                    progress: 0,
+                }
+            )
+        )
+
+        const tableHandlers = {
+            clickNameLink: ()=>{},
+            clickTodoLink: ()=>{},
+            clickDoneLink: ()=>{},
+            clickOverdueLink: ()=>{},
+            clickAddButton: () => {},
+        }
+
+        const content = document.querySelector("#content");
+        
+        this.#view.projects.render(
+            content, 
+            JSON.stringify(tableData), 
+            tableHandlers
+        );
+    }
+
 
     displayTodosinProject(event){
         const link = event.currentTarget;

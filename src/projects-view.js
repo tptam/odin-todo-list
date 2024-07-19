@@ -1,9 +1,8 @@
 import parseHtml from "./parse-html";
+import * as projectsTableView from "./projects-table-view";
 
-let handlers;
 
 function render(content, tableJson, tableHandlers) {
-    handlers = tableHandlers;
     const tableData = JSON.parse(tableJson);
     content.innerHTML = "";
 
@@ -20,7 +19,7 @@ function render(content, tableJson, tableHandlers) {
         const table = document.createElement("table");
         table.classList.add("projects");
         content.appendChild(table);
-        todosTableView.render(table, JSON.stringify(tableData), handlers);
+        projectsTableView.render(table, JSON.stringify(tableData), tableHandlers);
     }
 
     const addButton = parseHtml(
@@ -30,12 +29,13 @@ function render(content, tableJson, tableHandlers) {
 
     addButton.addEventListener(
         "click",
-        handlers.clickAddButton
+        tableHandlers.clickAddButton
     )
 }
 
-function update() {
-
+function update(content, tableJson) {
+    const table = content.querySelector("table.projects");
+    projectsTableView.update(table, tableJson);
 }
 
 export {render, update};
