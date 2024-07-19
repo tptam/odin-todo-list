@@ -98,7 +98,8 @@ class Controller{
         this.displaySearchedTodos(
             `Project: ${project.name} / Overdue Tasks`,
             todo => isBefore(todo.dueDate, new Date()) && !todo.done,
-            projectId
+            projectId,
+            "No Overdue Tasks. Great Job!",
         )
         this.#reload = () => this.displayOverdueTodosInProject(projectId);
     }
@@ -108,7 +109,8 @@ class Controller{
         this.displaySearchedTodos(
             `Project: ${project.name} / Unfinished Tasks`,
             todo => !todo.done,
-            projectId
+            projectId,
+            "No unfinished tasks. Yay!"
         )
         this.#reload = () => this.displayNotDoneTodosInProject(projectId);
     }
@@ -127,15 +129,15 @@ class Controller{
         const todos = this.#model.searchTodos(
             todo => isToday(todo.dueDate)
         );
-        this.displayTodos("Today's ToDo", todos);
+        this.displayTodos("Today's ToDo", todos, "No tasks found. What a beautiful day.");
 
         const menu = document.querySelector("nav");
         this.#view.menu.updateHighlight(menu, "today");
 
-        this.#reload = this.displayTodayTodos();
+        this.#reload = this.displayTodayTodos;
     }
 
-    displaySearchedTodos(caption, filter, projectId=null, emptyMessage=null) {
+    displaySearchedTodos(caption, filter, projectId=null, emptyMessage="") {
         let todos = this.#model.searchTodos(filter);
         if (projectId !== null) {
             todos = todos.filter(
@@ -154,7 +156,7 @@ class Controller{
         );
     }
 
-    displayTodos(caption, todos, emptyMessage=null){
+    displayTodos(caption, todos, emptyMessage=""){
         const content = document.querySelector("#content");
         content.textContent = "";
 

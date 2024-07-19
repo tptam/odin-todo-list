@@ -10,11 +10,20 @@ function render(content, tableJson, todosHandlers) {
     content.innerHTML = "";
 
     if (tableData.rows.length === 0) {
+        let emptyMessage;
+        if (tableData.emptyMessage !== "") {
+            emptyMessage = tableData.emptyMessage;
+        } else {
+            emptyMessage = "No tasks found. Create one (or just relax)."
+        }
+
+        console.log(emptyMessage);
+
         content.appendChild(parseHtml(`
             <div class="empty">
                 <h1>${tableData.caption}</h1>
                 <p>
-                    No todo task found. Create one (or just relax).
+                    ${emptyMessage}
                 </p>
             </div>
         `));
