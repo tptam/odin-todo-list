@@ -24,7 +24,7 @@ function render(tr, rowJson, rowHandlers) {
             classes: ["todos",],
             attribute: {},
             text: null,
-            contentHtml: `<a>${row.todos}</a>`
+            contentHtml: `<a data-projectId="${row.id}">${row.todos}</a>`
         },
         {
             tag: "td",
@@ -58,12 +58,12 @@ function render(tr, rowJson, rowHandlers) {
 
     const handlers = [
         {
-            selector: ".name",
+            selector: ".name a",
             type: "click",
             func: rowHandlers.clickNameLink
         },
         {
-            selector: ".todos",
+            selector: ".todos a",
             type: "click",
             func: rowHandlers.clickTodosLink
         },
