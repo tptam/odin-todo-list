@@ -82,10 +82,8 @@ class Controller{
         );
     }
 
-    displayTodosinProject(event){
-        const link = event.currentTarget;
-        const id = link.getAttribute("data-projectId");
-        const project = this.#model.getProjectById(id);
+    displayTodosinProject(projectID){
+        const project = this.#model.getProjectById(projectID);
         this.displayTodos(`Project: ${project.name}`, project.todos)
     }
 

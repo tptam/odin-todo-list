@@ -65,7 +65,7 @@ function render(tr, rowJson, rowHandlers) {
         {
             selector: ".todos a",
             type: "click",
-            func: rowHandlers.clickTodosLink
+            func: (event) => rowHandlers.clickTodosLink(row.id)
         },
         {
             selector: ".done a",
