@@ -56,7 +56,28 @@ function render(tr, rowJson, rowHandlers) {
         },
     ]
 
-    const handlers = [];
+    const handlers = [
+        {
+            selector: ".name",
+            type: "click",
+            func: rowHandlers.clickNameLink
+        },
+        {
+            selector: ".todos",
+            type: "click",
+            func: rowHandlers.clickTodosLink
+        },
+        {
+            selector: ".done",
+            type: "click",
+            func: rowHandlers.clickDoneLink
+        },
+        {
+            selector: ".overdue",
+            type: "click",
+            func: rowHandlers.clickOverdueLink
+        },
+    ];
 
     tableRow.render(tr, JSON.stringify(cellsData), handlers);
 
