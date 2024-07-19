@@ -52,7 +52,7 @@ class Controller{
                     name: project.name,
                     todos: project.todos.length,
                     done: project.todos.filter(todo => todo.done).length,
-                    overdue: 0,
+                    overdue: this.#model.getOverdueTodosInProject(project.id).length,
                     progress: 0,
                 }
             )

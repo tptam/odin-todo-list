@@ -1,4 +1,5 @@
 import { ulid } from "ulid";
+import { isBefore } from "date-fns";
 import Todo from "./todo.js";
 import Project from "./project.js";
 
@@ -163,6 +164,13 @@ class Service {
             }
         }
         return null;
+    }
+
+    getOverdueTodosInProject(id) {
+        const project = this.getProjectById(id);
+        return project.todos.filter(
+            todo => isBefore(todo.dueDate, new Date())
+        );
     }
 
     toggleTodoDoneByID(id) {
