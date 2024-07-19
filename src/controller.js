@@ -66,7 +66,7 @@ class Controller{
         const tableHandlers = {
             clickNameLink: ()=>{console.log("name")},
             clickTodosLink: this.displayTodosinProject.bind(this),
-            clickDoneLink: () => { console.log("done") },
+            clickDoneLink: this.displayDoneTodosInProject.bind(this),
             clickOverdueLink: () => { console.log("overdue") },
             clickAddButton: () => { console.log("add project") },
         }
@@ -80,12 +80,22 @@ class Controller{
         );
     }
 
-
     displayTodosinProject(event){
         const link = event.currentTarget;
         const id = link.getAttribute("data-projectId");
         const project = this.#model.getProjectById(id);
         this.displayTodos(`Project: ${project.name}`, project.todos)
+    }
+
+    displayDoneTodosInProject(event){
+        const link = event.currentTarget;
+        const id = link.getAttribute("data-projectId");
+        const project = this.#model.getProjectById(id);
+        this.displaySearchedTodos(
+            `Project: ${project.name} / Finished Tasks`,
+            todo => todo.done,
+            id
+        )
     }
 
     displayTodayTodos(){
@@ -96,6 +106,19 @@ class Controller{
 
         const menu = document.querySelector("nav");
         this.#view.menu.updateHighlight(menu, "today");
+    }
+
+    displaySearchedTodos(caption, filter, projectId=null) {
+        let todos = this.#model.searchTodos(filter);
+        if (projectId !== null) {
+            todos = todos.filter(
+                todo => {
+                    const proj = this.#model.getProjectByTodoId(todo.id);
+                    return proj.id === projectId;
+                }
+            );
+        }
+        this.displayTodos(caption, todos);
     }
 
     displayTodos(caption, todos){
