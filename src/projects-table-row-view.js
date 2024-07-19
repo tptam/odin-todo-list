@@ -68,12 +68,12 @@ function render(tr, rowJson, rowHandlers) {
             func: rowHandlers.clickTodosLink
         },
         {
-            selector: ".done",
+            selector: ".done a",
             type: "click",
             func: rowHandlers.clickDoneLink
         },
         {
-            selector: ".overdue",
+            selector: ".overdue a",
             type: "click",
             func: rowHandlers.clickOverdueLink
         },
