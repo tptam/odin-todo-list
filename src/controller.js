@@ -3,7 +3,8 @@ import { format, isToday, isBefore } from "date-fns";
 class Controller{
     #view;
     #model;
-    #currenrUpdate = this.displayAllTodos;
+
+    #reload;
 
     static #priorityLabel = ["eliminate", "delegate", "schedule", "do"];
 
@@ -20,8 +21,8 @@ class Controller{
         const menuHandlers = {
             clickAllTodosLink: this.displayAllTodos.bind(this),
             clickTodayTodosLink: this.displayTodayTodos.bind(this),
-            clickProjectLink: this.displayTodosinProject.bind(this),
-            clickAllProjectsLink: this.dislayAllProjects.bind(this),
+            clickProjectLink: this.displayTodosInProject.bind(this),
+            clickAllProjectsLink: this.displayAllProjects.bind(this),
             addProject: () => { },
         }
 
@@ -41,7 +42,7 @@ class Controller{
     }
 
 
-    dislayAllProjects() {
+    displayAllProjects() {
         const tableData = {
             caption: "All Projects",
             rows: []
@@ -67,7 +68,7 @@ class Controller{
 
         const tableHandlers = {
             clickNameLink: ()=>{console.log("name")},
-            clickTodosLink: this.displayTodosinProject.bind(this),
+            clickTodosLink: this.displayTodosInProject.bind(this),
             clickDoneLink: this.displayDoneTodosInProject.bind(this),
             clickOverdueLink: this.displayOverdueTodosInProject.bind(this),
             clickAddButton: () => { console.log("add project") },
@@ -80,21 +81,26 @@ class Controller{
             JSON.stringify(tableData), 
             tableHandlers
         );
+
+        this.#reload = this.displayAllProjects;
     }
 
-    displayTodosinProject(projectID){
-        const project = this.#model.getProjectById(projectID);
+    displayTodosInProject(projectId){
+        const project = this.#model.getProjectById(projectId);
         this.displayTodos(`Project: ${project.name}`, project.todos)
+        this.#reload = () => this.displayTodosInProject(projectId)
     }
 
 
-    displayOverdueTodosInProject(projectID) {
-        const project = this.#model.getProjectById(projectID);
+    displayOverdueTodosInProject(projectId) {
+        console.log(projectId);
+        const project = this.#model.getProjectById(projectId);
         this.displaySearchedTodos(
             `Project: ${project.name} / Overdue Tasks`,
-            todo => isBefore(todo.dueDate, new Date()),
-            projectID
+            todo => isBefore(todo.dueDate, new Date()) && !todo.done,
+            projectId
         )
+        this.#reload = () => this.displayOverdueTodosInProject(projectId);
     }
 
 
@@ -105,6 +111,7 @@ class Controller{
             todo => todo.done,
             projectId
         )
+        this.#reload = () => this.displayDoneTodosInProject(projectId);
     }
 
     displayTodayTodos(){
@@ -115,6 +122,8 @@ class Controller{
 
         const menu = document.querySelector("nav");
         this.#view.menu.updateHighlight(menu, "today");
+
+        this.#reload = this.displayTodayTodos();
     }
 
     displaySearchedTodos(caption, filter, projectId=null) {
@@ -128,6 +137,7 @@ class Controller{
             );
         }
         this.displayTodos(caption, todos);
+        this.#reload = () => this.displaySearchedTodos(caption, filter, projectId);
     }
 
     displayTodos(caption, todos){
@@ -160,7 +170,7 @@ class Controller{
             clickMultiDeleteButton: this.deleteSelectedTodos.bind(this),
             clickAddButton: () => { },
             clickTitleLink: () => { },
-            clickProjectLink: this.displayTodosinProject.bind(this),
+            clickProjectLink: this.displayTodosInProject.bind(this),
             clickStatusButton: this.toggleTodoStatus.bind(this),
 
         }
@@ -178,7 +188,7 @@ class Controller{
         const menu = document.querySelector("nav");
         this.#view.menu.updateHighlight(menu, "all");
 
-        this.#currenrUpdate = this.displayAllTodos;
+        this.#reload = this.displayAllTodos;
     }
 
     deleteSelectedTodos(){
@@ -201,6 +211,8 @@ class Controller{
         const id = button.closest("tr").getAttribute("data-id");
         this.#model.toggleTodoDoneByID(id);
         this.#view.statusButton.toggle(button);
+        console.log(this.#reload);
+        this.#reload();
     }
 }
 
