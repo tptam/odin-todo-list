@@ -70,7 +70,7 @@ function render(tr, rowJson, rowHandlers) {
         {
             selector: ".done a",
             type: "click",
-            func: rowHandlers.clickDoneLink
+            func: (event) => rowHandlers.clickDoneLink(row.id)
         },
         {
             selector: ".overdue a",
