@@ -90,21 +90,17 @@ class Controller{
     }
 
 
-    displayOverdueTodosInProject(event) {
-        const link = event.currentTarget;
-        const id = link.getAttribute("data-projectId");
-        const project = this.#model.getProjectById(id);
+    displayOverdueTodosInProject(projectID) {
+        const project = this.#model.getProjectById(projectID);
         this.displaySearchedTodos(
             `Project: ${project.name} / Overdue Tasks`,
             todo => isBefore(todo.dueDate, new Date()),
-            id
+            projectID
         )
     }
 
 
     displayDoneTodosInProject(projectId){
-        // const link = event.currentTarget;
-        // const id = link.getAttribute("data-projectId");
         const project = this.#model.getProjectById(projectId);
         this.displaySearchedTodos(
             `Project: ${project.name} / Finished Tasks`,

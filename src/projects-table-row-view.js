@@ -75,7 +75,7 @@ function render(tr, rowJson, rowHandlers) {
         {
             selector: ".overdue a",
             type: "click",
-            func: rowHandlers.clickOverdueLink
+            func: (event) => rowHandlers.clickOverdueLink(row.id)
         },
     ];
 
