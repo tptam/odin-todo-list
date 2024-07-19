@@ -277,9 +277,23 @@ tbody tr {
 }
 
 th, td {
-    display: block;
     width: 100%;
+    height: 100%;
+    display: grid;
+    align-items: center;
     text-align: center;
+}
+
+td.priority {
+    display: block;
+    height: auto;
+}
+
+th>a, td>a {
+    /* To make a whole cell clickable and center-align*/
+    height: 100%;
+    display: grid;
+    align-items: center;
 }
 
 th.title, 
@@ -379,6 +393,17 @@ table.projects td.progress {
     text-align: right;
     font-family: monospace;
 }
+
+table.projects td>a:hover {
+    background-color: var(--secondary-color-100);
+
+    /* To make highlight a bit wider than the cell itself */
+    box-shadow: 
+        calc(-1 * var(--gutter)) 0 var(--secondary-color-100),
+        var(--gutter) 0 var(--secondary-color-100)
+    ;
+}
+
 
 table.projects svg {
     fill: var(--neutral-color-200);
