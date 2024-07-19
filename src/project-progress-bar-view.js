@@ -8,6 +8,7 @@ function render(parent, rate, step = 5, blockRatio = 0.6, color = "black") {
 
     svg.setAttribute("viewBox", "0, 0, 100, 25");
     svg.setAttribute("fill", color);
+    svg.setAttribute("aria-hidden", "true");
     parent.appendChild(svg);
 
     for (let i = 0; i < blockN; i++) {
