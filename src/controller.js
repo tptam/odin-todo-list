@@ -3,6 +3,8 @@ import { format, isToday, isBefore } from "date-fns";
 class Controller{
     #view;
     #model;
+    #currenrUpdate = this.displayAllTodos;
+
     static #priorityLabel = ["eliminate", "delegate", "schedule", "do"];
 
     constructor(view, model) {
@@ -100,14 +102,14 @@ class Controller{
     }
 
 
-    displayDoneTodosInProject(event){
-        const link = event.currentTarget;
-        const id = link.getAttribute("data-projectId");
-        const project = this.#model.getProjectById(id);
+    displayDoneTodosInProject(projectId){
+        // const link = event.currentTarget;
+        // const id = link.getAttribute("data-projectId");
+        const project = this.#model.getProjectById(projectId);
         this.displaySearchedTodos(
             `Project: ${project.name} / Finished Tasks`,
             todo => todo.done,
-            id
+            projectId
         )
     }
 
@@ -121,7 +123,7 @@ class Controller{
         this.#view.menu.updateHighlight(menu, "today");
     }
 
-    displaySearchedTodos(caption, filter, projectId=null, emptyMessage=null) {
+    displaySearchedTodos(caption, filter, projectId=null) {
         let todos = this.#model.searchTodos(filter);
         if (projectId !== null) {
             todos = todos.filter(
@@ -181,6 +183,8 @@ class Controller{
 
         const menu = document.querySelector("nav");
         this.#view.menu.updateHighlight(menu, "all");
+
+        this.#currenrUpdate = this.displayAllTodos;
     }
 
     deleteSelectedTodos(){
