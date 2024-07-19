@@ -379,8 +379,8 @@ tr.summary th {
 
 table.projects th.todos,
 table.projects td.todos,
-table.projects th.done,
-table.projects td.done,
+table.projects th.not-done,
+table.projects td.not-done,
 table.projects th.overdue,
 table.projects td.overdue,
 table.projects th.progress,
@@ -389,7 +389,7 @@ table.projects td.progress {
 }
 
 table.projects td.todos,
-table.projects td.done,
+table.projects td.not-done,
 table.projects td.overdue,
 table.projects td.progress {
     text-align: right;

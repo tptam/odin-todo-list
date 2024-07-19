@@ -57,7 +57,7 @@ class Controller{
                         id: project.id,
                         name: project.name,
                         todos: project.todos.length,
-                        done: project.todos.filter(todo => todo.done).length,
+                        notDone: project.todos.filter(todo => !todo.done).length,
                         overdue: overdueTodos.length,
                         progress: `${Math.round(progressRate * 100) }%`,
                         progressRate: progressRate,
@@ -69,7 +69,7 @@ class Controller{
         const tableHandlers = {
             clickNameLink: ()=>{console.log("name")},
             clickTodosLink: this.displayTodosInProject.bind(this),
-            clickDoneLink: this.displayDoneTodosInProject.bind(this),
+            clickNotDoneLink: this.displayNotDoneTodosInProject.bind(this),
             clickOverdueLink: this.displayOverdueTodosInProject.bind(this),
             clickAddButton: () => { console.log("add project") },
         }
@@ -103,6 +103,15 @@ class Controller{
         this.#reload = () => this.displayOverdueTodosInProject(projectId);
     }
 
+    displayNotDoneTodosInProject(projectId) {
+        const project = this.#model.getProjectById(projectId);
+        this.displaySearchedTodos(
+            `Project: ${project.name} / Unfinished Tasks`,
+            todo => !todo.done,
+            projectId
+        )
+        this.#reload = () => this.displayNotDoneTodosInProject(projectId);
+    }
 
     displayDoneTodosInProject(projectId){
         const project = this.#model.getProjectById(projectId);
@@ -126,7 +135,7 @@ class Controller{
         this.#reload = this.displayTodayTodos();
     }
 
-    displaySearchedTodos(caption, filter, projectId=null) {
+    displaySearchedTodos(caption, filter, projectId=null, emptyMessage=null) {
         let todos = this.#model.searchTodos(filter);
         if (projectId !== null) {
             todos = todos.filter(
@@ -136,17 +145,23 @@ class Controller{
                 }
             );
         }
-        this.displayTodos(caption, todos);
-        this.#reload = () => this.displaySearchedTodos(caption, filter, projectId);
+        this.displayTodos(caption, todos, emptyMessage);
+        this.#reload = () => this.displaySearchedTodos(
+            caption, 
+            filter, 
+            projectId,
+            emptyMessage
+        );
     }
 
-    displayTodos(caption, todos){
+    displayTodos(caption, todos, emptyMessage=null){
         const content = document.querySelector("#content");
         content.textContent = "";
 
         const tableData = {
             caption: caption,
-            rows: []
+            rows: [],
+            emptyMessage: emptyMessage,
         };
 
         todos.map(

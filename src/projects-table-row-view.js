@@ -28,10 +28,10 @@ function render(tr, rowJson, rowHandlers) {
         },
         {
             tag: "td",
-            classes: ["done",],
+            classes: ["not-done",],
             attribute: {},
             text: null,
-            contentHtml: `<a data-projectId="${row.id}">${row.done}</a>`
+            contentHtml: `<a data-projectId="${row.id}">${row.notDone}</a>`
         },
         {
             tag: "td",
@@ -68,9 +68,9 @@ function render(tr, rowJson, rowHandlers) {
             func: (event) => rowHandlers.clickTodosLink(row.id)
         },
         {
-            selector: ".done a",
+            selector: ".not-done a",
             type: "click",
-            func: (event) => rowHandlers.clickDoneLink(row.id)
+            func: (event) => rowHandlers.clickNotDoneLink(row.id)
         },
         {
             selector: ".overdue a",

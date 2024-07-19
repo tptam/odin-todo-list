@@ -43,9 +43,9 @@ function render(table, tableJson, tableHandlers) {
         },
         {
             tag: "th",
-            classes: ["done",],
+            classes: ["not-done",],
             attribute: { scope: "col" },
-            text: "Done",
+            text: "Not Yet",
             contentHtml: null
         },
         {

@@ -11,7 +11,7 @@ function render(content, tableJson, tableHandlers) {
             <div class="empty">
                 <h1>${tableData.caption}</h1>
                 <p>
-                    No projects yet. Time to dream big (or take a nap)!
+                    No projects here. Time to dream big (or take a nap)!
                 </p>
             </div>
         `));
