@@ -1,5 +1,5 @@
 import * as tableRow from "./table-row";
-
+import * as progressBar from "./project-progress-bar-view";
 
 function render(tr, rowJson, rowHandlers) {
     const row = JSON.parse(rowJson);
@@ -51,7 +51,7 @@ function render(tr, rowJson, rowHandlers) {
             tag: "td",
             classes: ["progress-bar",],
             attribute: {},
-            text: "",
+            text: null,
             contentHtml: null
         },
     ]
@@ -59,6 +59,17 @@ function render(tr, rowJson, rowHandlers) {
     const handlers = [];
 
     tableRow.render(tr, JSON.stringify(cellsData), handlers);
+
+    const progressBarCell = tr.querySelector("td.progress-bar");
+    if (progressBarCell !== null) {
+        progressBar.render(progressBarCell, row.progressRate);
+    }
+    progressBarCell.classList.add(
+        row.progressRate === 1 ? "complete" :
+            row.progressRate >= 0.75 ? "over75" :
+                row.progressRate >= 0.50 ? "over50" :
+                    row.progressRate >= 0.25 ? "over25" : "under25"
+    )
 }
 
 function update(tr, rowJson) {
