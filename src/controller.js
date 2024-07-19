@@ -1,4 +1,4 @@
-import { format, isToday } from "date-fns";
+import { format, isToday, isBefore } from "date-fns";
 
 class Controller{
     #view;
@@ -67,7 +67,7 @@ class Controller{
             clickNameLink: ()=>{console.log("name")},
             clickTodosLink: this.displayTodosinProject.bind(this),
             clickDoneLink: this.displayDoneTodosInProject.bind(this),
-            clickOverdueLink: () => { console.log("overdue") },
+            clickOverdueLink: this.displayOverdueTodosInProject.bind(this),
             clickAddButton: () => { console.log("add project") },
         }
 
@@ -86,6 +86,19 @@ class Controller{
         const project = this.#model.getProjectById(id);
         this.displayTodos(`Project: ${project.name}`, project.todos)
     }
+
+
+    displayOverdueTodosInProject(event) {
+        const link = event.currentTarget;
+        const id = link.getAttribute("data-projectId");
+        const project = this.#model.getProjectById(id);
+        this.displaySearchedTodos(
+            `Project: ${project.name} / Overdue Tasks`,
+            todo => isBefore(todo.dueDate, new Date()),
+            id
+        )
+    }
+
 
     displayDoneTodosInProject(event){
         const link = event.currentTarget;
@@ -108,7 +121,7 @@ class Controller{
         this.#view.menu.updateHighlight(menu, "today");
     }
 
-    displaySearchedTodos(caption, filter, projectId=null) {
+    displaySearchedTodos(caption, filter, projectId=null, emptyMessage=null) {
         let todos = this.#model.searchTodos(filter);
         if (projectId !== null) {
             todos = todos.filter(
