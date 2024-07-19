@@ -46,16 +46,20 @@ class Controller{
         }
 
         this.#model.getAllProjects().forEach(
-            project => tableData.rows.push(
-                {
-                    id: project.id,
-                    name: project.name,
-                    todos: project.todos.length,
-                    done: project.todos.filter(todo => todo.done).length,
-                    overdue: this.#model.getOverdueTodosInProject(project.id).length,
-                    progress: 0,
-                }
-            )
+            project => {
+                const overdueTodos = this.#model.getOverdueTodosInProject(project.id);
+                const progressRate = this.#model.getProjectProgressRate(project.id);
+                tableData.rows.push(
+                    {
+                        id: project.id,
+                        name: project.name,
+                        todos: project.todos.length,
+                        done: project.todos.filter(todo => todo.done).length,
+                        overdue: overdueTodos.length,
+                        progress: `${Math.round(progressRate * 100) }%`,
+                    }
+                )
+            }
         )
 
         const tableHandlers = {
