@@ -169,7 +169,7 @@ class Service {
     getOverdueTodosInProject(id) {
         const project = this.getProjectById(id);
         return project.todos.filter(
-            todo => isBefore(todo.dueDate, new Date())
+            todo => isBefore(todo.dueDate, new Date()) && !todo.done
         );
     }
 
