@@ -1,13 +1,13 @@
 
 import * as view from "./view.js";
-import Service from "./service.js";
+import * as model from "./model.js"
+// import Service from "./service.js";
 import Controller from "./controller.js";
 
 import "./style.css";
 
-const service = new Service();
-const controller = new Controller(view, service);
 
+const controller = new Controller(view, model);
 
 controller.init();
 controller.displayTodoAddModal();
