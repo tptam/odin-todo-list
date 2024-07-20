@@ -71,8 +71,7 @@ class Todo {
             && val !== undefined
             && typeof (val) === 'string',
         dueDate: val => val !== undefined
-            && Date.prototype.isPrototypeOf(val)
-            // && (isAfter(val, new Date()) || isToday(val))
+            && (Date.prototype.isPrototypeOf(val) || val === null)
             ,
         priority: val => val !== null
             && val !== undefined
