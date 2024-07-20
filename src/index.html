@@ -19,49 +19,57 @@
         </nav>
     </header>
     <div id="content">
-        <table class="projects">
-            <caption>All Projects</caption>
-            <thead>
-                <!-- <tr class="summary">
-                    <td colspan="2"></td>
-                    <th scope="col" colspan="4">ToDo</th>
-                </tr> -->
-                <tr>
-                    <th class="select">
-                        <button class="multi-delete">
-                            <img src="http://127.0.0.1:5500/dist/b4a7b26be64c05d0f239.svg" alt="Delete icon">
-                        </button>
-                    </th>
-                    <th class="name title" scope="col">Name</th>
-                    <th class="todos" scope="col">Todos</th>
-                    <th class="done" scope="col">Done</th>
-                    <th class="overdue" scope="col">Overdue</th>
-                    <th class="progress" scope="col" colspan="2">Progress</th>
-                </tr>
-            </thead>
-            <tbody>
-                <tr data-projectid="01J32W2P7KT0ZC452ZYDQ4CJ4J">
-                    <td class="select">
-                        <input type="checkbox" name="select" value="01J32W2P7KT0ZC452ZYDQ4CJ4J">
-                    </td>
-                    <th class="name title" scope="row"><a>Alice</a></th>
-                    <td class="todos"><a>8</a></td>
-                    <td class="done"><a>2</a></td>
-                    <td class="overdue"><a>2</a></td>
-                    <td class="progress">25%</td>
-                    <td class="progress-bar under50">
-                        <svg viewBox="0, 0, 100, 25" xmlns="http://www.w3.org/2000/svg" fill="#d2d2d2">
-                            <rect width="3" height="25" x="0" y="0" />
-                            <rect width="3" height="25" x="5" y="0"  />
-                            <rect width="3" height="25" x="10" y="0"  />
-                            <rect width="3" height="25" x="15" y="0"  />
-                            <rect width="3" height="25" x="20" y="0"  />
-                        </svg>
-                    </td>
-                </tr>
-            </tbody>
-        </table>
-        <button class="add">+</button></div>
+        <dialog>
+            <h1>New ToDo Task</h1>
+            <button class="close"><img src="<%= require('./images/close.svg') %>" alt="Close"></button>
+            <form>
+                <label for="title">Title
+                <input type="text" name="title" id="title">
+                </label>
+                <label for="due-date">Due Date
+                <input type="date" name="due-date" id="due-date">
+                </label>
+                <div class="priority-wrapper">
+                    <div class="label">Priority</div>
+                    <div class="priority-input-wrapper">
+                        <div class="prompt">This task is...</div>
+                        <fieldset>
+                            <label for="urgent">
+                                <input type="checkbox" name="urgent" id="urgent">
+                                Urgent
+                            </label>
+                            <label for="important">
+                                <input type="checkbox" name="important" id="important">
+                                Important
+                            </label>
+                        </fieldset>
+                        <img src="<%= require('./images/triangle.svg') %>">
+                        <div class="priority-value eliminate">Eliminate</div>
+                        <a href="https://en.wikipedia.org/wiki/Time_management#The_Eisenhower_Method" target="_blank" rel="noopener noreferrer">
+                            What does this mean? 
+                            <span class="more">Learn more about Eisenhower Matrix!</span>
+                        </a>
+                    </div>
+                </div>
+                <label for="description">
+                    Description
+                    <textarea name="description" id="description" rows="5"></textarea>
+                </label>
+                <label for="project">Project
+                    <select name="project" id="project">
+                        <option value="">---Select---</option>
+                        <option value="0123">Alice</option>
+                        <option value="0456">Bob</option>
+                        <option value="0789">Charlie</option>
+                    </select>
+                </label>
+                <div class="button-wrapper">
+                    <button class="cancel">Cancel</button>
+                    <button type="submit">Add</button>
+                </div>
+            </form>
+        </dialog>
+    </div>
     <footer>Copyright © tptam 2024</footer>
 </body>
 </html>

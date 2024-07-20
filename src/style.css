@@ -19,6 +19,7 @@
     --table-width: min(900px, 100%);
     --table-line-height: 3.5rem;
     --add-button-size: 4rem;
+    --close-button-size: 3rem;
 
     /* From Tailwind color pallete*/
     --primary-color: #14b8a6; /*Teal500*/
@@ -46,7 +47,7 @@
     --eliminate-color:#bbbbbb;
 
     --text-color: var(--neutral-color);
-    --text-color-white: var(var(--neutral-color-50));
+    --text-color-white: var(--neutral-color-50);
     --background-color: var(--neutral-color-200);
     --surface-color: var(--neutral-color-50);
 }
@@ -317,16 +318,18 @@ tr.do td.priority {
     border-left: 6px solid var(--do-color);
 }
 
-tr.schedule td.priority  {
+tr.schedule td.priority {
     border-left: 6px solid var(--schedule-color);
 }
 
-tr.delegate td.priority  {
+tr.delegate td.priority {
     border-left: 6px solid var(--delegate-color);
 }
 
-tr.eliminate td.priority  {
+tr.eliminate td.priority {
     border-left: 6px solid var(--eliminate-color);
+    /* For bettercontrast */
+    color: white;
 }
 
 button.multi-delete {
@@ -425,4 +428,206 @@ table.projects .over75 svg {
 
 table.projects .complete svg {
     fill: var(--primary-color);
+}
+
+
+/* Modal dialog */
+
+dialog {
+    position: fixed;
+    inset: 0;
+    margin: auto;
+    padding: calc(var(--gutter) * 2);
+    width: var(--table-width);
+}
+
+button.close {
+    position: absolute;
+    top: calc(var(--gutter) * 1);
+    right: calc(var(--gutter) * 1);
+    width: var(--close-button-size);
+    height: var(--close-button-size);
+    border-radius: 50%;
+    display: grid;
+    justify-items: center;
+    align-items: center;
+}
+
+
+button.close>img {
+    width: 80%;
+    height: 80%;
+}
+
+dialog h1 {
+    font-size: var(--content-h1-font-size);
+    margin-bottom: calc(var(--gutter)*2);
+    text-decoration: underline;
+}
+
+dialog::backdrop {
+  background: rgba(0, 0, 0, 0.6);
+}
+
+form {
+    display:grid;
+    gap: var(--gutter);
+}
+
+form label, 
+.priority-wrapper {
+    display: grid;
+    grid-template-columns: 12ch 1fr;
+    gap: var(--gutter);
+}
+
+form>label,
+.priority-wrapper,
+.button-wrapper,
+.priority-value {
+    font-size: var(--content-h2-font-size);
+}
+
+form>label,
+.priority-wrapper>.label {
+    font-weight: bold;
+}
+
+form input[type="text"],
+form input[type="date"],
+textarea,
+select {
+    font-size: var(--content-h3-font-size);
+    font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+    border: 1px solid var(--neutral-color-400);
+    border-radius: 5px;
+}
+
+form input[type="text"]:focus,
+form input[type="date"]:focus,
+form input[type="checkbox"]:focus,
+textarea:focus,
+select:focus {
+    border-color: transparent;
+    outline: 4px solid var(--primary-color);
+}
+
+form input[type="text"],
+form input[type="date"],
+textarea,
+select {
+    padding: calc(var(--gutter) / 2) var(--gutter);
+    background-color: var(--neutral-color-100);
+}
+
+form input[type="date"] {
+    box-sizing: content-box;
+    width: 15ch;
+}
+
+form input[type="checkbox"] {
+    transform: scale(0.8);
+}
+
+textarea {
+    vertical-align:top;
+}
+
+.priority-input-wrapper {
+    display: grid;
+    grid-template-columns: auto 2ch 12ch 1fr;
+    justify-content: start;
+    column-gap: var(--gutter);
+    align-items: center;
+}
+
+.priority-input-wrapper .prompt,
+.priority-input-wrapper a {
+    grid-column: 1 / -1;
+}
+
+.priority-input-wrapper img {
+    height: 2ch
+}
+
+.priority-value {
+    grid-column: 3;
+    box-shadow: 2px 2px 2px var(--neutral-color-400);
+    padding: calc(var(--gutter)/2);
+    font-weight: bold;
+    color: var(--text-color-white);
+    text-align: center;
+}
+
+div.do.priority-value {
+    background-color: var(--do-color);
+    color: var(--text-color-white);
+}
+
+div.schedule.priority-value  {
+    background-color: var(--schedule-color);
+}
+
+div.delegate.priority-value  {
+    background-color: var(--delegate-color);
+}
+
+div.eliminate.priority-value  {
+    background-color: var(--eliminate-color);
+}
+
+fieldset {
+    border: none;
+    padding: var(--gutter);
+}
+
+fieldset label {
+    grid-template-columns: 3ch 1fr;
+}
+
+.priority-input-wrapper a {
+    font-size: initial;
+}
+
+.priority-input-wrapper a:not(:hover) .more {
+    visibility: hidden;
+}
+
+.priority-input-wrapper a:hover .more {
+    visibility: visible;
+    color: var(--secondary-color);
+}
+
+.button-wrapper {
+    display: grid;
+    grid-template-columns: 12ch repeat(2, 1fr);
+    gap: var(--gutter);
+    align-items: center;
+    justify-items: center;
+    margin-top: var(--gutter);
+}
+
+form button {
+    font-size: var(--content-h2-font-size);
+    width: 100%;
+    padding: var(--gutter) 5ch;
+    border-radius: 2ch;
+}
+
+dialog button:hover,
+dialog button:focus {
+    outline: 4px solid var(--neutral-color-600);
+}
+
+dialog button:active {
+    filter: brightness(1.05);
+}
+
+button.cancel {
+    grid-column: 2;
+}
+
+button[type="submit"] {
+    grid-column: 3;
+    background-color: var(--primary-color);
 }
