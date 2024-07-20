@@ -41,6 +41,26 @@ class Controller{
         this.displayAllTodos();
     }
 
+    displayTodoAddModal(){
+        const content = document.querySelector("#content");
+        const formData = {
+            projects: this.#model.getAllProjects()
+        }
+        const handlers = {
+            clickCloseButton: ()=>console.log("close"),
+            checkUrgent: () => console.log("check urgent"),
+            checkImportant: () => console.log("check important"),
+            submit: ()=> console.log("submit"),
+            clickCancelButton: ()=> console.log("cancel"),
+        }
+        this.#view.todoAdd.render(
+            content,
+            JSON.stringify(formData),
+            handlers
+        )
+
+        // This method opens a modal window, so #reload is not updated
+    }
 
     displayAllProjects() {
         const tableData = {
