@@ -3,7 +3,7 @@ import CloseIcon from "./images/close.svg";
 
 function render(dialog, title, modalHandlers) {
     const closeButton = parseHtml(`
-        <button class="close">
+        <button type="button" class="close">
             <img src="${CloseIcon}" alt="Close">
         </button>
     `);

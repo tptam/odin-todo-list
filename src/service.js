@@ -215,6 +215,7 @@ class Service {
             }
         });
     }
+
 }
 
 function getId() {
@@ -227,12 +228,10 @@ function validate(obj, schema){
         validated[key] = schema[key](value);
     }
     return validated;
+
+    
 }
 
-class ValidationError extends Error {
-    constructor(keys) {
-        super(`Invalid key(s): ${JSON.stringify(keys)}`);
-    }
-}
+
 
 export default Service;

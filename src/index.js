@@ -10,4 +10,9 @@ const controller = new Controller(view, service);
 
 
 controller.init();
+controller.displayTodoAddModal();
 
+// controller.init();
+
+// const form = document.querySelector("dialog");
+// form.showModal();

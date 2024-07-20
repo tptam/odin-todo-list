@@ -6,7 +6,7 @@ class Controller{
 
     #reload;
 
-    static #priorityLabel = ["eliminate", "delegate", "schedule", "do"];
+    static #priorityLabels = ["eliminate", "delegate", "schedule", "do"];
 
     constructor(view, model) {
         this.#view = view;
@@ -55,10 +55,8 @@ class Controller{
 
         const handlers = {
             clickCloseButton: this.#reload.bind(this),
-            checkUrgent: () => console.log("check urgent"),
-            checkImportant: () => console.log("check important"),
-            submit: ()=> console.log("submit"),
             clickCancelButton: this.#reload.bind(this),
+            clickAddButton: this.submitTodoAddForm.bind(this),
         }
         this.#view.todoAdd.render(
             content,
@@ -201,7 +199,7 @@ class Controller{
                         id: todo.id,
                         title: todo.title,
                         dueDate: format(new Date(todo.dueDate), "yyyy-MM-dd"),
-                        priority: Controller.#priorityLabel[todo.priority],
+                        priority: Controller.#priorityLabels[todo.priority],
                         done: todo.done,
                         project: proj === null ? "" : proj.name,
                         projectId: proj === null ? "" : proj.id,
@@ -255,7 +253,22 @@ class Controller{
         const id = button.closest("tr").getAttribute("data-id");
         this.#model.toggleTodoDoneByID(id);
         this.#view.statusButton.toggle(button);
-        console.log(this.#reload);
+        this.#reload();
+    }
+
+    submitTodoAddForm(title, dueDate, priorityLabel, description, project){
+        console.table({ title, dueDate, priorityLabel, project });
+        const priority = Controller.#priorityLabels.indexOf(priorityLabel);
+        try {
+            this.#model.createTodo(title, description, dueDate, priority, false);
+        } catch(err) {
+            if (true) {
+                console.table(err);
+                alert("Weird Data!");
+                return;
+            }
+        }
+
         this.#reload();
     }
 }
