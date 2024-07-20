@@ -195,11 +195,14 @@ class Controller{
         todos.map(
             todo => {
                 const proj = this.#model.getProjectByTodoId(todo.id);
+                const dueDateString = todo.dueDate === null 
+                    ? ""
+                    : format(new Date(todo.dueDate), "yyyy-MM-dd")
                 tableData.rows.push(
                     {
                         id: todo.id,
                         title: todo.title,
-                        dueDate: format(new Date(todo.dueDate), "yyyy-MM-dd"),
+                        dueDate: dueDateString,
                         priority: Controller.#priorityLabels[todo.priority],
                         done: todo.done,
                         project: proj === null ? "" : proj.name,
@@ -257,7 +260,7 @@ class Controller{
         this.#reload();
     }
 
-    submitTodoAddForm(title, dueDateString, priorityLabel, description, project){
+    submitTodoAddForm(title, dueDateString, priorityLabel, description, projectId){
         const priority = Controller.#priorityLabels.indexOf(priorityLabel);
         const dueDate = dueDateString === "" ? null : new Date(dueDateString);
 
@@ -266,20 +269,26 @@ class Controller{
 
         // New task's dueDate should be today or later
         // (This is not in schema because tasks can be overdue)
-        if (dueDate !== null & !isBefore(dueDate, new Date())) {
+        if (dueDate !== null && isBefore(dueDate, new Date())) {
             alert("The due date must be today or later.");
             return;
         }
 
         // Create new Todo / Validation against schema
+        let todo;
         try {
-            this.#model.createTodo(title, description, dueDate, priority, false);
+            todo = this.#model.createTodo(title, description, dueDate, priority, false);
         } catch(err) {
             if (err instanceof this.#model.ValidationError) {
-                console.table(err);
-                alert(err.message);
+                // Can be more specific using error message.
+                alert("Invalid data submitted: no task was created.");
                 return;
             }
+        }
+
+        // Add to project
+        if (projectId !== "") {
+            this.#model.addTodoToProject(todo.id, projectId);
         }
 
         this.#reload();
