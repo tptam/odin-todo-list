@@ -86,7 +86,6 @@ table {
 /* Parts */
 input[type=checkbox] {
   accent-color: var(--neutral-color-500);
-  transform: scale(0.8);
 }
 
 button.add {
@@ -300,6 +299,10 @@ th>a, td>a {
     align-items: center;
 }
 
+tr input[type=checkbox] {
+    height: 100%;
+}
+
 th.title, 
 td.title, 
 th.priority,
@@ -329,8 +332,6 @@ tr.delegate td.priority {
 
 tr.eliminate td.priority {
     border-left: 6px solid var(--eliminate-color);
-    /* For bettercontrast */
-    color: white;
 }
 
 button.multi-delete {
@@ -546,6 +547,10 @@ textarea {
     grid-column: 1 / -1;
 }
 
+.priority-input-wrapper input[type="checkbox"] {
+    height: 80%;
+}
+
 .priority-input-wrapper img {
     height: 2ch
 }
@@ -574,6 +579,8 @@ div.priority-display[data-value="delegate"]{
 
 div.priority-display[data-value="eliminate"]  {
     background-color: var(--eliminate-color);
+    /* For better contrast */
+    color: white;
 }
 
 fieldset {
@@ -582,7 +589,9 @@ fieldset {
 }
 
 fieldset label {
-    grid-template-columns: 3ch 1fr;
+    grid-template-columns: 2ch 1fr;
+    gap: 0.75ch;
+    align-items: center;
 }
 
 .priority-input-wrapper a {
@@ -617,6 +626,7 @@ form button {
 dialog button:hover,
 dialog button:focus {
     outline: 4px solid var(--neutral-color-600);
+    font-weight: bold;
 }
 
 dialog button:active {
