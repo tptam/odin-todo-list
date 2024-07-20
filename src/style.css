@@ -490,6 +490,7 @@ form>label,
 
 form>label,
 .priority-wrapper>.label {
+    color: var(--neutral-color-700);
     font-weight: bold;
 }
 
@@ -624,6 +625,7 @@ dialog button:active {
 }
 
 button.cancel {
+    background-color: var(--neutral-color-300);
     grid-column: 2;
 }
 
