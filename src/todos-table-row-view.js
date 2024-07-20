@@ -38,7 +38,11 @@ function render(tr, rowJson, rowHandlers){
     cell.classList.add("status");    
     const button = document.createElement("button");
     cell.appendChild(button);
-    statusButton.render(button, row.done, handlers.clickStatusButton);
+    statusButton.render(
+        button, 
+        JSON.stringify({id: row.id, done: row.done}), 
+        handlers.clickStatusButton
+    );
     tr.appendChild(cell);
 
     cell = document.createElement("td");
