@@ -57,7 +57,7 @@ class Controller{
         const handlers = {
             clickCloseButton: this.#reload.bind(this),
             clickCancelButton: this.#reload.bind(this),
-            clickAddButton: this.submitTodoAddForm.bind(this),
+            clickSubmitButton: this.submitTodoAddForm.bind(this),
         }
         this.#view.todoAdd.render(
             content,
