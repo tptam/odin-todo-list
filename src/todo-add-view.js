@@ -58,6 +58,15 @@ function render(content, formJson, formHandlers){
     modalView.render(dialog, "New ToDo Task", formHandlers);
     const form = parseHtml(template);
     dialog.append(form);
+
+    const cancelButton = dialog.querySelector(".cancel");
+    cancelButton.addEventListener(
+        "click", 
+        event => {
+            event.preventDefault();
+            formHandlers.clickCancelButton();
+        }
+    );
 }
 
 function update(){

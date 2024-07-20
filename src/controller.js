@@ -47,11 +47,11 @@ class Controller{
             projects: this.#model.getAllProjects()
         }
         const handlers = {
-            clickCloseButton: ()=>console.log("close"),
+            clickCloseButton: this.#reload.bind(this),
             checkUrgent: () => console.log("check urgent"),
             checkImportant: () => console.log("check important"),
             submit: ()=> console.log("submit"),
-            clickCancelButton: ()=> console.log("cancel"),
+            clickCancelButton: this.#reload.bind(this),
         }
         this.#view.todoAdd.render(
             content,
