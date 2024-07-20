@@ -37,7 +37,7 @@ const template = `
         </div>
         <label for="description">
             Description
-            <textarea name="description" id="description" rows="4"></textarea>
+            <textarea name="description" id="description" rows="3"></textarea>
         </label>
         <label for="project">Project
             <select name="project" id="project">
@@ -58,6 +58,16 @@ function render(content, formJson, formHandlers){
     modalView.render(dialog, "New ToDo Task", formHandlers);
     const form = parseHtml(template);
     dialog.append(form);
+
+    const select = dialog.querySelector("select");
+    formData.projects.forEach(
+        project => {
+            const option = document.createElement("option");
+            option.value = project.id;
+            option.textContent =project.name;
+            select.appendChild(option);
+        }
+    )
 
     const cancelButton = dialog.querySelector(".cancel");
     cancelButton.addEventListener(

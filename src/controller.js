@@ -44,8 +44,15 @@ class Controller{
     displayTodoAddModal(){
         const content = document.querySelector("#content");
         const formData = {
-            projects: this.#model.getAllProjects()
+            projects: []
         }
+        this.#model.getAllProjects().forEach(
+            project => formData.projects.push({
+                id: project.id,
+                name: project.name,
+            })
+        );
+
         const handlers = {
             clickCloseButton: this.#reload.bind(this),
             checkUrgent: () => console.log("check urgent"),
