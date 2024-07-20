@@ -11,6 +11,7 @@ class Controller{
     constructor(view, model) {
         this.#view = view;
         this.#model = model;
+        this.#model.init();
     }
 
     init(){
@@ -256,15 +257,27 @@ class Controller{
         this.#reload();
     }
 
-    submitTodoAddForm(title, dueDate, priorityLabel, description, project){
-        console.table({ title, dueDate, priorityLabel, project });
+    submitTodoAddForm(title, dueDateString, priorityLabel, description, project){
         const priority = Controller.#priorityLabels.indexOf(priorityLabel);
+        const dueDate = dueDateString === "" ? null : new Date(dueDateString);
+
+        // Data Validation
+        // (Should usually pass thanks to HTML form validation)
+
+        // New task's dueDate should be today or later
+        // (This is not in schema because tasks can be overdue)
+        if (dueDate !== null & !isBefore(dueDate, new Date())) {
+            alert("The due date must be today or later.");
+            return;
+        }
+
+        // Create new Todo / Validation against schema
         try {
             this.#model.createTodo(title, description, dueDate, priority, false);
         } catch(err) {
-            if (true) {
+            if (err instanceof this.#model.ValidationError) {
                 console.table(err);
-                alert("Weird Data!");
+                alert(err.message);
                 return;
             }
         }
