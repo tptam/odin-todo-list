@@ -92,7 +92,9 @@ class Controller{
             clickCloseButton: this.#reload.bind(this),
             clickCancelButton: this.#reload.bind(this),
             clickSubmitButton: () => {},
-            clickStatusButton: this.toggleTodoStatus.bind(this),
+            clickStatusButton: ((button, id) => {
+                this.toggleTodoStatus(button, id);
+            }).bind(this),
         }
 
         this.#view.todoEdit.render(
