@@ -28,11 +28,12 @@ const template = `
                     </label>
                 </fieldset>
                 <img src="${ConvertIcon}">
-                <div class="priority-value eliminate">Eliminate</div>
+                <div class="priority-display" data-value="eliminate">eliminate</div>
                 <a href="https://en.wikipedia.org/wiki/Time_management#The_Eisenhower_Method" target="_blank" rel="noopener noreferrer">
                     What does this mean?
                     <span class="more">Learn more about Eisenhower Matrix!</span>
                 </a>
+                <input type="hidden" name="priority" id="priority" value="eliminate">
             </div>
         </div>
         <label for="description">
@@ -77,10 +78,35 @@ function render(content, formJson, formHandlers){
             formHandlers.clickCancelButton();
         }
     );
+
+    const checkboxes = document.querySelectorAll("#urgent, #important");
+    checkboxes.forEach(
+        box => addEventListener("click", updatePriority)
+    )
+
 }
 
 function update(){
+}
 
+function updatePriority() {
+    const priority = document.querySelector("#priority");
+    const priorityDisplay = document.querySelector(".priority-display");
+    const urgent = document.querySelector("#urgent").checked;
+    const important = document.querySelector("#important").checked;
+    let level;
+    if (urgent && important) {
+        level = "do";
+    } else if (!urgent && important) {
+        level = "schedule"
+    } else if (urgent && !important) {
+        level = "delegate"
+    } else {
+        level = "eliminate"
+    }
+    priority.value = level;
+    priorityDisplay.textContent = level;
+    priorityDisplay.setAttribute("data-value", level);
 }
 
 export {render, update}

@@ -34,6 +34,7 @@
     --neutral-color: #0a0a0a;  /*Neutral950*/
     --neutral-color-700: #404040;
     --neutral-color-600: #525252;
+    --neutral-color-500: #737373;
     --neutral-color-400: #a8a29e;
     --neutral-color-300: #d6d3d1;
     --neutral-color-200: #e5e5e5;
@@ -84,9 +85,9 @@ table {
 
 /* Parts */
 input[type=checkbox] {
-  transform: scale(1.5, 1.5);
+  accent-color: var(--neutral-color-500);
+  transform: scale(0.8);
 }
-
 
 button.add {
     width: var(--add-button-size);
@@ -484,7 +485,7 @@ form label,
 form>label,
 .priority-wrapper,
 .button-wrapper,
-.priority-value {
+.priority-display {
     font-size: var(--content-h2-font-size);
 }
 
@@ -526,10 +527,6 @@ form input[type="date"] {
     width: 15ch;
 }
 
-form input[type="checkbox"] {
-    transform: scale(0.8);
-}
-
 textarea {
     vertical-align:top;
 }
@@ -551,7 +548,7 @@ textarea {
     height: 2ch
 }
 
-.priority-value {
+.priority-display {
     grid-column: 3;
     box-shadow: 2px 2px 2px var(--neutral-color-400);
     padding: calc(var(--gutter)/2);
@@ -560,20 +557,20 @@ textarea {
     text-align: center;
 }
 
-div.do.priority-value {
+div.priority-display[data-value="do"]{
     background-color: var(--do-color);
     color: var(--text-color-white);
 }
 
-div.schedule.priority-value  {
+div.priority-display[data-value="schedule"] {
     background-color: var(--schedule-color);
 }
 
-div.delegate.priority-value  {
+div.priority-display[data-value="delegate"]{
     background-color: var(--delegate-color);
 }
 
-div.eliminate.priority-value  {
+div.priority-display[data-value="eliminate"]  {
     background-color: var(--eliminate-color);
 }
 
