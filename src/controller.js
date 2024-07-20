@@ -68,6 +68,41 @@ class Controller{
         // This method opens a modal window, so #reload is not updated
     }
 
+    displayTodoEditModal(todoId){
+        const content = document.querySelector("#content");
+        const todo = this.#model.getTodoById(todoId);
+        const formData = {
+            projects: [],
+            todo: {
+                id: todo.id,
+                title: todo.title,
+                dueDate: todo.dueDate,
+                priority: todo.priority,
+                description: todo.description,
+                done: todo.done,
+            }
+        }
+        this.#model.getAllProjects().forEach(
+            project => formData.projects.push({
+                id: project.id,
+                name: project.name,
+            })
+        );
+        const handlers = {
+            clickCloseButton: this.#reload.bind(this),
+            clickCancelButton: this.#reload.bind(this),
+            clickSubmitButton: () => {},
+        }
+
+        this.#view.todoEdit.render(
+            content,
+            JSON.stringify(formData),
+            handlers
+        )
+
+        // This method opens a modal window, so #reload is not updated
+    }
+
     displayAllProjects() {
         const tableData = {
             caption: "All Projects",
@@ -215,7 +250,7 @@ class Controller{
         const todosHandlers = {
             clickMultiDeleteButton: this.deleteSelectedTodos.bind(this),
             clickAddButton: this.displayTodoAddModal.bind(this),
-            clickTitleLink: () => { },
+            clickTitleLink: this.displayTodoEditModal.bind(this),
             clickProjectLink: this.displayTodosInProject.bind(this),
             clickStatusButton: this.toggleTodoStatus.bind(this),
 

@@ -50,7 +50,7 @@ function render(tr, rowJson, rowHandlers){
 
     tr.querySelector(".title a").addEventListener(
         "click",
-        handlers.clickTitleLink
+        e => handlers.clickTitleLink(row.id)
     );
 
     tr.querySelector(".project a").addEventListener(
