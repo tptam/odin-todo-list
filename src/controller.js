@@ -97,7 +97,7 @@ class Controller{
             clickTodosLink: this.displayTodosInProject.bind(this),
             clickNotDoneLink: this.displayNotDoneTodosInProject.bind(this),
             clickOverdueLink: this.displayOverdueTodosInProject.bind(this),
-            clickAddButton: () => { console.log("add project") },
+            clickAddButton: () => this.displayTodoAddModal.bind(this),
         }
 
         const content = document.querySelector("#content");
@@ -211,7 +211,7 @@ class Controller{
 
         const todosHandlers = {
             clickMultiDeleteButton: this.deleteSelectedTodos.bind(this),
-            clickAddButton: () => { },
+            clickAddButton: this.displayTodoAddModal.bind(this),
             clickTitleLink: () => { },
             clickProjectLink: this.displayTodosInProject.bind(this),
             clickStatusButton: this.toggleTodoStatus.bind(this),
