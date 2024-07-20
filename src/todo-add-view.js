@@ -1,4 +1,3 @@
-import { format } from "date-fns";
 import * as modalView from "./modal-view";
 import * as todoFormView from "./todo-form-view";
 
