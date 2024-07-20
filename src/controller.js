@@ -92,6 +92,7 @@ class Controller{
             clickCloseButton: this.#reload.bind(this),
             clickCancelButton: this.#reload.bind(this),
             clickSubmitButton: () => {},
+            clickStatusButton: this.toggleTodoStatus.bind(this),
         }
 
         this.#view.todoEdit.render(
@@ -252,7 +253,10 @@ class Controller{
             clickAddButton: this.displayTodoAddModal.bind(this),
             clickTitleLink: this.displayTodoEditModal.bind(this),
             clickProjectLink: this.displayTodosInProject.bind(this),
-            clickStatusButton: this.toggleTodoStatus.bind(this),
+            clickStatusButton: ((button, id) => {
+                this.toggleTodoStatus(button, id);
+                this.#reload();
+            }).bind(this),
 
         }
 
@@ -287,12 +291,13 @@ class Controller{
         }
     }
 
-    toggleTodoStatus(event){
-        const button = event.currentTarget;
-        const id = button.closest("tr").getAttribute("data-id");
-        this.#model.toggleTodoDoneByID(id);
+    toggleTodoStatus(button, todoId){
+        console.log({ button, todoId });
+        // const button = event.currentTarget;
+        // const id = button.closest("tr").getAttribute("data-id");
+        this.#model.toggleTodoDoneByID(todoId);
         this.#view.statusButton.toggle(button);
-        this.#reload();
+        // this.#reload();
     }
 
     submitTodoAddForm(title, dueDateString, priorityLabel, description, projectId){
