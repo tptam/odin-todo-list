@@ -3,7 +3,9 @@ import * as modalView from "./modal-view";
 
 function render(content, formJson, formHandlers){
     const formData = JSON.parse(formJson);
-    modalView.render(content, "New ToDo Task", formHandlers);
+    const dialog = document.createElement("dialog");
+    content.appendChild(dialog)
+    modalView.render(dialog, "New ToDo Task", formHandlers);
 }
 
 function update(){

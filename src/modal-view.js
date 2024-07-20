@@ -1,8 +1,7 @@
 import parseHtml from "./parse-html";
 import CloseIcon from "./images/close.svg";
 
-function render(content, title, modalHandlers) {
-    const dialog = document.createElement("dialog");
+function render(dialog, title, modalHandlers) {
     const closeButton = parseHtml(`
         <button class="close">
             <img src="${CloseIcon}" alt="Close">
@@ -12,7 +11,6 @@ function render(content, title, modalHandlers) {
 
     closeButton.addEventListener("click", modalHandlers.clickCloseButton);
 
-    content.appendChild(dialog);
     dialog.appendChild(closeButton);
     dialog.appendChild(h1);
     dialog.showModal();
