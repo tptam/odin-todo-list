@@ -482,7 +482,15 @@ form label,
 .priority-wrapper {
     display: grid;
     grid-template-columns: 12ch 1fr;
-    gap: var(--gutter);
+    column-gap: var(--gutter);
+    /* row-gap: calc(var(--gutter) / 2); */
+}
+
+form label > .alert, 
+.priority-wrapper > .alert{
+    grid-column: 2;
+    color: var(--do-color);
+    font-size: 1rem;
 }
 
 form>label,
@@ -585,7 +593,7 @@ div.priority-display[data-value="eliminate"]  {
 
 fieldset {
     border: none;
-    padding: var(--gutter);
+    padding: calc(var(--gutter)/2) var(--gutter);
 }
 
 fieldset label {
@@ -642,6 +650,7 @@ button[type="submit"] {
     grid-column: 3;
     background-color: var(--primary-color);
 }
+
 
 /* Todo Edit Form specific */
 
