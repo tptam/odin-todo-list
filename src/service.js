@@ -167,6 +167,16 @@ function getProjectByTodoId(id, ignoreDefault = true) {
     return null;
 }
 
+function getTodosWithoutProject(){
+    const without = [];
+    for (let id in todos) {
+        if (getProjectByTodoId(id) === null) {
+            without.push(todos[id])
+        }
+    }
+    return without;
+}
+
 function getOverdueTodosInProject(id) {
     const project = getProjectById(id);
     return project.todos.filter(
@@ -263,6 +273,7 @@ export {
     searchTodos,
     searchProjects,
     getProjectByTodoId,
+    getTodosWithoutProject,
     getOverdueTodosInProject,
     getProjectProgressRate,
     toggleTodoDoneByID,

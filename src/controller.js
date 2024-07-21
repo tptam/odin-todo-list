@@ -155,15 +155,20 @@ class Controller{
         this.#reload = this.displayAllProjects;
     }
 
-    displayTodosWithNoProject(){
-
+    displayTodosWithoutProject(){
+        const todos = this.#model.getTodosWithoutProject();
+        this.displayTodos(
+            "ToDo tasks without project",
+            todos,
+            "Every task belongs to a project. Great job staying organized!"
+        )
     }
 
     displayTodosInProject(projectId){
         if (projectId === "") {
-            displayTodosWithNoProject();
+            this.displayTodosWithoutProject();
+            return;
         }
-
         const project = this.#model.getProjectById(projectId);
         this.displayTodos(`Project: ${project.name}`, project.todos)
         this.#reload = () => this.displayTodosInProject(projectId)
