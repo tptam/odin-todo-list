@@ -619,7 +619,7 @@ fieldset label {
 form button {
     font-size: var(--content-h2-font-size);
     width: 100%;
-    padding: var(--gutter) 5ch;
+    padding: calc(var(--gutter)/2) 5ch;
     border-radius: 2ch;
 }
 
@@ -641,4 +641,13 @@ button.cancel {
 button[type="submit"] {
     grid-column: 3;
     background-color: var(--primary-color);
+}
+
+/* Todo Edit Form specific */
+
+form button.toggle {
+    transform: scale(1.1);
+
+    /* with(11ch) * 1.1 / 2 */
+    margin-left: 0.55ch;
 }
