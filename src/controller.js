@@ -345,8 +345,8 @@ class Controller{
 
 
         // Update project
+        this.#model.deleteTodoFromCurrentProject(id);
         if (projectId !== "") {
-            this.#model.deleteTodoFromCurrentProject(id);
             this.#model.addTodoToProject(id, projectId);
         }
 
