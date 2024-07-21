@@ -72,6 +72,7 @@ class Controller{
         const content = document.querySelector("#content");
         const todo = this.#model.getTodoById(todoId);
         const project = this.#model.getProjectByTodoId(todoId);
+
         const formData = {
             projects: [],
             todo: {
@@ -83,8 +84,8 @@ class Controller{
                 priority: Controller.#priorityLabels[todo.priority],
                 description: todo.description,
                 done: todo.done,
-                projectName: project.name, 
-                projectId: project.id
+                projectName: project === null? "" : project.name, 
+                projectId: project === null ? "" : project.id
             }
         }
         this.#model.getAllProjects().forEach(

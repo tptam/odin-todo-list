@@ -51,14 +51,15 @@ function render(content, formJson, formHandlers) {
     setPriorityCheckbox(form, priority.value);
 
     // Alert for overdue date
-    const dueDateObj = new Date(formData.todo.dueDate);
-    const today = new Date();
-    console.log(dueDateObj);
-    if (isBefore(dueDateObj, today)){
-        const alert = document.createElement("span");
-        alert.classList.add("alert");
-        alert.textContent = "This task is overdue. Set a new date.";
-        dueDate.parentNode.appendChild(alert);        
+    if (formData.todo.dueDate !== "") {
+        const dueDateObj = new Date(formData.todo.dueDate);
+        const today = new Date();
+        if (isBefore(dueDateObj, today)){
+            const alert = document.createElement("span");
+            alert.classList.add("alert");
+            alert.textContent = "This task is overdue. Set a new date.";
+            dueDate.parentNode.appendChild(alert);        
+        }
     }
 
     form.addEventListener(
