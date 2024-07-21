@@ -10,7 +10,6 @@ import "./style.css";
 const controller = new Controller(view, model);
 
 controller.init();
-controller.displayTodoAddModal();
 
 // controller.init();
 
