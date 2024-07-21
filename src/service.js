@@ -97,6 +97,11 @@ function deleteTodoFromProject(todoId, projectId) {
     project.deleteTodo(todo);
 }
 
+function deleteTodoFromCurrentProject(todoId) {
+    const project = getProjectByTodoId(todoId);
+    deleteTodoFromProject(todoId, project.id);
+}
+
 function updateProjectById(id, name) {
     const project = getProjectById(id);
     const input = { id, name };
@@ -252,6 +257,7 @@ export {
     updateProjectById,
     deleteProjectById,
     deleteTodoById,
+    deleteTodoFromCurrentProject,
     getAllTodos,
     getAllProjects,
     searchTodos,
