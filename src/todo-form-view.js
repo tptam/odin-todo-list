@@ -55,7 +55,6 @@ const template = `
 
 function render(parent, formJson, formHandlers) {
     const formData = JSON.parse(formJson);
-    console.table(formData);
 
     const form = parseHtml(template);
     parent.appendChild(form);
@@ -108,21 +107,6 @@ function render(parent, formJson, formHandlers) {
             // Use "change" instead
             "change", updatePriority
         )
-    )
-
-    const submitButton = form.querySelector("button[type='submit'");
-    form.addEventListener(
-        "submit",
-        (e) => {
-            e.preventDefault();
-            formHandlers.clickSubmitButton(
-                form.title.value,
-                form.dueDate.value,
-                form.priority.value,
-                form.description.value,
-                form.project.value,
-            );
-        }
     )
 }
 
