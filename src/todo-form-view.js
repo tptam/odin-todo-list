@@ -55,6 +55,8 @@ const template = `
 
 function render(parent, formJson, formHandlers) {
     const formData = JSON.parse(formJson);
+    console.table(formData);
+
     const form = parseHtml(template);
     parent.appendChild(form);
     const select = form.querySelector("select");
