@@ -71,15 +71,20 @@ class Controller{
     displayTodoEditModal(todoId){
         const content = document.querySelector("#content");
         const todo = this.#model.getTodoById(todoId);
+        const project = this.#model.getProjectByTodoId(todoId);
         const formData = {
             projects: [],
             todo: {
                 id: todo.id,
                 title: todo.title,
-                dueDate: todo.dueDate,
-                priority: todo.priority,
+                dueDate: todo.dueDate === null 
+                    ? "" 
+                    : format(todo.dueDate, "yyyy-MM-dd"),
+                priority: Controller.#priorityLabels[todo.priority],
                 description: todo.description,
                 done: todo.done,
+                projectName: project.name, 
+                projectId: project.id
             }
         }
         this.#model.getAllProjects().forEach(
@@ -91,7 +96,7 @@ class Controller{
         const handlers = {
             clickCloseButton: this.#reload.bind(this),
             clickCancelButton: this.#reload.bind(this),
-            clickSubmitButton: () => {},
+            clickSubmitButton: this.submitTodoEditForm.bind(this),
             clickStatusButton: ((button, id) => {
                 this.toggleTodoStatus(button, id);
             }).bind(this),
@@ -300,6 +305,52 @@ class Controller{
         this.#model.toggleTodoDoneByID(todoId);
         this.#view.statusButton.toggle(button);
         // this.#reload();
+    }
+
+    submitTodoEditForm(id, title, dueDateString, 
+        priorityLabel, description, projectId, doneString
+    ){
+        console.log(priorityLabel);
+        const priority = Controller.#priorityLabels.indexOf(priorityLabel);
+        const dueDate = dueDateString === "" ? null : new Date(dueDateString);
+        const done = JSON.parse(doneString);
+
+        // Data Validation
+        // (Should usually pass thanks to HTML form validation)
+
+        // New task's dueDate should be today or later
+        // (This is not in schema because tasks can be overdue)
+        if (dueDate !== null && isBefore(dueDate, new Date())) {
+            alert("The due date must be today or later.");
+            return;
+        }
+
+        console.log({ id, title, dueDate, priority, description, projectId, done });
+
+        // Update Todo / Validation against schema
+        try {
+            this.#model.updateTodoByID(id, title, description, dueDate, priority, done);
+        } catch (err) {
+            if (err instanceof this.#model.ValidationError) {
+                // Can be more specific using error message.
+                alert("Invalid data submitted: task not updated.");
+                return;
+            }
+        }
+
+        const todo = this.#model.getTodoById(id);
+        const project = this.#model.getProjectByTodoId(id);
+        console.log(todo);
+        console.log(project);
+
+
+        // Update project
+        if (projectId !== "") {
+            this.#model.deleteTodoFromCurrentProject(id);
+            this.#model.addTodoToProject(id, projectId);
+        }
+
+        this.#reload();
     }
 
     submitTodoAddForm(title, dueDateString, priorityLabel, description, projectId){
