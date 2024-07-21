@@ -260,7 +260,9 @@ class Controller{
             clickMultiDeleteButton: this.deleteSelectedTodos.bind(this),
             clickAddButton: this.displayTodoAddModal.bind(this),
             clickTitleLink: this.displayTodoEditModal.bind(this),
-            clickProjectLink: this.displayTodosInProject.bind(this),
+            clickProjectLink: (
+                (projectId) => this.displayTodosInProject(projectId)
+            ).bind(this),
             clickStatusButton: ((button, id) => {
                 this.toggleTodoStatus(button, id);
                 this.#reload();
@@ -301,11 +303,8 @@ class Controller{
 
     toggleTodoStatus(button, todoId){
         console.log({ button, todoId });
-        // const button = event.currentTarget;
-        // const id = button.closest("tr").getAttribute("data-id");
         this.#model.toggleTodoDoneByID(todoId);
         this.#view.statusButton.toggle(button);
-        // this.#reload();
     }
 
     submitTodoEditForm(id, title, dueDateString, 
@@ -346,10 +345,13 @@ class Controller{
 
 
         // Update project
-        this.#model.deleteTodoFromCurrentProject(id);
+        if (project !== null) {
+            this.#model.deleteTodoFromCurrentProject(id);
+        }
         if (projectId !== "") {
             this.#model.addTodoToProject(id, projectId);
         }
+    
 
         this.#reload();
     }

@@ -59,7 +59,9 @@ function render(tr, rowJson, rowHandlers){
 
     tr.querySelector(".project a").addEventListener(
         "click",
-        handlers.clickProjectLink
+        () => {
+            handlers.clickProjectLink(row.projectId);
+        }
     );
 }
 
