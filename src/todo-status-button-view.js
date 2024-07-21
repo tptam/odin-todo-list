@@ -12,7 +12,10 @@ function render(button, buttonJson, handler){
     `));
     button.addEventListener(
         "click",
-        event => handler(button, buttonData.id)
+        event => {
+            handler(button, buttonData.id);
+            event.preventDefault();
+        }
     );
 }
 
