@@ -97,8 +97,9 @@ class Controller{
         const handlers = {
             clickCloseButton: this.#reload.bind(this),
             clickCancelButton: this.#reload.bind(this),
-            clickEditButton: ()=>{},
-            clickDeleteButton: ()=>{},
+            clickEditButton: (todoId => {
+                this.displayTodoEditModal(todoId)
+            }).bind(this),
         }
 
         this.#view.todo.render(

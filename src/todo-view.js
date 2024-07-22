@@ -2,52 +2,63 @@ import * as modalView from "./modal-view";
 import * as todoFormView from "./todo-form-view";
 import * as statusInputView from "./todo-status-input-view";
 import parseHtml from "./parse-html";
-import { isBefore } from "date-fns";
 
 function render(content, formJson, formHandlers) {
     const formData = JSON.parse(formJson);
     const dialog = document.createElement("dialog");
     content.appendChild(dialog)
     modalView.render(dialog, "ToDo Task", formHandlers);
-    todoFormView.render(dialog, formJson, formHandlers);
+    dialog.appendChild(parseHtml(`
+        <div class="todo-display">
+            <div class="title row">
+                <div class="label">Title</div>
+                <div class="data">${formData.todo.title}</div>
+            </div>
+            <div class="status row">
+                <div class="label">Status</div>
+                <div class="data"></div>
+            </div>
+            <div class="due-date row">
+                <div class="label">Due Date</div>
+                <div class="data">${formData.todo.dueDate}</div>
+            </div>
+            <div class="priority row">
+                <div class="label">Priority</div>
+                <div class="data">
+                    <div class="priority-display" data-value="${formData.todo.priority}">${formData.todo.priority}</div>
+                    <a href="https://en.wikipedia.org/wiki/Time_management#The_Eisenhower_Method" target="_blank" rel="noopener noreferrer">
+                        What does this mean?
+                        <span class="more">Learn more about Eisenhower Matrix!</span>
+                    </a>                
+                </div>
+            </div>
+            <div class="description row">
+                <div class="label">Description</div>
+                <div class="data">${formData.todo.description}</div>
+            </div>
+            <div class="project row">
+                <div class="label">Project</div>
+                <div class="data">${formData.todo.projectName}</div>
+            </div>
+            <form>
+                <input type="hidden" name="id" value=${formData.todo.id}>
+                <button class="cancel">Cancel</button>
+                <button class="edit">Edit</button>
+            </form>
+        </div>
+    `));
 
-    const form = dialog.querySelector("form");
-    form.setAttribute("name", "todo");
 
-    // Add Status (done)
-    const statusWrapper = parseHtml(`
-        <div class="status-wrapper">
-            <div class="label">Status</div>
-        </div>>`
-    );
-    const statusInputWrapper = document.createElement("div");
-    statusWrapper.appendChild(statusInputWrapper);
-    statusInputView.render(statusInputWrapper, JSON.stringify(formData.todo), () => { });
-    form.insertBefore(statusWrapper, form.dueDate.parentNode);
+    // Add status component
+    const statusWrapper = document.createElement("div");
+    statusWrapper.classList.add("status-input-wrapper");
+    statusInputView.render(statusWrapper, JSON.stringify(formData.todo), () => { });
+    statusWrapper.querySelector("input").disabled = true;
+    dialog.querySelector(".status>.data").appendChild(statusWrapper);
 
-    // Populate other data
-    form.title.value = formData.todo.title;
-    form.dueDate.value = formData.todo.dueDate;
-    form.priority.value = formData.todo.priority;
-    form.description.value = formData.todo.description;
-    form.project.value = formData.todo.projectId;
-    setPriorityCheckbox(form, form.priority.value);
-
-    // Change buttons
-    const submitButton = form.querySelector("button[type='submit']"); 
-    const editButton = parseHtml("<button class='edit'>Edit</button>");
-    const deleteButton = parseHtml("<button class='delete'>Delete</button>");
-    submitButton.parentNode.appendChild(deleteButton);
-    submitButton.parentNode.appendChild(editButton);
-    submitButton.remove();
-
-    editButton.addEventListener(
+    dialog.querySelector("button.edit").addEventListener(
         "click",
-        formHandlers.clickEditButton
-    );
-    deleteButton.addEventListener(
-        "click",
-        formHandlers.clickDeleteButton
+        () => formHandlers.clickEditButton(formData.todo.id)
     );
 }
 

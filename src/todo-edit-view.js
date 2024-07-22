@@ -6,8 +6,13 @@ import { isBefore } from "date-fns";
 
 function render(content, formJson, formHandlers) {
     const formData = JSON.parse(formJson);
-    const dialog = document.createElement("dialog");
-    content.appendChild(dialog)
+    let dialog = document.querySelector("dialog");
+    if (dialog === null) {
+        dialog = document.createElement("dialog");
+        content.appendChild(dialog)
+    } else {
+        dialog.textContent = "";
+    }
     modalView.render(dialog, "Edit ToDo Task", formHandlers);
     todoFormView.render(dialog, formJson, formHandlers);
 

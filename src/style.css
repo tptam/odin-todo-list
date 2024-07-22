@@ -654,18 +654,71 @@ button[type="submit"] {
 }
 
 
-/* Todo Edit Form specific */
-form button.toggle {
-    transform: scale(1.1);
+/* Todo Display / Edit Form specific */
 
-    /* with(11ch) * 1.1 / 2 */
-    margin-left: 0.55ch;
-}
-
-form[name="todoEdit"] .button-like-checkbox-wrapper span {
+dialog .button-like-checkbox-wrapper span {
     font-size: var(--content-h2-font-size);
 }
 
+/* Todo Display View */
+.todo-display {
+    display: grid;
+    gap: var(--gutter);
+}
+
+.todo-display>.row {
+    display: grid;
+    font-size: var(--content-h2-font-size);
+    grid-template-columns: 12ch 1fr;
+    align-items: baseline;
+}
+
+.todo-display>form {
+    display:grid;
+    grid-template-columns: 12ch 1fr 1fr;
+}
+
+.todo-display .cancel {
+    grid-column: 2;
+}
+
+todo-display .edit {
+    grid-column: 3;
+}
+
+.todo-display .label {
+    color: var(--neutral-color-700);
+    font-weight: bold;
+}
+
+.todo-display .description .data {
+    font-size: var(--content-h3-font-size);
+}
+
+.todo-display .priority.row {
+    align-items: start;
+}
+
+.todo-display .priority-display {
+    width: 12ch;
+}
+
+.todo-display .priority a {
+    font-size: initial;
+}
+
+.todo-display .priority a:not(:hover) .more {
+    visibility: hidden;
+}
+
+.todo-display .priority a:hover .more {
+    visibility: visible;
+    color: var(--secondary-color);
+}
+
+.todo-display .edit {
+    background-color: var(--primary-color);
+}
 
 /* Status Toggle */
 .button-like-checkbox-wrapper {
@@ -735,3 +788,4 @@ form[name="todoEdit"] .button-like-checkbox-wrapper span {
 .button-like-checkbox-wrapper input[type="checkbox"]:focus {
     outline: 2px solid var(--button-on-color);
 }
+
