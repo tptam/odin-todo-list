@@ -351,8 +351,9 @@ class Controller{
 
         for (let id of ids) {
             this.#model.deleteTodoById(id);
-            this.#view.todosTable.deleteRowById(table, id);
         }
+
+        this.#reload();
     }
 
     // For button status component
