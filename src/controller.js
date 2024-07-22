@@ -193,6 +193,9 @@ class Controller{
             tableHandlers
         );
 
+        const menu = document.querySelector("nav");
+        this.#view.menu.updateHighlight(menu, "project");
+
         this.#reload = this.displayAllProjects;
     }
 
@@ -212,6 +215,9 @@ class Controller{
         }
         const project = this.#model.getProjectById(projectId);
         this.displayTodos(`Project: ${project.name}`, project.todos)
+
+        const menu = document.querySelector("nav");
+        this.#view.menu.updateHighlight(menu, "project");
         this.#reload = () => this.displayTodosInProject(projectId)
     }
 
