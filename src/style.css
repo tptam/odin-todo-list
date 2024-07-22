@@ -268,7 +268,7 @@ tr {
     padding-left: var(--gutter);
     display: grid;
     grid-auto-flow: column;
-    grid-template-columns: 2ch 1fr 10ch 12ch 12ch 10ch;
+    grid-template-columns: 2ch 1fr 10ch 10ch 10ch 10ch;
     gap: calc(var(--gutter)*2);
     align-items: center;
     justify-items: center;
@@ -332,6 +332,19 @@ tr.delegate td.priority {
 
 tr.eliminate td.priority {
     border-left: 6px solid var(--eliminate-color);
+}
+
+table.todos td.status {
+    justify-content: center;
+}
+
+table.todos .button-like-checkbox-wrapper {
+    --button-height: 32px;
+    --button-width: 12ch;
+}
+
+table.todos .button-like-checkbox-wrapper span{
+    font-size: var(--table-font-size);
 }
 
 button.multi-delete {
@@ -669,13 +682,16 @@ dialog .button-like-checkbox-wrapper span {
 .todo-display>.row {
     display: grid;
     font-size: var(--content-h2-font-size);
-    grid-template-columns: 12ch 1fr;
+    grid-template-columns: 11ch 1fr;
     align-items: baseline;
+    gap: var(--gutter);
 }
 
 .todo-display>form {
     display:grid;
-    grid-template-columns: 12ch 1fr 1fr;
+    font-size: var(--content-h2-font-size);
+    grid-template-columns: 11ch 1fr 1fr;
+    gap: var(--gutter);
 }
 
 .todo-display .cancel {
@@ -785,7 +801,7 @@ todo-display .edit {
   height: 1ch;
 }
 
-.button-like-checkbox-wrapper input[type="checkbox"]:focus {
+form .button-like-checkbox-wrapper input[type="checkbox"]:focus {
     outline: 2px solid var(--button-on-color);
 }
 

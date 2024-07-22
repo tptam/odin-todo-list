@@ -1,5 +1,6 @@
 import parseHtml from "./parse-html.js";
 import * as statusButton from "./todo-status-button-view.js";
+import * as statusInput from "./todo-status-input-view.js";
 
 let handlers;
 
@@ -36,14 +37,25 @@ function render(tr, rowJson, rowHandlers){
 
     cell = document.createElement("td");
     cell.classList.add("status");    
-    const button = document.createElement("button");
-    cell.appendChild(button);
-    statusButton.render(
-        button, 
-        JSON.stringify({id: row.id, done: row.done}), 
+    const statusWrapper = document.createElement("div");
+    statusWrapper.classList.add("status-input-wrapper");
+    statusInput.render(
+        statusWrapper,
+        JSON.stringify({ id: row.id, done: row.done }), 
         handlers.clickStatusButton
-    );
+    )
+    cell.appendChild(statusWrapper);
     tr.appendChild(cell);
+
+
+    // const button = document.createElement("button");
+    // cell.appendChild(button);
+    // statusButton.render(
+    //     button, 
+    //     JSON.stringify({id: row.id, done: row.done}), 
+    //     handlers.clickStatusButton
+    // );
+    // tr.appendChild(cell);
 
     cell = document.createElement("td");
     cell.classList.add("project");

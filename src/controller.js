@@ -317,8 +317,9 @@ class Controller{
             clickProjectLink: (
                 (projectId) => this.displayTodosInProject(projectId)
             ).bind(this),
-            clickStatusButton: ((button, id) => {
-                this.toggleTodoStatus(button, id);
+            clickStatusButton: ((todoId) => {
+                // this.toggleTodoStatus(button, id);
+                this.changeTodoStatus(todoId);
                 this.#reload();
             }).bind(this),
 
