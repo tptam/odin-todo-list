@@ -41,7 +41,6 @@ function render(content, formJson, formHandlers) {
                 <div class="data">${formData.todo.projectName}</div>
             </div>
             <form>
-                <input type="hidden" name="id" value=${formData.todo.id}>
                 <button class="cancel">Cancel</button>
                 <button class="edit">Edit</button>
             </form>
