@@ -315,9 +315,12 @@ class Controller{
     }
 
     toggleTodoStatus(button, todoId){
-        console.log({ button, todoId });
         this.#model.toggleTodoDoneByID(todoId);
         this.#view.statusButton.toggle(button);
+    }
+
+    changeTodoStatus(todoId) {
+        this.#model.toggleTodoDoneByID(todoId);
     }
 
     submitTodoEditForm(id, title, dueDateString, 

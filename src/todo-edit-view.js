@@ -1,6 +1,6 @@
 import * as modalView from "./modal-view";
 import * as todoFormView from "./todo-form-view";
-import * as statusButtonView from "./todo-status-button-view"
+import * as statusInputView from "./todo-status-input-view";
 import parseHtml from "./parse-html";
 import { isBefore } from "date-fns";
 
@@ -14,41 +14,24 @@ function render(content, formJson, formHandlers) {
     const form = dialog.querySelector("form");
     form.setAttribute("name", "todoEdit");
 
-    const title = form.querySelector("#title");
-    const dueDate = form.dueDate;
-    const priority = form.priority;
-    const description = form.description;
-    const project = form.project;
-
-    const button = document.createElement("button");
-    button.classList.add("status");
-    statusButtonView.render(
-        button, 
-        JSON.stringify({
-            id: formData.todo.id,
-            done: formData.todo.done,
-        }), 
-        formHandlers.clickStatusButton
-    );
-
-
     // Add Status (done)
-    const doneLabel = parseHtml("<label for='done'></label>");
-    doneLabel.textContent = "Status";
-    const done = parseHtml("<input type='hidden' name='done' id='done'>");
-    done.value = formData.todo.done;
-    doneLabel.appendChild(button);
-    doneLabel.appendChild(done);
-
-    form.insertBefore(doneLabel, dueDate.parentNode);
+    const statusWrapper = parseHtml(`
+        <div class="status-wrapper">
+            <div class="label">Status</div>
+        </div>>`
+    );
+    const statusInputWrapper= document.createElement("div");
+    statusWrapper.appendChild(statusInputWrapper);
+    statusInputView.render(statusInputWrapper, JSON.stringify(formData.todo), ()=>{});
+    form.insertBefore(statusWrapper, form.dueDate.parentNode);
 
     // Populate other data
-    title.value = formData.todo.title;
-    dueDate.value = formData.todo.dueDate;
-    priority.value = formData.todo.priority;
-    description.value = formData.todo.description;
-    project.value = formData.todo.projectId;
-    setPriorityCheckbox(form, priority.value);
+    form.title.value = formData.todo.title;
+    form.dueDate.value = formData.todo.dueDate;
+    form.priority.value = formData.todo.priority;
+    form.description.value = formData.todo.description;
+    form.project.value = formData.todo.projectId;
+    setPriorityCheckbox(form, form.priority.value);
 
     // Alert for overdue date
     if (formData.todo.dueDate !== "") {
@@ -68,13 +51,35 @@ function render(content, formJson, formHandlers) {
             e.preventDefault();
             formHandlers.clickSubmitButton(
                 formData.todo.id,
-                title.value,
-                dueDate.value,
-                priority.value,
-                description.value,
-                project.value,
-                done.value,
+                form.title.value,
+                form.dueDate.value,
+                form.priority.value,
+                form.description.value,
+                form.project.value,
+                form.done.checked,
             );
+        }
+    )
+
+    // Prevent submit by enter key for accidental submit
+    // Is there any elegant way to do this?
+    const inputs = [
+        form.title, form.dueDate, form.done, form.urgent, form.important, form.description
+    ];
+
+    inputs.forEach(
+        (elem, index) => {
+            if (elem !== form.description) {
+                elem.addEventListener(
+                    "keydown",
+                    (e) => {
+                        if (e.key === "Enter") {
+                            inputs[index + 1].focus();
+                            e.preventDefault();
+                        }
+                    }
+                )
+            }
         }
     )
 }

@@ -479,6 +479,7 @@ form {
 }
 
 form label, 
+.status-wrapper,
 .priority-wrapper {
     display: grid;
     grid-template-columns: 12ch 1fr;
@@ -495,13 +496,14 @@ form label > .alert,
 
 form>label,
 .priority-wrapper,
-.button-wrapper,
+.status-wrapper,
 .priority-display {
     font-size: var(--content-h2-font-size);
 }
 
 form>label,
-.priority-wrapper>.label {
+.priority-wrapper>.label,
+.status-wrapper>.label {
     color: var(--neutral-color-700);
     font-weight: bold;
 }
@@ -653,10 +655,83 @@ button[type="submit"] {
 
 
 /* Todo Edit Form specific */
-
 form button.toggle {
     transform: scale(1.1);
 
     /* with(11ch) * 1.1 / 2 */
     margin-left: 0.55ch;
+}
+
+form[name="todoEdit"] .button-like-checkbox-wrapper span {
+    font-size: var(--content-h2-font-size);
+}
+
+
+/* Status Toggle */
+.button-like-checkbox-wrapper {
+    /* Parameters for the component appearance */
+    --button-height: calc(var(--content-h2-font-size) + var(--gutter));
+    --button-width: 180px;
+    --button-background-color: #ebebeb;
+    --button-on-color: var(--primary-color);
+    --button-off-color: white;
+
+    --button-label-height: calc(var(--button-height) * 0.6);
+    --button-padding: calc(var(--button-height) * 0.2);
+    font-size: initial;
+    font-weight: initial;
+    width: var(--button-width);
+    height: var(--button-height);
+}
+
+.button-like-checkbox-wrapper>label {
+  display: flex;  
+  align-items: center;
+  justify-content: space-between;
+  max-height: var(--button-height);
+  font-size: var(--button-label-height);
+  background-color: var(--button-background-color);
+  padding: var(--button-padding);
+  padding-left: calc(var(--button-padding) * 2);
+  border-radius: calc(var(--button-height) * 0.5);
+}
+
+.button-like-checkbox-wrapper span {
+  flex: none;
+  line-height: 1;
+}
+
+.button-like-checkbox-wrapper input[type="checkbox"] {
+  flex: none;
+  appearance: none;
+  -webkit-appearance: none;
+  display: flex;
+  align-content: center;
+  justify-content: center;
+  font-size: 1.8em;
+  line-height: 1;
+  background-color: var(--button-off-color);
+  border-radius: 50%;
+  width: 1ch;
+  height: 1ch;
+}
+
+.button-like-checkbox-wrapper input[type="checkbox"]::before {
+  content: "";
+  width: 1ch;
+  height: 1ch;
+  clip-path: circle(50% at 50% 50%);
+  transform: scale(0);
+  background-color: var(--button-on-color);
+}
+
+
+.button-like-checkbox-wrapper input[type="checkbox"]:checked::before {
+  transform: scale(1);
+  width: 1ch;
+  height: 1ch;
+}
+
+.button-like-checkbox-wrapper input[type="checkbox"]:focus {
+    outline: 2px solid var(--button-on-color);
 }
