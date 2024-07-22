@@ -3,7 +3,7 @@ import parseHtml from "./parse-html";
 function render(wrapper, json, changeHandler) {
     wrapper.classList.add("button-like-checkbox-wrapper");
     const data = JSON.parse(json);
-    const doneId = `done_${data.id}`;
+    const doneId = `done_${crypto.randomUUID()}`;
     const label = parseHtml(`
         <label for="${doneId}"></label>
     `);
