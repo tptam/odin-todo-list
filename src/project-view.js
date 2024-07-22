@@ -41,7 +41,7 @@ function render(content, formJson, formHandlers) {
         "click",
         (event) => {
             event.preventDefault();
-            formHandlers.clickEditButton(formData.todo.id);
+            formHandlers.clickEditButton(formData.project.id);
         }
     );
 }
