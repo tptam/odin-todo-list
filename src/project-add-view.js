@@ -18,7 +18,14 @@ const template = `
 `
 
 function render(content, formJson, formHandlers) {
-    const dialog = document.createElement("dialog");
+    let dialog = content.querySelector("dialog");
+    if (dialog !== null) {
+        dialog.textContent = "";
+    } else {
+        dialog = document.createElement("dialog");
+        content.appendChild(dialog);
+    }
+    
     const formData = JSON.parse(formJson); // For future new features
     content.appendChild(dialog)
     modalView.render(dialog, "New Project", formHandlers);
