@@ -1,17 +1,49 @@
-class ProjectView {
-    #project;
-    constructor(project) {
-        this.#project = project;
+import * as modalView from "./modal-view";
+import parseHtml from "./parse-html";
+
+
+function render(content, formJson, formHandlers) {
+    let dialog = content.querySelector("dialog");
+    if (dialog !== null) {
+        dialog.textContent = "";
+    } else {
+        dialog = document.createElement("dialog");
     }
 
-    toString(){
-        let string = `Project Name: ${this.#project.name}\n`;
-        string += "Todos:\n";
-        this.#project.todos.forEach(
-            todo => string += `${todo.title} (${todo.dueDate.toDateString()}) ${todo.done ? "✓" : "-"}\n`
-        );
-        return string;
-    }
+    const formData = JSON.parse(formJson);
+    content.appendChild(dialog)
+    modalView.render(dialog, "Project", formHandlers);
+
+    dialog.appendChild(parseHtml(`
+        <div class="project-display">
+            <div class="name row">
+                <div class="label">
+                    Name
+                </div>
+                <div class="data">${formData.project.name}</div>
+            </div>
+            <form>
+                <button class="cancel">Cancel</button>
+                <button class="edit">Edit</button>
+            </form>
+        </div>
+    `));
+
+    dialog.querySelector("button.cancel").addEventListener(
+        "click",
+        event => {
+            event.preventDefault();
+            formHandlers.clickCancelButton();
+        }
+    );
+
+    dialog.querySelector("button.edit").addEventListener(
+        "click",
+        (event) => {
+            event.preventDefault();
+            formHandlers.clickEditButton(formData.todo.id);
+        }
+    );
 }
 
-export default ProjectView;
+export { render };

@@ -7,6 +7,7 @@ import * as projects from "./projects-view";
 import * as todo from "./todo-view";
 import * as todoAdd from "./todo-add-view";
 import * as todoEdit from "./todo-edit-view";
+import * as project from "./project-view";
 import * as projectAdd from "./project-add-view";
 
 export { 
@@ -14,5 +15,5 @@ export {
     menu,
     projects,
     todo, todoAdd, todoEdit,
-    projectAdd,
+    project, projectAdd,
 };

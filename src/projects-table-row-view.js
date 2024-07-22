@@ -60,7 +60,7 @@ function render(tr, rowJson, rowHandlers) {
         {
             selector: ".name a",
             type: "click",
-            func: rowHandlers.clickNameLink
+            func: () => rowHandlers.clickNameLink(row.id),
         },
         {
             selector: ".todos a",

@@ -65,6 +65,26 @@ class Controller{
         // This method opens a modal window, so #reload is not updated
     }
 
+    displayProjectModal(projectId){
+        const content = document.querySelector("#content");
+        const project = this.#model.getProjectById(projectId);
+
+        const formData = {
+            project: {
+                id: projectId,
+                name: project.name
+            }
+        }
+
+        const handlers = {
+            clickCloseButton: this.#reload.bind(this),
+            clickCancelButton: this.#reload.bind(this),
+            clickEditButton: (()=>{}).bind(this),
+        }
+
+        this.#view.project.render(content, JSON.stringify(formData), handlers);
+    }
+
     displayTodoAddModal(){
         const content = document.querySelector("#content");
         const formData = {
@@ -201,7 +221,9 @@ class Controller{
         )
 
         const tableHandlers = {
-            clickNameLink: ()=>{console.log("name")},
+            clickNameLink: (
+                projectID => this.displayProjectModal(projectID)
+            ).bind(this),
             clickTodosLink: this.displayTodosInProject.bind(this),
             clickNotDoneLink: this.displayNotDoneTodosInProject.bind(this),
             clickOverdueLink: this.displayOverdueTodosInProject.bind(this),
