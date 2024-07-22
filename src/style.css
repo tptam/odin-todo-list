@@ -509,6 +509,7 @@ form label > .alert,
 
 form>label,
 .priority-wrapper,
+.button-wrapper,
 .status-wrapper,
 .priority-display {
     font-size: var(--content-h2-font-size);
