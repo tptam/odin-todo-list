@@ -33,7 +33,7 @@ function render(menu, projectsData, handlers) {
     menu.querySelector("a#add-project")
         .addEventListener(
             "click",
-            handlers.addProject
+            handlers.clickAddLink
         );
 }
 

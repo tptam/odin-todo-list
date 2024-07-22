@@ -24,7 +24,10 @@ class Controller{
             clickTodayTodosLink: this.displayTodayTodos.bind(this),
             clickProjectLink: this.displayTodosInProject.bind(this),
             clickAllProjectsLink: this.displayAllProjects.bind(this),
-            addProject: () => { },
+            clickAddLink: (() => {
+                this.displayAllProjects();
+                this.displayProjectAddModal();
+            }).bind(this),
         }
 
         const projectsData = [];

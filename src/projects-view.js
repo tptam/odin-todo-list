@@ -3,7 +3,6 @@ import * as projectsTableView from "./projects-table-view";
 
 
 function render(content, tableJson, tableHandlers) {
-    console.log(tableHandlers);
     const tableData = JSON.parse(tableJson);
     content.innerHTML = "";
 

@@ -3,6 +3,8 @@ import parseHtml from "./parse-html";
 function render(wrapper, json, changeHandler) {
     wrapper.classList.add("button-like-checkbox-wrapper");
     const data = JSON.parse(json);
+
+    // Unique ID is required for when modal shows over todos view
     const doneId = `done_${crypto.randomUUID()}`;
     const label = parseHtml(`
         <label for="${doneId}"></label>
