@@ -58,7 +58,10 @@ function render(content, formJson, formHandlers) {
 
     dialog.querySelector("button.edit").addEventListener(
         "click",
-        () => formHandlers.clickEditButton(formData.todo.id)
+        (event) => {
+            event.preventDefault();
+            formHandlers.clickEditButton(formData.todo.id);
+        }
     );
 }
 
