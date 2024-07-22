@@ -8,10 +8,10 @@ function render(content, formJson, formHandlers) {
         dialog.textContent = "";
     } else {
         dialog = document.createElement("dialog");
+        content.appendChild(dialog);
     }
 
     const formData = JSON.parse(formJson);
-    content.appendChild(dialog)
     modalView.render(dialog, "Project", formHandlers);
 
     dialog.appendChild(parseHtml(`
