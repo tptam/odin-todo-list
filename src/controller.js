@@ -42,6 +42,26 @@ class Controller{
         this.displayAllTodos();
     }
 
+    displayProjectAddModal(){
+        const content = document.querySelector("#content");
+        const formData = {
+            // now empty, but can be added new property
+            // e.g., todo tasks without projects
+        }
+        const handlers = {
+            clickCloseButton: this.#reload.bind(this),
+            clickCancelButton: this.#reload.bind(this),
+            clickSubmitButton: ((name) => this.submitProjectAddForm(name)).bind(this),
+        }
+
+        this.#view.projectAdd.render(
+            content,
+            JSON.stringify(formData),
+            handlers
+        )
+        // This method opens a modal window, so #reload is not updated
+    }
+
     displayTodoAddModal(){
         const content = document.querySelector("#content");
         const formData = {
@@ -63,7 +83,7 @@ class Controller{
             content,
             JSON.stringify(formData),
             handlers
-        )
+        );
 
         // This method opens a modal window, so #reload is not updated
     }
@@ -182,7 +202,7 @@ class Controller{
             clickTodosLink: this.displayTodosInProject.bind(this),
             clickNotDoneLink: this.displayNotDoneTodosInProject.bind(this),
             clickOverdueLink: this.displayOverdueTodosInProject.bind(this),
-            clickAddButton: () => this.displayTodoAddModal.bind(this),
+            clickAddButton: this.displayProjectAddModal.bind(this),
         }
 
         const content = document.querySelector("#content");
@@ -372,6 +392,22 @@ class Controller{
     // For checkbox status component
     changeTodoStatus(todoId) {
         this.#model.toggleTodoDoneByID(todoId);
+    }
+
+    submitProjectAddForm(name){
+        // Create new Todo / Validation against schema
+        let project;
+        try {
+            project = this.#model.createProject(name);
+        } catch (err) {
+            if (err instanceof this.#model.ValidationError) {
+                // Can be more specific using error message.
+                alert("Invalid data submitted: no project was created.");
+                return;
+            }
+        }
+
+        this.#reload();
     }
 
     submitTodoEditForm(id, title, dueDateString, 
