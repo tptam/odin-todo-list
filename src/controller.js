@@ -79,13 +79,15 @@ class Controller{
         const handlers = {
             clickCloseButton: this.#reload.bind(this),
             clickCancelButton: this.#reload.bind(this),
-            clickSubmitButton: (() => { }).bind(this),
+            clickSubmitButton: (
+                (projectId, name) => this.submitProjectEditForm(projectId, name)
+            ).bind(this),
         }
 
         this.#view.projectEdit.render(content, JSON.stringify(formData), handlers);
     }
 
-    
+
     displayProjectModal(projectId){
         const content = document.querySelector("#content");
         const project = this.#model.getProjectById(projectId);
@@ -291,7 +293,6 @@ class Controller{
 
 
     displayOverdueTodosInProject(projectId) {
-        console.log(projectId);
         const project = this.#model.getProjectById(projectId);
         this.displaySearchedTodos(
             `Project: ${project.name} / Overdue Tasks`,
@@ -442,7 +443,33 @@ class Controller{
         this.#model.toggleTodoDoneByID(todoId);
     }
 
+    submitProjectEditForm(projectId, name) {
+        // Data Validation
+        // (Should usually pass thanks to HTML form validation)
+        if (name.length > 100) {
+            alert("The project name is too long. Keep it under 100 characters.");
+            return;
+        }
+
+        // Update project / Validation against schema
+        try {
+            this.#model.updateProjectById(projectId, name);
+        } catch (err) {
+            if (err instanceof this.#model.ValidationError) {
+                // Can be more specific using error message.
+                alert("Invalid data submitted: project not updated.");
+                return;
+            }
+        }
+        this.#reload();
+    }
+
     submitProjectAddForm(name){
+        if (name.length > 100) {
+            alert("The project name is too long. Keep it under 100 characters.");
+            return;
+        }
+
         // Create new Todo / Validation against schema
         let project;
         try {
@@ -461,7 +488,6 @@ class Controller{
     submitTodoEditForm(id, title, dueDateString, 
         priorityLabel, description, projectId, doneString
     ){
-        console.log(priorityLabel);
         const priority = Controller.#priorityLabels.indexOf(priorityLabel);
         const dueDate = dueDateString === "" ? null : new Date(dueDateString);
         const done = JSON.parse(doneString);
@@ -476,7 +502,10 @@ class Controller{
             return;
         }
 
-        console.log({ id, title, dueDate, priority, description, projectId, done });
+        if (title.length > 100) {
+            alert("The task title is too long. Keep it under 100 characters.");
+            return;
+        }
 
         // Update Todo / Validation against schema
         try {
@@ -489,11 +518,7 @@ class Controller{
             }
         }
 
-        const todo = this.#model.getTodoById(id);
         const project = this.#model.getProjectByTodoId(id);
-        console.log(todo);
-        console.log(project);
-
 
         // Update project
         if (project !== null) {
@@ -518,6 +543,11 @@ class Controller{
         // (This is not in schema because tasks can be overdue)
         if (dueDate !== null && isBefore(dueDate, new Date())) {
             alert("The due date must be today or later.");
+            return;
+        }
+
+        if (title.length > 100) {
+            alert("The task title is too long. Keep it under 100 characters.");
             return;
         }
 
