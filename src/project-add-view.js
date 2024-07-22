@@ -9,7 +9,7 @@ const template = `
                 required 
                 maxlength="100"
                 placeholder="What's your project? (Required, keep it under 100 characters)">
-        <label>
+        </label>
         <div class="button-wrapper">
             <button type="button" class="cancel">Cancel</button>
             <button type="submit">Submit</button>
