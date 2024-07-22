@@ -65,6 +65,27 @@ class Controller{
         // This method opens a modal window, so #reload is not updated
     }
 
+    displayProjectEditModal(projectId) {
+        const content = document.querySelector("#content");
+        const project = this.#model.getProjectById(projectId);
+
+        const formData = {
+            project: {
+                id: projectId,
+                name: project.name
+            }
+        }
+
+        const handlers = {
+            clickCloseButton: this.#reload.bind(this),
+            clickCancelButton: this.#reload.bind(this),
+            clickSubmitButton: (() => { }).bind(this),
+        }
+
+        this.#view.projectEdit.render(content, JSON.stringify(formData), handlers);
+    }
+
+    
     displayProjectModal(projectId){
         const content = document.querySelector("#content");
         const project = this.#model.getProjectById(projectId);
@@ -79,7 +100,9 @@ class Controller{
         const handlers = {
             clickCloseButton: this.#reload.bind(this),
             clickCancelButton: this.#reload.bind(this),
-            clickEditButton: (()=>{}).bind(this),
+            clickEditButton: (projectId => {
+                this.displayProjectEditModal(projectId)
+            }).bind(this),
         }
 
         this.#view.project.render(content, JSON.stringify(formData), handlers);

@@ -9,11 +9,12 @@ import * as todoAdd from "./todo-add-view";
 import * as todoEdit from "./todo-edit-view";
 import * as project from "./project-view";
 import * as projectAdd from "./project-add-view";
+import * as projectEdit from "./project-edit-view";
 
 export { 
     todos, todosTable, todosTableRow, statusButton, 
     menu,
     projects,
     todo, todoAdd, todoEdit,
-    project, projectAdd,
+    project, projectAdd, projectEdit,
 };
