@@ -675,12 +675,12 @@ dialog .button-like-checkbox-wrapper span {
 }
 
 /* Todo Display View */
-.todo-display {
+.single-display {
     display: grid;
     gap: var(--gutter);
 }
 
-.todo-display>.row {
+.single-display>.row {
     display: grid;
     font-size: var(--content-h2-font-size);
     grid-template-columns: 11ch 1fr;
@@ -688,14 +688,14 @@ dialog .button-like-checkbox-wrapper span {
     gap: var(--gutter);
 }
 
-.todo-display>form {
+.single-display>form {
     display:grid;
     font-size: var(--content-h2-font-size);
     grid-template-columns: 11ch 1fr 1fr;
     gap: var(--gutter);
 }
 
-.todo-display .cancel {
+.single-display .cancel {
     grid-column: 2;
 }
 
@@ -703,37 +703,37 @@ todo-display .edit {
     grid-column: 3;
 }
 
-.todo-display .label {
+.single-display .label {
     color: var(--neutral-color-700);
     font-weight: bold;
 }
 
-.todo-display .description .data {
+.single-display .description .data {
     font-size: var(--content-h3-font-size);
 }
 
-.todo-display .priority.row {
+.single-display .priority.row {
     align-items: start;
 }
 
-.todo-display .priority-display {
+.single-display .priority-display {
     width: 12ch;
 }
 
-.todo-display .priority a {
+.single-display .priority a {
     font-size: initial;
 }
 
-.todo-display .priority a:not(:hover) .more {
+.single-display .priority a:not(:hover) .more {
     visibility: hidden;
 }
 
-.todo-display .priority a:hover .more {
+.single-display .priority a:hover .more {
     visibility: visible;
     color: var(--secondary-color);
 }
 
-.todo-display .edit {
+.single-display .edit {
     background-color: var(--primary-color);
 }
 

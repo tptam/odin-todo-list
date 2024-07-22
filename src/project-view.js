@@ -15,7 +15,7 @@ function render(content, formJson, formHandlers) {
     modalView.render(dialog, "Project", formHandlers);
 
     dialog.appendChild(parseHtml(`
-        <div class="project-display">
+        <div class="project single-display">
             <div class="name row">
                 <div class="label">
                     Name
