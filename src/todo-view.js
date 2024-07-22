@@ -9,7 +9,7 @@ function render(content, formJson, formHandlers) {
     content.appendChild(dialog)
     modalView.render(dialog, "ToDo Task", formHandlers);
     dialog.appendChild(parseHtml(`
-        <div class="todo-display">
+        <div class="todo single-display">
             <div class="title row">
                 <div class="label">Title</div>
                 <div class="data">${formData.todo.title}</div>
