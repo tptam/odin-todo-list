@@ -22,6 +22,28 @@ function render(content, formJson, formHandlers) {
             );
         }
     )
+
+    // Prevent submit by enter key for accidental submit
+    // Is there any elegant way to do this?
+    const inputs = [
+        form.title, form.dueDate, form.urgent, form.important, form.description
+    ];
+
+    inputs.forEach(
+        (elem, index) => {
+            if (elem !== form.description) {
+                elem.addEventListener(
+                    "keydown",
+                    (e) => {
+                        if (e.key === "Enter") {
+                            inputs[index + 1].focus();
+                            e.preventDefault();
+                        }
+                    }
+                )
+            }
+        }
+    )
 }
 
 export { render };
