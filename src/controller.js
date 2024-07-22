@@ -68,6 +68,49 @@ class Controller{
         // This method opens a modal window, so #reload is not updated
     }
 
+    displayTodoModal(todoId) {
+        const content = document.querySelector("#content");
+        const todo = this.#model.getTodoById(todoId);
+        const project = this.#model.getProjectByTodoId(todoId);
+
+        const formData = {
+            projects: [],
+            todo: {
+                id: todo.id,
+                title: todo.title,
+                dueDate: todo.dueDate === null
+                    ? ""
+                    : format(todo.dueDate, "yyyy-MM-dd"),
+                priority: Controller.#priorityLabels[todo.priority],
+                description: todo.description,
+                done: todo.done,
+                projectName: project === null ? "" : project.name,
+                projectId: project === null ? "" : project.id
+            }
+        }
+        this.#model.getAllProjects().forEach(
+            project => formData.projects.push({
+                id: project.id,
+                name: project.name,
+            })
+        );
+        const handlers = {
+            clickCloseButton: this.#reload.bind(this),
+            clickCancelButton: this.#reload.bind(this),
+            clickEditButton: ()=>{},
+            clickDeleteButton: ()=>{},
+        }
+
+        this.#view.todo.render(
+            content,
+            JSON.stringify(formData),
+            handlers
+        )
+
+        // This method opens a modal window, so #reload is not updated
+    }
+
+
     displayTodoEditModal(todoId){
         const content = document.querySelector("#content");
         const todo = this.#model.getTodoById(todoId);
@@ -98,9 +141,6 @@ class Controller{
             clickCloseButton: this.#reload.bind(this),
             clickCancelButton: this.#reload.bind(this),
             clickSubmitButton: this.submitTodoEditForm.bind(this),
-            clickStatusButton: ((button, id) => {
-                this.toggleTodoStatus(button, id);
-            }).bind(this),
         }
 
         this.#view.todoEdit.render(
@@ -272,7 +312,7 @@ class Controller{
         const todosHandlers = {
             clickMultiDeleteButton: this.deleteSelectedTodos.bind(this),
             clickAddButton: this.displayTodoAddModal.bind(this),
-            clickTitleLink: this.displayTodoEditModal.bind(this),
+            clickTitleLink: this.displayTodoModal.bind(this),
             clickProjectLink: (
                 (projectId) => this.displayTodosInProject(projectId)
             ).bind(this),
@@ -314,11 +354,13 @@ class Controller{
         }
     }
 
+    // For button status component
     toggleTodoStatus(button, todoId){
         this.#model.toggleTodoDoneByID(todoId);
         this.#view.statusButton.toggle(button);
     }
 
+    // For checkbox status component
     changeTodoStatus(todoId) {
         this.#model.toggleTodoDoneByID(todoId);
     }
