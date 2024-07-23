@@ -1,5 +1,5 @@
 import * as modalView from "./modal-view";
-import parseHtml from "./parse-html";
+import parseHtml from "../parse-html";
 
 
 function render(content, formJson, formHandlers) {

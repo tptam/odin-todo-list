@@ -1,4 +1,4 @@
-import parseHtml from "./parse-html.js";
+import parseHtml from "../parse-html.js";
 import * as todosTableView from "./todos-table-view.js";
 
 let handlers;

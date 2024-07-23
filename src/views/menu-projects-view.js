@@ -1,4 +1,4 @@
-import parseHtml from "./parse-html.js";
+import parseHtml from "../parse-html.js";
 
 function render(menu, projectsData, handlers) {
     menu.textContent = "";

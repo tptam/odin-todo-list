@@ -1,6 +1,6 @@
-import parseHtml from "./parse-html";
+import parseHtml from "../parse-html";
 import { format } from "date-fns";
-import ConvertIcon from "./images/triangle.svg";
+import ConvertIcon from "../images/triangle.svg";
 
 const template = `
     <form>

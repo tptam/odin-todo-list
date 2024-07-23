@@ -1,4 +1,4 @@
-import parseHtml from "./parse-html";
+import parseHtml from "../parse-html";
 
 function render(wrapper, json, changeHandler) {
     wrapper.classList.add("button-like-checkbox-wrapper");

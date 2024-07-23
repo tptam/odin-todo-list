@@ -1,5 +1,5 @@
-import parseHtml from "./parse-html";
-import CloseIcon from "./images/close.svg";
+import parseHtml from "../parse-html";
+import CloseIcon from "../images/close.svg";
 
 function render(dialog, title, modalHandlers) {
     const closeButton = parseHtml(`
