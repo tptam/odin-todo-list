@@ -80,7 +80,7 @@ function render(parent, formJson, formHandlers) {
 
     const checkboxes = form.querySelectorAll("#urgent, #important");
     checkboxes.forEach(
-        box => addEventListener(
+        box => box.addEventListener(
             // Somehow "click" event fires when user interacts with other inputs
             // Use "change" instead
             "change", updatePriority
