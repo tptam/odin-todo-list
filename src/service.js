@@ -322,10 +322,6 @@ function clearData(){
     projects = {};
     defaultProject = null;
     repo.clear();
-    console.log(todos);
-    console.log(projects);
-    console.log(defaultProject);
-    console.log(localStorage);
 }
 
 function getId() {
