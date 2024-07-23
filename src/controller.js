@@ -14,8 +14,12 @@ class Controller{
     }
 
     init(){
-        this.#model.init();
-     
+        this.#model.init();   
+        this.displayMenu();  
+        this.displayAllTodos();
+    }
+
+    displayMenu(){
         const menu = document.querySelector("nav");
         const menuHandlers = {
             clickAllTodosLink: this.displayAllTodos.bind(this),
@@ -28,6 +32,7 @@ class Controller{
             }).bind(this),
             clickDummyDataLink: (() => {
                 this.#model.populateDummy();
+                this.displayMenu();
                 this.#reload();
             }).bind(this),
             clickClearLink: (() => {
@@ -42,13 +47,11 @@ class Controller{
                 {
                     id: project.id,
                     name: project.name
-                } 
+                }
             )
         );
 
         this.#view.menu.render(menu, JSON.stringify(projectsData), menuHandlers);
-
-        this.displayAllTodos();
     }
 
     displayProjectAddModal(){
