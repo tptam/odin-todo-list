@@ -13,6 +13,12 @@ function render(menu, projectsData, handlers) {
             "click",
             handlers.clickTodayTodosLink
         );
+    
+    menu.querySelector("#link-todos-overdue")
+        .addEventListener(
+            "click",
+            handlers.clickOverdueTodosLink
+        );
 
     const projectMenu = menu.querySelector("#project-menu");
     projectMenuView.render(projectMenu, projectsData, handlers);    

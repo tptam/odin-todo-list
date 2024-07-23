@@ -24,6 +24,7 @@ class Controller{
         const menuHandlers = {
             clickAllTodosLink: this.displayAllTodos.bind(this),
             clickTodayTodosLink: this.displayTodayTodos.bind(this),
+            clickOverdueTodosLink: this.displayOverdueTodos.bind(this),
             clickProjectLink: this.displayTodosInProject.bind(this),
             clickAllProjectsLink: this.displayAllProjects.bind(this),
             clickAddLink: (() => {
@@ -353,6 +354,19 @@ class Controller{
         this.#view.menu.updateHighlight(menu, "today");
 
         this.#reload = this.displayTodayTodos;
+    }
+
+    displayOverdueTodos() {
+        const today = new Date();
+        const todos = this.#model.searchTodos(
+            todo => isBefore(todo.dueDate, today) && !todo.done
+        );
+        this.displayTodos("Overdue Todo Tasks", todos, "No overdue tasks. Everything is on schedule.");
+
+        const menu = document.querySelector("nav");
+        this.#view.menu.updateHighlight(menu, "overdue");
+
+        this.#reload = this.displayOverdueTodos;
     }
 
     displaySearchedTodos(caption, filter, projectId=null, emptyMessage="") {
