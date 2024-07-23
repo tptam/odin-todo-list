@@ -18,9 +18,6 @@ function init() {
         saveTodos();
         saveProjects();
         saveDefaultProject();
-        console.log(todos);
-        console.log(projects);
-        console.log(defaultProject);
     }
 }
 
@@ -268,9 +265,6 @@ function retrieveSavedData(){
     const todosData = repo.getObj("todos");
     const projectsData = repo.getObj("projects");
     const defaultProjectData = repo.getObj("defaultProject");
-    console.log(todosData);
-    console.log(projectsData);
-    console.log(defaultProjectData);
 
     // Create default project first because createTodo populates its todos 
     defaultProject = createProject(defaultProjectData.name, defaultProjectData.id);  
@@ -296,10 +290,6 @@ function retrieveSavedData(){
             );
         }
     );
-    
-    console.log(todos);
-    console.log(projects);
-    console.log(defaultProject);
 }
 
 function populateDummy() {
