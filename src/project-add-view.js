@@ -7,8 +7,8 @@ const template = `
             Name
             <input type="text" name="name" id="name" 
                 required 
-                maxlength="100"
-                placeholder="What's your project? (Required, keep it under 100 characters)">
+                maxlength="50"
+                placeholder="What's your project? (Required, keep it under 50 characters)">
         </label>
         <div class="button-wrapper">
             <button type="button" class="cancel">Cancel</button>

@@ -449,8 +449,8 @@ class Controller{
     submitProjectEditForm(projectId, name) {
         // Data Validation
         // (Should usually pass thanks to HTML form validation)
-        if (name.length > 100) {
-            alert("The project name is too long. Keep it under 100 characters.");
+        if (name.length > 50) {
+            alert("The project name is too long. Keep it under 50 characters.");
             return;
         }
 
@@ -468,8 +468,8 @@ class Controller{
     }
 
     submitProjectAddForm(name){
-        if (name.length > 100) {
-            alert("The project name is too long. Keep it under 100 characters.");
+        if (name.length > 50) {
+            alert("The project name is too long. Keep it under 50 characters.");
             return;
         }
 
@@ -505,8 +505,8 @@ class Controller{
             return;
         }
 
-        if (title.length > 100) {
-            alert("The task title is too long. Keep it under 100 characters.");
+        if (title.length > 50) {
+            alert("The task title is too long. Keep it under 50 characters.");
             return;
         }
 
@@ -549,8 +549,8 @@ class Controller{
             return;
         }
 
-        if (title.length > 100) {
-            alert("The task title is too long. Keep it under 100 characters.");
+        if (title.length > 50) {
+            alert("The task title is too long. Keep it under 50 characters.");
             return;
         }
 

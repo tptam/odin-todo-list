@@ -18,8 +18,8 @@ function render(content, formJson, formHandlers) {
                 Name
                 <input type="text" name="name" id="name" 
                     required 
-                    maxlength="100"
-                    placeholder="What's your project? (Required, keep it under 100 characters)"
+                    maxlength="50"
+                    placeholder="What's your project? (Required, keep it under 50 characters)"
                     value="${formData.project.name}"
                 >
             </label>

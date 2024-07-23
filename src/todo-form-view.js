@@ -7,8 +7,8 @@ const template = `
         <label for="title"><span>Title<span class="required">*</span></span>
         <input type="text" name="title" id="title"
             required
-            maxlength="100"
-            placeholder="What's your task? (Required, keep it under 100 characters)">
+            maxlength="50"
+            placeholder="What's your task? (Required, keep it under 50 characters)">
         </label>
         <label for="due-date">Due Date
         <input type="date" name="dueDate" id="due-date" 

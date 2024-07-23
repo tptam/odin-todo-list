@@ -286,10 +286,14 @@ tbody tr {
 
 th, td {
     width: 100%;
-    height: 100%;
     display: grid;
     align-items: center;
     text-align: center;
+}
+
+td.select {
+    /* This is necessary to fit checkbox to the height*/
+    height: 100%;
 }
 
 td.priority {
@@ -350,6 +354,17 @@ table.todos .button-like-checkbox-wrapper {
 
 table.todos .button-like-checkbox-wrapper span{
     font-size: var(--table-font-size);
+}
+
+td.title a,
+td.project a {
+    width: 10ch;
+    display: -webkit-box;
+    overflow: hidden;
+    overflow-wrap: break-word;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    font-size: initial;
 }
 
 button.multi-delete {
@@ -682,12 +697,17 @@ button[type="submit"] {
 
 
 /* Todo Display / Edit Form specific */
-
 dialog .button-like-checkbox-wrapper span {
     font-size: var(--content-h2-font-size);
 }
 
-/* Todo Display View */
+/* Todo single display specific*/
+.todo.single-display .button-like-checkbox-wrapper>label:hover{
+    cursor: default;
+}
+
+
+/* Todo / Project single display*/
 .single-display {
     display: grid;
     gap: var(--gutter);
@@ -712,7 +732,7 @@ dialog .button-like-checkbox-wrapper span {
     grid-column: 2;
 }
 
-todo-display .edit {
+.single-display .edit {
     grid-column: 3;
 }
 
@@ -777,6 +797,10 @@ todo-display .edit {
   padding: var(--button-padding);
   padding-left: calc(var(--button-padding) * 2);
   border-radius: calc(var(--button-height) * 0.5);
+}
+
+.button-like-checkbox-wrapper>label:hover{
+    cursor: pointer;
 }
 
 .button-like-checkbox-wrapper span {
