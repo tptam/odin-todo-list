@@ -297,6 +297,8 @@ function getProjectByName(name){
 }
 
 function populateDummy() {
+    clearData();
+    init();
     dummyTodos.forEach(
         todo => {
             const newTodo = createTodo(
@@ -306,7 +308,7 @@ function populateDummy() {
                 todo.priority,
                 todo.done
             );
-            let newProject = projects.find(
+            let newProject = Object.values(projects).find(
                 project => project.name === todo.project
             )
             if (newProject === undefined) {

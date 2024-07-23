@@ -1,6 +1,7 @@
 import parseHtml from "./parse-html.js";
 
 function render(menu, projectsData, handlers) {
+    menu.textContent = "";
     const projects = JSON.parse(projectsData);
     projects.forEach(
         project => {
@@ -9,7 +10,7 @@ function render(menu, projectsData, handlers) {
             link.textContent = project.name;
             link.addEventListener(
                 "click",
-                (event) => {
+                () => {
                     handlers.clickProjectLink(project.id)
                 }
             )
