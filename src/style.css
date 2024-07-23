@@ -357,6 +357,14 @@ button.multi-delete img{
     width: calc(var(--table-font-size) * 1.3);
 }
 
+button.multi-delete:disabled img{
+    filter:contrast(0.1);
+}
+
+button.multi-delete:enabled:hover{
+    transform: scale(1.1);
+}
+
 /* No task found message */
 .empty {
     width: var(--table-width);

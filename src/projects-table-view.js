@@ -78,7 +78,7 @@ function render(table, tableJson, tableHandlers) {
         projectsTableRowView.render(tr, JSON.stringify(row), tableHandlers);
     }
 
-    const multiDeleteButton = table.querySelector("button.multi-delete");
+    const multiDeleteButton = table.querySelector("button.multi-delete")
     multiDeleteButton.addEventListener(
         "click",
         () => {
@@ -89,6 +89,21 @@ function render(table, tableJson, tableHandlers) {
             tableHandlers.clickMultiDeleteButton(projectIds);
         }
     );
+    multiDeleteButton.disabled = true;
+
+    table.querySelectorAll("input[name='select']").forEach(
+        select => select.addEventListener(
+            "change",
+            () => {
+                if (table.querySelectorAll("input[name='select']:checked").length > 0) {
+                    multiDeleteButton.disabled = false;
+                } else {
+                    multiDeleteButton.disabled = true;
+                }
+            }
+        )
+    )
+
 }
 
 function update(){
