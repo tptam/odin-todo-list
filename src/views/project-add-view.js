@@ -1,5 +1,5 @@
 import * as modalView from "./modal-view";
-import parseHtml from "../parse-html";
+import parseHtml from "../tools/parse-html";
 
 const template = `
     <form name="projectAdd">

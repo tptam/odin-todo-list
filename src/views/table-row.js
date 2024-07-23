@@ -1,4 +1,4 @@
-import parseHtml from "./parse-html";
+import parseHtml from "../tools/parse-html";
 
 export function render(tr, cellsJson, handlers){
     const cellsData = JSON.parse(cellsJson);

@@ -1,4 +1,4 @@
-import * as tableRow from "../table-row";
+import * as tableRow from "./table-row";
 import * as projectsTableRowView from "./projects-table-row-view";
 import trashIcon from "../images/trash-can.svg"
 

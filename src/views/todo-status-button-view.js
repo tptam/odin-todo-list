@@ -1,4 +1,4 @@
-import parseHtml from "../parse-html";
+import parseHtml from "../tools/parse-html";
 
 function render(button, buttonJson, handler){
     const buttonData = JSON.parse(buttonJson);

@@ -1,4 +1,4 @@
-import parseHtml from "../parse-html";
+import parseHtml from "../tools/parse-html";
 import { format } from "date-fns";
 import ConvertIcon from "../images/triangle.svg";
 

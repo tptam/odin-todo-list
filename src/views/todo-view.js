@@ -1,6 +1,6 @@
 import * as modalView from "./modal-view";
 import * as statusInputView from "./todo-status-input-view";
-import parseHtml from "../parse-html";
+import parseHtml from "../tools/parse-html";
 
 function render(content, formJson, formHandlers) {
     const formData = JSON.parse(formJson);

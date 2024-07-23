@@ -1,4 +1,4 @@
-import parseHtml from "../parse-html";
+import parseHtml from "../tools/parse-html";
 import * as projectsTableView from "./projects-table-view";
 
 

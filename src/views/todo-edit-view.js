@@ -1,7 +1,7 @@
 import * as modalView from "./modal-view";
 import * as todoFormView from "./todo-form-view";
 import * as statusInputView from "./todo-status-input-view";
-import parseHtml from "../parse-html";
+import parseHtml from "../tools/parse-html";
 import { isBefore } from "date-fns";
 
 function render(content, formJson, formHandlers) {

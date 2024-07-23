@@ -1,4 +1,4 @@
-import * as tableRow from "../table-row";
+import * as tableRow from "./table-row";
 import * as progressBar from "./project-progress-bar-view";
 
 function render(tr, rowJson, rowHandlers) {

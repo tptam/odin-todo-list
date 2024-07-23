@@ -1,4 +1,4 @@
-import parseHtml from "../parse-html.js";
+import parseHtml from "../tools/parse-html.js";
 import * as statusButton from "./todo-status-button-view.js";
 import * as statusInput from "./todo-status-input-view.js";
 

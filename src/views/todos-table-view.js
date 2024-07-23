@@ -1,5 +1,5 @@
 import * as todosTableRowView from "./todos-table-row-view.js";
-import parseHtml from "../parse-html.js";
+import parseHtml from "../tools/parse-html.js";
 import trashIcon from "../images/trash-can.svg"
 
 let handlers;

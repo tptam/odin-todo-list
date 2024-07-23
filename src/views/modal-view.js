@@ -1,4 +1,4 @@
-import parseHtml from "../parse-html";
+import parseHtml from "../tools/parse-html";
 import CloseIcon from "../images/close.svg";
 
 function render(dialog, title, modalHandlers) {
