@@ -111,7 +111,6 @@ function update(){
 
 function deleteRowById(table, rowId) {
     const tr = table.querySelector(`tr[data-id="${rowId}"]`);
-    console.log(rowId);
     if (tr) {
         tr.remove();
     }

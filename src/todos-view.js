@@ -17,8 +17,6 @@ function render(content, tableJson, todosHandlers) {
             emptyMessage = "No tasks found. Create one (or just relax)."
         }
 
-        console.log(emptyMessage);
-
         content.appendChild(parseHtml(`
             <div class="empty">
                 <h1>${tableData.caption}</h1>
