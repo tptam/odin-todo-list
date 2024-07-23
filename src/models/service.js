@@ -3,7 +3,7 @@ import { isBefore } from "date-fns";
 import Todo from "./todo.js";
 import Project from "./project.js";
 import * as repo from "./repository.js";
-import dummyTodos from "./dummy-todos.json";
+import dummyTodos from "../dummy-todos.json";
 
 let todos = {};
 let projects = {};
