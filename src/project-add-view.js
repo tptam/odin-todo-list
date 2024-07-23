@@ -4,7 +4,7 @@ import parseHtml from "./parse-html";
 const template = `
     <form name="projectAdd">
         <label for="name">
-            Name
+            <span>Name<span class="required">*</span></span>
             <input type="text" name="name" id="name" 
                 required 
                 maxlength="50"

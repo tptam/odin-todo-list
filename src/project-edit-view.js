@@ -15,7 +15,7 @@ function render(content, formJson, formHandlers) {
     const form = parseHtml(`
         <form name="projectEdit">
             <label for="name">
-                Name
+                <span>Name<span class="required">*</span></span>
                 <input type="text" name="name" id="name" 
                     required 
                     maxlength="50"
