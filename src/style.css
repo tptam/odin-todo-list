@@ -77,6 +77,11 @@ a {
     cursor: pointer;
 }
 
+button:disabled,
+a:disabled{
+    cursor: default;
+}
+
 table {
     border-collapse: collapse;
     font-size: var(--table-font-size);

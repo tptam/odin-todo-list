@@ -79,6 +79,21 @@ function render(table, tableJson, tableHandlers){
             handlers.clickMultiDeleteButton(todoIds);
         }
     );
+
+    multiDeleteButton.disabled = true;
+    
+    table.querySelectorAll("input[name='select']").forEach(
+        select => select.addEventListener(
+            "change",
+            () => {
+                if (table.querySelectorAll("input[name='select']:checked").length > 0) {
+                    multiDeleteButton.disabled = false;
+                } else {
+                    multiDeleteButton.disabled = true;
+                }
+            }
+        )
+    )
     
 }
 
