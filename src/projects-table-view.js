@@ -77,6 +77,18 @@ function render(table, tableJson, tableHandlers) {
         tbody.appendChild(tr);
         projectsTableRowView.render(tr, JSON.stringify(row), tableHandlers);
     }
+
+    const multiDeleteButton = table.querySelector("button.multi-delete");
+    multiDeleteButton.addEventListener(
+        "click",
+        () => {
+            const projectIds = [];
+            table.querySelectorAll("input[name='select']:checked").forEach(
+                input => projectIds.push(input.value)
+            );
+            tableHandlers.clickMultiDeleteButton(projectIds);
+        }
+    );
 }
 
 function update(){

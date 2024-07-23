@@ -250,6 +250,9 @@ class Controller{
                 projectID => this.displayProjectModal(projectID)
             ).bind(this),
             clickTodosLink: this.displayTodosInProject.bind(this),
+            clickMultiDeleteButton: (
+                projectIds => this.deleteSelectedProjects(projectIds)
+            ).bind(this),
             clickNotDoneLink: this.displayNotDoneTodosInProject.bind(this),
             clickOverdueLink: this.displayOverdueTodosInProject.bind(this),
             clickAddButton: this.displayProjectAddModal.bind(this),
@@ -267,6 +270,13 @@ class Controller{
         this.#view.menu.updateHighlight(menu, "project");
 
         this.#reload = this.displayAllProjects;
+    }
+
+    deleteSelectedProjects(projectIds) {
+        for (let id of projectIds) {
+            this.#model.deleteProjectById(id);
+        }
+        this.#reload();
     }
 
     displayTodosWithoutProject(){
@@ -418,7 +428,6 @@ class Controller{
 
     deleteSelectedTodos(){
         const checkedBoxes = document.querySelectorAll("input:checked");
-        const table = document.querySelector("table.todos");
         if (checkedBoxes.length === 0) {
             return;
         }
