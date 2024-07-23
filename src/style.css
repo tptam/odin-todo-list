@@ -356,7 +356,6 @@ table.todos .button-like-checkbox-wrapper span{
     font-size: var(--table-font-size);
 }
 
-td.title a,
 td.project a {
     width: 10ch;
     display: -webkit-box;
@@ -364,7 +363,6 @@ td.project a {
     overflow-wrap: break-word;
     -webkit-line-clamp: 2;
     -webkit-box-orient: vertical;
-    font-size: initial;
 }
 
 button.multi-delete {
@@ -412,6 +410,12 @@ table.projects thead{
 table.projects tr {
     grid-template-columns: 2ch 1fr repeat(4, 8ch) 15ch;
 }
+
+table.projects td {
+    /* This is for highlighting the entire cell when hovered */
+    height: 100%;
+}
+
 tr.summary {
     grid-template-columns: 2ch 1fr calc((var(--gutter) * 8) + 47ch);
 }
