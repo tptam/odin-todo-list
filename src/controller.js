@@ -396,7 +396,9 @@ class Controller{
         );
 
         const todosHandlers = {
-            clickMultiDeleteButton: this.deleteSelectedTodos.bind(this),
+            clickMultiDeleteButton: (
+                todoIds => this.deleteSelectedTodos(todoIds)
+            ).bind(this),
             clickAddButton: this.displayTodoAddModal.bind(this),
             clickTitleLink: this.displayTodoModal.bind(this),
             clickProjectLink: (
@@ -426,18 +428,10 @@ class Controller{
         this.#reload = this.displayAllTodos;
     }
 
-    deleteSelectedTodos(){
-        const checkedBoxes = document.querySelectorAll("input:checked");
-        if (checkedBoxes.length === 0) {
-            return;
-        }
-        const ids = [];
-        checkedBoxes.forEach( box => ids.push(box.value));
-
-        for (let id of ids) {
+    deleteSelectedTodos(todoIds){
+        for (let id of todoIds) {
             this.#model.deleteTodoById(id);
         }
-
         this.#reload();
     }
 

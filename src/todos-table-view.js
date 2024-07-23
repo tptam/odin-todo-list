@@ -71,8 +71,15 @@ function render(table, tableJson, tableHandlers){
     const multiDeleteButton = table.querySelector("button.multi-delete");
     multiDeleteButton.addEventListener(
         "click",
-        handlers.clickMultiDeleteButton
+        () => {
+            const todoIds = [];
+            table.querySelectorAll("input[name='select']:checked").forEach(
+                input => todoIds.push(input.value)
+            );
+            handlers.clickMultiDeleteButton(todoIds);
+        }
     );
+    
 }
 
 function update(table, tableJson){
