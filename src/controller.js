@@ -14,8 +14,6 @@ class Controller{
     }
 
     init(){
-        // For testing
-        // this.#model.populateDummy();
         this.#model.init();
      
         const menu = document.querySelector("nav");
@@ -27,6 +25,14 @@ class Controller{
             clickAddLink: (() => {
                 this.displayAllProjects();
                 this.displayProjectAddModal();
+            }).bind(this),
+            clickDummyDataLink: (() => {
+                this.#model.populateDummy();
+                this.#reload();
+            }).bind(this),
+            clickClearLink: (() => {
+                this.#model.clearData();
+                this.init();
             }).bind(this),
         }
 

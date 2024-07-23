@@ -16,6 +16,18 @@ function render(menu, projectsData, handlers) {
 
     const projectMenu = menu.querySelector("#project-menu");
     projectMenuView.render(projectMenu, projectsData, handlers);    
+
+    menu.querySelector("#link-dummy-data")
+        .addEventListener(
+            "click",
+            handlers.clickDummyDataLink
+        );
+
+    menu.querySelector("#link-clear")
+        .addEventListener(
+            "click",
+            handlers.clickClearLink
+        );
 }
 
 function update(menu, projectsData) {

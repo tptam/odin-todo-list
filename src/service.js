@@ -9,7 +9,6 @@ let todos = {};
 let projects = {};
 let defaultProject;
 
-
 function init() {
     if (isRepository()) {
         retrieveSavedData();
@@ -20,7 +19,6 @@ function init() {
         saveDefaultProject();
     }
 }
-
 
 function createTodo(title, description, dueDate, priority, done, id=null) {
     if (id === null) {
@@ -292,8 +290,14 @@ function retrieveSavedData(){
     );
 }
 
+function getProjectByName(name){
+    return Object.values(projects).find(
+        project => project.name === name
+    )
+}
+
 function populateDummy() {
-    const todos = dummyTodos.map(
+    dummyTodos.forEach(
         todo => {
             const newTodo = createTodo(
                 todo.title,
@@ -302,24 +306,27 @@ function populateDummy() {
                 todo.priority,
                 todo.done
             );
-            return newTodo;
+            let newProject = projects.find(
+                project => project.name === todo.project
+            )
+            if (newProject === undefined) {
+                newProject = createProject(todo.project);
+            }
+            addTodoToProject(newTodo.id, newProject.id);
         }
     );
-    const project1 = createProject("Alice");
-    const project2 = createProject("Bob");
-    const project3 = createProject("Charlie");
-
-    todos.map((todo, index) => {
-        if (index < 8) {
-            addTodoToProject(todo.id, project1.id);
-        } else if (index < 15) {
-            addTodoToProject(todo.id, project2.id);
-        } else {
-            addTodoToProject(todo.id, project3.id);
-        }
-    });
 }
 
+function clearData(){
+    todos = {};
+    projects = {};
+    defaultProject = null;
+    repo.clear();
+    console.log(todos);
+    console.log(projects);
+    console.log(defaultProject);
+    console.log(localStorage);
+}
 
 function getId() {
     return ulid();
@@ -370,6 +377,8 @@ export {
     getOverdueTodosInProject,
     getProjectProgressRate,
     toggleTodoDoneByID,
+    getProjectByName,
     populateDummy,
+    clearData,
     ValidationError,
 };
