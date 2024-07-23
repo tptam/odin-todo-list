@@ -348,7 +348,11 @@ class Controller{
         const todos = this.#model.searchTodos(
             todo => isToday(todo.dueDate)
         );
-        this.displayTodos("Today's ToDo", todos, "No tasks found. What a beautiful day.");
+        this.displayTodos(
+            `ToDo Tasks Due Today (${format(new Date(), "yyyy-MM-dd")})`,
+             todos,
+            "No tasks found. What a beautiful day."
+        );
 
         const menu = document.querySelector("nav");
         this.#view.menu.updateHighlight(menu, "today");
