@@ -44,8 +44,8 @@ function render(tr, rowJson, rowHandlers) {
             tag: "td",
             classes: ["progress",],
             attribute: {},
-            text: null,
-            contentHtml: `<a>${row.progress}</a>`
+            text: row.progress,
+            contentHtml: null,
         },
         {
             tag: "td",
