@@ -2,6 +2,8 @@
 
 Todo list
 
+<a href="https://tptam.github.io/odin-todo-list/#">Live demo</a>
+
 ## Features
 - Table views to see todo tasks/projects lists
 - Modal view to see a single todo task/project
