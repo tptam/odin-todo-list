@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Todo List</title>
+<script defer src="main.js"></script></head>
+<body>
+    <header>
+        <h1>ToDo List</h1>
+        <nav>
+            <button id="link-todos-all" class="selected all">All</button>
+            <button id="link-todos-today" class="today">Today</button>
+            <button id="link-todos-overdue" class="overdue">Overdue</button>
+            <div class="dropdown">
+                <button class="dropbtn project">Project</button>
+                <div id="project-menu" class="dropdown-content" hidden>
+                </div>
+            </div>
+            <div class="dropdown">
+                <button class="dropbtn data">Data</button>
+                <div id="data-menu" class="dropdown-content" hidden>
+                    <a id="link-dummy-data">Set dummy</a>
+                    <a id="link-clear" class="separate">Clear</a>
+                </div>
+            </div>
+        </nav>
+    </header>
+    <div id="content">
+    </div>
+    <footer>
+        <span class="copyright">Copyright © tptam 2024</span>
+        <span class="asset"><a href="https://pictogrammers.com/library/mdi/">Material Design Icons</a></span>
+        <span class="asset"><a href="https://www.fontsquirrel.com/fonts/league-spartan">Font</a> by <a href="https://www.theleagueofmoveabletype.com/">the League of Moveable Type</a></span>
+    </footer>
+</body>
+</html>
