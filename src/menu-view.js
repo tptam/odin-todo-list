@@ -1,4 +1,3 @@
-import parseHtml from "./parse-html.js";
 import * as projectMenuView from "./menu-projects-view.js";
 
 function render(menu, projectsData, handlers) {
