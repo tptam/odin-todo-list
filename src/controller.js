@@ -11,12 +11,12 @@ class Controller{
     constructor(view, model) {
         this.#view = view;
         this.#model = model;
-        this.#model.init();
     }
 
     init(){
         // For testing
-        this.#model.populateDummy();
+        // this.#model.populateDummy();
+        this.#model.init();
      
         const menu = document.querySelector("nav");
         const menuHandlers = {

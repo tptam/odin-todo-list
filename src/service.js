@@ -2,22 +2,33 @@ import { ulid } from "ulid";
 import { isBefore } from "date-fns";
 import Todo from "./todo.js";
 import Project from "./project.js";
-
+import * as repo from "./repository.js";
 import dummyTodos from "./dummy-todos.json";
 
-const todos = {};
-const projects = {};
+let todos = {};
+let projects = {};
 let defaultProject;
 
 
 function init() {
-    defaultProject = createProject("default");
-    // Data retrieval from repository will be added 
+    if (isRepository()) {
+        retrieveSavedData();
+    } else {
+        defaultProject = createProject("default");
+        saveTodos();
+        saveProjects();
+        saveDefaultProject();
+        console.log(todos);
+        console.log(projects);
+        console.log(defaultProject);
+    }
 }
 
 
-function createTodo(title, description, dueDate, priority, done) {
-    const id = getId();
+function createTodo(title, description, dueDate, priority, done, id=null) {
+    if (id === null) {
+        id = getId();
+    }
     const input = { id, title, description, dueDate, priority, done };
     const validated = validate(input, Todo.schema);
     const invalidKeys = Object.entries(validated)
@@ -29,6 +40,8 @@ function createTodo(title, description, dueDate, priority, done) {
         const todo = new Todo(id, title, description, dueDate, priority, done);
         todos[id] = todo;
         defaultProject.addTodo(todo);
+        saveTodos();
+        saveProjects();
         return todo;
     }
 }
@@ -48,11 +61,14 @@ function updateTodoByID(id, title, description, dueDate, priority, done) {
         throw new ValidationError(invalidKeys);
     } else {
         todo.setAll(title, description, dueDate, priority, done);
+        saveTodos();
     }
 }
 
-function createProject(name) {
-    const id = getId();
+function createProject(name, id=null) {
+    if (id === null) {
+        id = getId();
+    }
     const input = { id, name };
     const validated = validate(input, Project.schema);
     const invalidKeys = Object.entries(validated)
@@ -63,6 +79,7 @@ function createProject(name) {
     } else {
         const project = new Project(id, name);
         projects[id] = project;
+        saveProjects();
         return project;
     }
 }
@@ -78,6 +95,7 @@ function addTodoToProject(todoId, projectId) {
         throw new Error("Object not found.");
     }
     project.addTodo(todo);
+    saveProjects();
 }
 
 function isDefaultProject(projectId) {
@@ -95,6 +113,7 @@ function deleteTodoFromProject(todoId, projectId) {
         throw new Error("Object not found.");
     }
     project.deleteTodo(todo);
+    saveProjects();
 }
 
 function deleteTodoFromCurrentProject(todoId) {
@@ -113,11 +132,13 @@ function updateProjectById(id, name) {
         throw new ValidationError(invalidKeys);
     } else {
         project.name = name;
+        saveProjects();
     }
 }
 
 function deleteProjectById(projectID) {
     delete (projects[projectID]);
+    saveProjects();
 }
 
 function deleteTodoById(todoId) {
@@ -125,6 +146,9 @@ function deleteTodoById(todoId) {
     Object.values(projects).forEach(project => {
         project.deleteTodo(todo);
     });
+    delete (todos[todoId]);
+    saveTodos();
+    saveProjects();
 }
 
 function getAllTodos() {
@@ -197,6 +221,85 @@ function getProjectProgressRate(id) {
 function toggleTodoDoneByID(id) {
     const todo = getTodoById(id);
     todo.done = !todo.done;
+    saveTodos();
+}
+
+function isRepository(){
+    return repo.isSaved("todos") 
+        && repo.isSaved("projects")
+        && repo.isSaved("defaultProject")
+}
+
+function saveTodos(){
+    const todosData = [];
+    Object.values(todos).forEach(
+        todo => todosData.push({
+            id: todo.id,
+            title: todo.title,
+            description: todo.description,
+            dueDate: todo.dueDate,
+            done: todo.done,
+            priority: todo.priority,
+        })
+    )
+    repo.saveObj("todos", todosData);
+}
+
+function saveProjects(){
+    const projectData = [];
+    Object.values(projects).forEach(
+        project => projectData.push({
+            id: project.id,
+            name: project.name,
+            todos: project.todos.map(todos => todos.id)
+        })
+    )
+    repo.saveObj("projects", projectData);
+}
+
+function saveDefaultProject() {
+    repo.saveObj("defaultProject", {
+        id: defaultProject.id,
+        name: defaultProject.name
+    });
+}
+
+function retrieveSavedData(){
+    const todosData = repo.getObj("todos");
+    const projectsData = repo.getObj("projects");
+    const defaultProjectData = repo.getObj("defaultProject");
+    console.log(todosData);
+    console.log(projectsData);
+    console.log(defaultProjectData);
+
+    // Create default project first because createTodo populates its todos 
+    defaultProject = createProject(defaultProjectData.name, defaultProjectData.id);  
+    
+    todosData.forEach(
+        data => createTodo(
+            data.title, 
+            data.description, 
+            new Date(data.dueDate), 
+            data.priority, 
+            data.done,
+            data.id
+        )
+    );
+
+    projectsData
+    .filter(data => data.id !== defaultProject.id)
+    .forEach(
+        data => {
+            createProject(data.name, data.id);
+            data.todos.forEach(
+                todoId => addTodoToProject(todoId, data.id)
+            );
+        }
+    );
+    
+    console.log(todos);
+    console.log(projects);
+    console.log(defaultProject);
 }
 
 function populateDummy() {
