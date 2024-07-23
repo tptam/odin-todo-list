@@ -286,6 +286,7 @@ tbody tr {
 
 th, td {
     width: 100%;
+    height: 100%; 
     display: grid;
     align-items: center;
     text-align: center;
@@ -356,6 +357,10 @@ table.todos .button-like-checkbox-wrapper span{
     font-size: var(--table-font-size);
 }
 
+td.project {
+    height: auto;
+}
+
 td.project a {
     width: 10ch;
     display: -webkit-box;
@@ -411,10 +416,6 @@ table.projects tr {
     grid-template-columns: 2ch 1fr repeat(4, 8ch) 15ch;
 }
 
-table.projects td {
-    /* This is for highlighting the entire cell when hovered */
-    height: 100%;
-}
 
 tr.summary {
     grid-template-columns: 2ch 1fr calc((var(--gutter) * 8) + 47ch);
@@ -456,6 +457,29 @@ table.projects td>a:hover {
     ;
 }
 
+
+
+th.title,
+td.project {
+    height: auto;
+}
+
+td.title a {
+    width: auto;
+}
+
+td.project a {
+    width: 10ch;
+}
+
+th.title a,
+td.project a {
+    display: -webkit-box;
+    overflow: hidden;
+    overflow-wrap: break-word;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+}
 
 table.projects svg {
     fill: var(--neutral-color-150);
