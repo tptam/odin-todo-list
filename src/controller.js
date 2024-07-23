@@ -506,7 +506,7 @@ class Controller{
 
         // New task's dueDate should be today or later
         // (This is not in schema because tasks can be overdue)
-        if (dueDate !== null && isBefore(dueDate, new Date())) {
+        if (dueDate !== null && !isToday(dueDate) && isBefore(dueDate, new Date())) {
             alert("The due date must be today or later.");
             return;
         }
@@ -550,7 +550,7 @@ class Controller{
 
         // New task's dueDate should be today or later
         // (This is not in schema because tasks can be overdue)
-        if (dueDate !== null && isBefore(dueDate, new Date())) {
+        if (dueDate !== null && !isToday(dueDate) && isBefore(dueDate, new Date())) {
             alert("The due date must be today or later.");
             return;
         }
